@@ -14,30 +14,37 @@ preload(){
 
 create(){
 
-    this.add.image(800,500, 'background');
     this.puh = this.physics.add.image(800,50, 'puh');
-
-
-    this.platform = this.physics.add.image(400,300, 'platform');
-    this.platform.body.allowGravity = false;
-    this.platform.setCollideWorldBounds(true);
-    //this.platform.setVelocity(-100,50);
+    this.puh.setCollideWorldBounds(true);
     this.puh.body.allowGravity = false;
-    this.puh.setVelocity(-100,100);
 
+    this.add.image(800,500, 'background');
+    this.platform = this.physics.add.image(400,300, 'platform').setImmovable();
+    this.platform.body.allowGravity = false;
+
+    this.physics.add.collider(this.puh, this.platform);
     this.cursors = this.input.keyboard.createCursorKeys();
 }
 
 update(){
    
     if(this.cursors.left.isDown){
-        this.platform.setVelocityX(-200);
+        this.puh.setVelocityX(-200);
     }
     else if(this.cursors.right.isDown){
-        this.platform.setVelocityX(200);
+        this.puh.setVelocityX(200);
     }
     else{
-        this.platform.setVelocityX(0);
+        this.puh.setVelocityX(0);
+    }
+    if(this.cursors.up.isDown){
+        this.puh.setVelocityY(-200);
+    }
+    else if(this.cursors.down.isDown){
+        this.puh.setVelocityY(200)
+    }
+    else{
+        this.puh.setVelocityY(0);
     }
 }
 
