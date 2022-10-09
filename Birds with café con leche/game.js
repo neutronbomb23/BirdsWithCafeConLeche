@@ -6,24 +6,30 @@ constructor(){
 
 preload(){
 
-    this.load.image('background', 'images/backgroundd.png');
-    this.load.image('puh', 'images/puh.png');
-    this.load.image('platform', 'images/platform.png');
-    this.load.image('skull', 'images/skull.png');
-
+    this.load.image('background', 'assets/backgroundd.png');
+    this.load.image('puh', 'assets/puh/puh.png');
+    this.load.image('platform', 'assets/platform.png');
+    this.load.image('skull', 'assets/obstacles/skull.png');
+    this.load.image('gameover', 'assets/go.jpg');
 }
 
 create(){
+    
 
     this.physics.world.setBoundsCollision(true,true,true,false);
-
     this.add.image(800,500, 'background');
+    this.gameover = this.add.image(700,600, 'gameover');
+    this.gameover.visible = false;
+    
     this.platform = this.physics.add.image(900,300, 'platform');
     this.skull = this.physics.add.image(400,100, 'skull');
+
     this.puh = this.physics.add.image(400,20, 'puh');
     this.puh.body.allowGravity = false;
+
     this.skull.setBounce(3);
     let velocity = 100 * Phaser.Math.Between(1.3,2);
+
     if(Phaser.Math.Between(0,10)>5){
         velocity = 0 - velocity;
     }
@@ -44,6 +50,7 @@ create(){
 
 saltin(){
         this.scene.pause()
+        
     }
 
 update(){
@@ -71,6 +78,7 @@ update(){
 
         console.log('fin');
         this.scene.pause();
+        this.gameover.visible = true;
 
         }
     }
