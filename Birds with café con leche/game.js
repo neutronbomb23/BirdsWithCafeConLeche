@@ -33,10 +33,18 @@ create(){
     this.puh.setCollideWorldBounds(true);
     this.skull.setCollideWorldBounds(true);
     this.platform.body.allowGravity = false;
-    this.physics.add.collider(this.skull, this.platform);
+    this.physics.add.collider(this.puh, this.platform);
+    this.physics.add.collider(this.skull, this.platform, this.saltin, null, this);
+   
 
-    this.cursors = this.input.keyboard.createCursorKeys();
+    this.cursors = this.input.keyboard.createCursorKeys(); 
+    
+    
 }
+
+saltin(){
+        this.scene.pause()
+    }
 
 update(){
    
@@ -58,5 +66,14 @@ update(){
     else{
         this.platform.setVelocityY(0);
         }
+
+     if(this.skull.y > 1000) {
+
+        console.log('fin');
+        this.scene.pause();
+
+        }
     }
+
+   
 }
