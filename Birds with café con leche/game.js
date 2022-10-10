@@ -4,6 +4,10 @@ constructor(){
     super({key: 'game'});
 }
 
+init(){
+    this.score = 0;
+}
+
 preload(){
 
     this.load.image('background', 'assets/backgroundd.png');
@@ -20,6 +24,12 @@ create(){
     this.add.image(800,500, 'background');
     this.gameover = this.add.image(700,600, 'gameover');
     this.gameover.visible = false;
+
+    this.scoreText = this.add.text(16,16, 'Points: 0', {
+        fontSize: '40px',
+        fill: '#fff',
+        fontFamily: 'verdana, arial, sans-serif' 
+    });
     
     this.platform = this.physics.add.image(900,300, 'platform');
     this.skull = this.physics.add.image(400,100, 'skull');
@@ -40,7 +50,7 @@ create(){
     this.skull.setCollideWorldBounds(true);
     this.platform.body.allowGravity = false;
     this.physics.add.collider(this.puh, this.platform);
-    this.physics.add.collider(this.skull, this.platform, this.saltin, null, this);
+    this.physics.add.collider(this.skull, this.platform, this.addScore, null, this);
    
 
     this.cursors = this.input.keyboard.createCursorKeys(); 
@@ -51,6 +61,11 @@ create(){
 saltin(){
         this.scene.pause()
         
+    }
+    addScore(){
+        this.score++;
+        this.scoreText.setText('Points: ' + this.score);
+        console.log('1 punto');
     }
 
 update(){
