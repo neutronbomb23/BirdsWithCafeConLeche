@@ -8,8 +8,8 @@ init(){
     this.score = 0;
 }
 
-preload(){
-
+preload()
+{
     this.load.image('background', 'assets/backgroundd.png');
     this.load.image('puh', 'assets/puh/puh.png');
     this.load.image('platform', 'assets/platform.png');
@@ -17,10 +17,9 @@ preload(){
     this.load.image('gameover', 'assets/go.jpg');
 }
 
-create(){
-    
-
-    this.physics.world.setBoundsCollision(true,true,true,false);
+create()
+{
+    this.physics.world.setBoundsCollision(true,true,true, false);
     this.add.image(800,500, 'background');
     this.gameover = this.add.image(700,600, 'gameover');
     this.gameover.visible = false;
@@ -31,13 +30,13 @@ create(){
         fontFamily: 'verdana, arial, sans-serif' 
     });
     
-    this.platform = this.physics.add.image(900,300, 'platform');
+    this.platform = this.physics.add.image(900,500, 'platform');
     this.skull = this.physics.add.image(400,100, 'skull');
 
     this.puh = this.physics.add.image(400,20, 'puh');
     this.puh.body.allowGravity = false;
 
-    this.skull.setBounce(3);
+    this.skull.setBounce(2);
     let velocity = 100 * Phaser.Math.Between(1.3,2);
 
     if(Phaser.Math.Between(0,10)>5){
@@ -48,52 +47,60 @@ create(){
     
     this.puh.setCollideWorldBounds(true);
     this.skull.setCollideWorldBounds(true);
-    this.platform.body.allowGravity = false;
+    this.platform.setCollideWorldBounds(true);
+    this.platform.body.onWorldBounds=true;
     this.physics.add.collider(this.puh, this.platform);
-    this.physics.add.collider(this.skull, this.platform, this.addScore, null, this);
-   
+    this.physics.add.collider(this.skull, this.platform, this.addScore.bind(this), null);
 
-    this.cursors = this.input.keyboard.createCursorKeys(); 
-    
-    
+    this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+    this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+    this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+    this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+    this.keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
+
+
+    this.cursors = this.input.keyboard.createCursorKeys();     
 }
 
 saltin(){
         this.scene.pause()
-        
     }
-    addScore(){
+addScore(){
         this.score++;
         this.scoreText.setText('Points: ' + this.score);
         console.log('1 punto');
     }
-
 update(){
    
-    if(this.cursors.left.isDown){
+    if(this.keyA.isDown){
         this.platform.setVelocityX(-200);
     }
-    else if(this.cursors.right.isDown){
+    else if(this.keyD.isDown){
         this.platform.setVelocityX(200);
     }
     else{
         this.platform.setVelocityX(0);
     }
-    if(this.cursors.up.isDown){
+    if(this.keyW.isDown){
         this.platform.setVelocityY(-200);
     }
-    else if(this.cursors.down.isDown){
+    else if(this.keyS.isDown){
         this.platform.setVelocityY(200)
     }
     else{
         this.platform.setVelocityY(0);
         }
 
-     if(this.skull.y > 1000) {
+    if(this.keyQ.isDown){
+        this.scene.start('game');
+    }
+
+     if(this.skull.y > 950) {
 
         console.log('fin');
-        this.scene.pause();
         this.gameover.visible = true;
+        this.platform.visible = false;
+        //this.scene.pause();
 
         }
     }
