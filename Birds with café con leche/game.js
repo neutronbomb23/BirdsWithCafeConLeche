@@ -10,7 +10,7 @@ init(){
 
 preload(){
     this.load.image('background', 'assets/backgroundd.png');
-    this.load.image('puh', 'assets/puh/puh.png');
+    this.load.image('puh', 'assets/puh/TemporalPuh.png');
     this.load.image('platform', 'assets/platform.png');
     this.load.image('floor', 'assets/floor.png');
     this.load.image('bone', 'assets/obstacles/bone.png');
@@ -116,11 +116,11 @@ gameOver(){
 characterInputManager(){
 
     if(this.keyA.isDown){
-        this.puh.setVelocityX(-200);
+        this.puh.setVelocityX(-400);
         //this.puh.anims.play('walk', true);
     }
     else if(this.keyD.isDown){
-        this.puh.setVelocityX(200);
+        this.puh.setVelocityX(400);
     }
     else{
         this.puh.setVelocityX(0);
