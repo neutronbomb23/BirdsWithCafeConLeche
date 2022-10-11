@@ -20,6 +20,7 @@ preload(){
 }
 
 create(){
+
     this.physics.world.setBoundsCollision(true,true,true, false);
     this.add.image(800,500, 'background');
     this.gameover = this.add.image(700, 600, 'gameover');
@@ -47,42 +48,50 @@ create(){
         loop: true,
     });
 
-    this.platform = this.physics.add.image(900,500, 'platform');
+    /*this.anims.create({
+        key: 'walk',
+        frames: this.anims.generateFrameNumbers('puh', { start: 0, end: 3 }),
+        frameRate: 10,
+        repeat: -1
+    });*/
+
+    this.puhInit();
+    
+
+    this.platform = this.physics.add.image(900,500, 'platform').setImmovable(true).setScale(1);
     this.platform.body.allowGravity = false;
 
     this.floor = this.physics.add.image(900,950, 'floor').setImmovable(true).setScale(3);
     this.floor.body.allowGravity = false;
 
-    this.puhInit();
+    //this.puhInit();
 
 
-    let velocity = 100 * Phaser.Math.Between(1.3,2);
+    /*let velocity = 100 * Phaser.Math.Between(1.3,2);
 
     if(Phaser.Math.Between(0,10)>5){
         velocity = 0 - velocity;
     }
+    */
     
-    
+    this.physics.add.collider(this.puh, this.platform);
+    this.physics.add.collider(this.puh, this.floor);
 
     this.platform.setCollideWorldBounds(true);
     this.platform.body.onWorldBounds=true;
-
+    this.physics.add.collider(this.platform, this.floor);
+    
     //this.physics.add.collider(this.bone, this.platform, this.addScore.bind(this), null);
     //this.physics.add.collider(this.birdSkull, this.platform, this.addScore.bind(this), null);
     //this.physics.add.collider(this.birdClaw, this.platform, this.addScore.bind(this), null);
 
     this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-    this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
     this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
     this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
     this.keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
 
 
     this.cursors = this.input.keyboard.createCursorKeys();     
-}
-
-saltin(){
-        this.scene.pause()
 }
 addScore(){
         this.score++;
@@ -91,16 +100,24 @@ addScore(){
 }
 
 puhInit(){
-    this.puh = this.physics.add.image(400,20, 'puh').setScale(3);;
-    this.puh.body.allowGravity = false;
+    this.puh = this.physics.add.image(400,20, 'puh').setImmovable(false).setScale(2);
+    this.puh.setBounce(5);
+    this.puh.body.allowGravity = true;
+    this.puh.setGravityY(9000);
     this.puh.setCollideWorldBounds(true);
-    this.physics.add.collider(this.puh, this.platform);
-    this.physics.add.collider(this.puh, this.floor);
+}
+
+gameOver(){
+    this.puh.visible = false;
+    console.log('fin');
+    this.gameover.visible = true;
 }
 
 characterInputManager(){
+
     if(this.keyA.isDown){
         this.puh.setVelocityX(-200);
+        //this.puh.anims.play('walk', true);
     }
     else if(this.keyD.isDown){
         this.puh.setVelocityX(200);
@@ -108,18 +125,17 @@ characterInputManager(){
     else{
         this.puh.setVelocityX(0);
     }
-    if(this.keyW.isDown){
-        this.puh.setVelocityY(-200);
-    }
-    else if(this.keyS.isDown){
-        this.puh.setVelocityY(200)
+   if(this.keyW.isDown && this.puh.body.touching.down){
+        this.puh.setVelocityY(-10000)
     }
     else{
         this.puh.setVelocityY(0);
     }
+
 }
 
 update(){
+
     this.characterInputManager();
 
     if(this.keyQ.isDown){
@@ -127,10 +143,9 @@ update(){
     }
 
         if(this.puh.y > 950) {
-            console.log('fin');
-            this.gameover.visible = true;
-            this.platform.visible = false;
-            //this.scene.pause();
+           
+            this.gameOver();
+
         }
     }
 }
