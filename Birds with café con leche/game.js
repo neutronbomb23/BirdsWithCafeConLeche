@@ -126,9 +126,9 @@ characterInputManager(){
         this.puh.setVelocityX(0);
     }
    if(this.keyW.isDown && this.puh.body.touching.down){
-        this.puh.setVelocityY(-10000)
+        this.puh.setVelocityY(-2000)
     }
-    else{
+    else if (this.puh.body.touching.down){ 
         this.puh.setVelocityY(0);
     }
 
