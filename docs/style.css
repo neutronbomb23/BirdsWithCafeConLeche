@@ -1,0 +1,53 @@
+.header {
+    width: 750px;
+    display: block;
+    margin: auto;
+}
+
+.text{
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.lista{
+    font-size: 20px;
+    margin-left: 100px;
+}
+
+.dbutton{
+    width: 250px;
+    display: block;
+    margin: auto;
+}
+
+.titles{
+    font-size: 35px;
+    color: darkslategray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.des{
+    font-size: 35px;
+    color: darkslategray;
+    margin-left: 100px;
+}
+
+.socials{
+    width: 50px;
+    margin-left: 100px;
+}
+
+footer{
+    margin-left: 100px;
+}
+
+body {
+    background-image: url("https://www.bypeople.com/wp-content/uploads/2014/05/light-live-background-css.jpg");
+    background-size: cover;
+}
