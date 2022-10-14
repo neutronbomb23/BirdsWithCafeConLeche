@@ -10,25 +10,27 @@ export class Menu extends Phaser.Scene {
     preload(){
 
         this.load.image('playButton', 'assets/playButton.png');
-        this.load.image('quitButton', 'assets/quit.png');
+        this.load.image('optionsButton', 'assets/quit.png');
         this.load.image('menuFondo', 'assets/menu.jpg');
         this.load.image('puh', 'assets/puh.png');
         this.load.audio('sample', 'assets/audio/sound.mp3');
         this.load.audio('menuMusic', 'assets/audio/menuMusic.mp3');
+        this.load.image('logo', 'assets/logo.png');
 
     }
 
     create(){
 
         this.add.image(800,500, 'menuFondo'); // Imagen fondo
+        this.add.image(700,200, 'logo');
        
-        let playButton = this.add.image(500,600 , 'playButton').setScale(0.3); // Botón de play
-        let quitButton = this.add.image(900,600 , 'quitButton').setScale(0.5); // Botón de play
-        this.add.sprite(100,100,'puh');
+        let playButton = this.add.image(500,600 , 'playButton').setScale(0.1); // Botón de play
+        let optionsButton = this.add.image(900,600 , 'optionsButton').setScale(0.5); // Botón de play
+        //this.add.sprite(100,100,'puh');
       
 
         playButton.setInteractive();
-        quitButton.setInteractive();
+        optionsButton.setInteractive();
 
         this.menuMusic = this.sound.add('menuMusic');
         this.sampleSound = this.sound.add('sample');
@@ -52,7 +54,7 @@ export class Menu extends Phaser.Scene {
             this.stopAudio();
         })
 
-        quitButton.on("pointerup", ()=>{
+        optionsButton.on("pointerup", ()=>{
             this.scene.start('Menu');
             this.menuMusic.stop();
         })

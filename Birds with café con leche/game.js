@@ -17,9 +17,12 @@ preload(){
     this.load.image('birdSkull', 'assets/obstacles/birdSkull.png');
     this.load.image('birdClaw', 'assets/obstacles/birdClaw.png');
     this.load.image('gameover', 'assets/go.jpg');
+    this.load.audio('song','assets/audio/cty.mp3');
 }
 
 create(){
+    this.song = this.sound.add('song');
+    this.song.play();
 
     this.physics.world.setBoundsCollision(true,true,true, false); // Define limites del mapa
     this.add.image(800,500, 'background'); // Imagen fondo
@@ -149,12 +152,14 @@ gameOver(){
     this.puh.visible = false;
     console.log('fin');
     this.gameover.visible = true;
+    this.scene.pause();
+    this.song.stop();
 }
 
 
 update(){
 
-    this.characterInputManager(true);
+    this.characterInputManager(false);
 
     if(this.keyQ.isDown){
         this.scene.start('game');
