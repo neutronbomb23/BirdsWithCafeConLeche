@@ -26,7 +26,8 @@
 
 .titles{
     font-size: 35px;
-    color: darkslategray;
+    color: rgb(255, 255, 255);
+    background-color: rgb(121, 115, 120);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -34,8 +35,11 @@
 
 .des{
     font-size: 35px;
-    color: darkslategray;
-    margin-left: 100px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(121, 115, 120);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .socials{
