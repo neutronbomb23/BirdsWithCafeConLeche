@@ -4,10 +4,19 @@
     margin: auto;
 }
 
+.subtitle{
+    font-size: 29px;
+    display: flex;
+    font-weight: bold;
+    margin-left: 645px;
+    margin-right: 645px;
+    color: rgb(88, 0, 15);
+    background-color: rgb(255, 255, 255);
+}
+
 .text{
     font-size: 20px;
     display: flex;
-    align-items: center;
     justify-content: center;
     margin-left: 100px;
     margin-right: 100px;
@@ -28,6 +37,8 @@
     font-size: 35px;
     color: rgb(255, 255, 255);
     background-color: rgb(121, 115, 120);
+    width: 30%;
+    margin-left: 35%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -37,6 +48,8 @@
     font-size: 35px;
     color: rgb(255, 255, 255);
     background-color: rgb(121, 115, 120);
+    width: 30%;
+    margin-left: 35%;
     display: flex;
     align-items: center;
     justify-content: center;
