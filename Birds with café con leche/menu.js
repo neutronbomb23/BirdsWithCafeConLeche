@@ -21,11 +21,11 @@ export class Menu extends Phaser.Scene {
 
     create(){
 
-        this.add.image(850,500, 'menuFondo'); // Imagen fondo
-        this.add.image(850,150, 'logo');
+        this.add.image(720,410, 'menuFondo'); // Imagen fondo
+        this.add.image(720,150, 'logo');
        
-        let playButton = this.add.image(850, 450, 'playButton').setScale(1); // Botón de play
-        let optionsButton = this.add.image(850, 650 , 'optionsButton').setScale(1); // Botón de play
+        let playButton = this.add.image(720, 450, 'playButton').setScale(0.6); // Botón de play
+        let optionsButton = this.add.image(720, 600 , 'optionsButton').setScale(0.6); // Botón de play
         //this.add.sprite(100,100,'puh');
       
 

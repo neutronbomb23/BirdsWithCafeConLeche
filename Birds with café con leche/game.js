@@ -25,7 +25,7 @@ create(){
     this.song.play();
 
     this.physics.world.setBoundsCollision(true,true,true, false); // Define limites del mapa
-    this.add.image(800,500, 'background'); // Imagen fondo
+    this.add.image(720,410, 'background'); // Imagen fondo
     this.gameover = this.add.image(700, 600, 'gameover'); 
     this.gameover.visible = false;
 
@@ -42,10 +42,10 @@ create(){
 
     this.puhInit();
     
-    this.platform = this.physics.add.image(900,500, 'platform').setImmovable(true).setScale(1);
+    this.platform = this.physics.add.image(720,450, 'platform').setImmovable(true).setScale(1);
     this.platform.body.allowGravity = false;
 
-    this.floor = this.physics.add.image(900,950, 'floor').setImmovable(true).setScale(3);
+    this.floor = this.physics.add.image(720,800, 'floor').setImmovable(true).setScale(3);
     this.floor.body.allowGravity = false;
 
     /*let velocity = 100 * Phaser.Math.Between(1.3,2);

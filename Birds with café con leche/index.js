@@ -5,8 +5,8 @@ import { Intro } from './intro.js';
 
 const config = {
     type: Phaser.AUTO,
-    width: 1700,
-    height: 1000,
+    width: 1440,
+    height: 810,
     scene: [Menu, Game],
     //backgroundColor: "b9eaff",
     physics: {
