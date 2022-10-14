@@ -133,6 +133,7 @@ characterInputManager(fly = false){
         else if (this.puh.body.touching.down){ 
             this.puh.setVelocityY(0);
         }
+        else if(this.puh.body.touching.up) this.puh.setVelocityY(0);
     }
     else{
         if(this.keyW.isDown){
@@ -145,7 +146,6 @@ characterInputManager(fly = false){
             this.puh.setVelocityY(100);
         }
     }
-
 }
 
 gameOver(){
