@@ -108,7 +108,7 @@ summonObstacles(){
 
 puhInit(){
     this.puh = this.physics.add.image(400,20, 'puh').setImmovable(false).setScale(2);
-    this.puh.setBounce(5);
+    this.puh.setBounce(3);
     this.puh.body.allowGravity = true;
     this.puh.setGravityY(9000);
     this.puh.setCollideWorldBounds(true);
