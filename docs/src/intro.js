@@ -8,12 +8,20 @@ export class Intro extends Phaser.Scene {
     }
 
     preload (){
-        this.load.video('video', 'assets/video/video.webm');
+        this.load.video('video', './assets/video/video.webm');
     }
     create (){
-        this.menuvideo = this.add.video('video');
+        this.menuvideo = this.add.video(0,0, 'video').setOrigin(0,0);
+        this.menuvideo.play();
+
+        this.menuvideo.on('complete', video => {
+
+            this.scene.start('Menu');
+
+        });
+        
     }
     update(){
-        this.menuvideo.play(true);
+        
     }
 }

@@ -13,7 +13,6 @@ export class Menu extends Phaser.Scene {
         this.load.image('optionsButton', 'assets/controlspng.png');
         this.load.image('menuFondo', 'assets/menu.jpg');
         this.load.image('puh', 'assets/puh.png');
-        this.load.audio('sample', 'assets/audio/sound.mp3');
         this.load.audio('menuMusic', 'assets/audio/menuMusic.mp3');
         this.load.image('logo', 'assets/logopng.png');
 
@@ -33,26 +32,13 @@ export class Menu extends Phaser.Scene {
         optionsButton.setInteractive();
 
         this.menuMusic = this.sound.add('menuMusic');
-        this.sampleSound = this.sound.add('sample');
         
         this.menuMusic.play();
         playButton.on("pointerup", ()=>{
             this.scene.start('game');
-            this.stopAudio();
             this.menuMusic.stop();
         })
 
-        playButton.on("pointerover", ()=>{
-            console.log("wasap covid china");
-
-            this.playAudio();
-        })
-
-        playButton.on("pointerout", ()=>{
-            console.log("estoy fuera");
-            
-            this.stopAudio();
-        })
 
         optionsButton.on("pointerup", ()=>{
             this.scene.start('Menu');
@@ -61,12 +47,7 @@ export class Menu extends Phaser.Scene {
 
 
     }
-    playAudio(){
-        this.sampleSound.play();
-    }
-    stopAudio(){
-        this.sampleSound.stop();
-    }
+
 }
 //Podemos cambiar el viewport de la cámara con setViewport:
 

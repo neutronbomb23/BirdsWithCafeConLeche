@@ -24,7 +24,7 @@ let config = {
         },
 		zoom: 1
     },
-    scene: [Menu, Game],
+    scene: [Intro, Menu, Game],
     physics: { 
         default: 'arcade', 
         arcade: { 

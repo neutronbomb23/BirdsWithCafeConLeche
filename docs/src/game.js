@@ -94,7 +94,7 @@ summonObstacles(){
     const obstaclesList = ['bone', 'birdClaw', 'birdSkull']
 
     const obsGen = () => {
-        const xCoord = Math.random() * 1700
+        const xCoord = Math.random() * 1440
         let obsGen = obstaclesList[Math.floor(Math.random() * 3)]
         obstacles.create(xCoord, 10, obsGen)
     }
