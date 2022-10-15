@@ -1,3 +1,5 @@
+import { GameOver } from "./GameOver.js";
+
 export class Game extends Phaser.Scene{
 
 constructor(){
@@ -16,7 +18,6 @@ preload(){
     this.load.image('bone', 'assets/obstacles/bone.png');
     this.load.image('birdSkull', 'assets/obstacles/birdSkull.png');
     this.load.image('birdClaw', 'assets/obstacles/birdClaw.png');
-    this.load.image('gameover', 'assets/go.jpg');
     this.load.audio('song','assets/audio/cty.mp3');
 }
 
@@ -26,8 +27,6 @@ create(){
 
     this.physics.world.setBoundsCollision(true,true,true, false); // Define limites del mapa
     this.add.image(720,410, 'background'); // Imagen fondo
-    this.gameover = this.add.image(700, 600, 'gameover'); 
-    this.gameover.visible = false;
 
     this.initScore();
     
@@ -154,8 +153,8 @@ characterInputManager(fly = false){
 gameOver(){
     this.puh.visible = false;
     console.log('fin');
-    this.gameover.visible = true;
     this.song.stop();
+    this.scene.start('GameOver');
 }
 
 

@@ -1,6 +1,7 @@
 import { Menu } from './menu.js';
 import { Game } from './game.js';
 import { Intro } from './intro.js';
+import { GameOver } from './GameOver.js';
 
 
 let config = {
@@ -24,7 +25,7 @@ let config = {
         },
 		zoom: 1
     },
-    scene: [Intro, Menu, Game],
+    scene: [Intro, Menu, Game, GameOver],
     physics: { 
         default: 'arcade', 
         arcade: { 
