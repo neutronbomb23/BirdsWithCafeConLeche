@@ -9,19 +9,28 @@ export class Intro extends Phaser.Scene {
 
     preload (){
         this.load.video('video', './assets/video/video.webm');
+        this.load.text('text');
     }
     create (){
         this.menuvideo = this.add.video(0,0, 'video').setOrigin(0,0);
         this.menuvideo.play();
-
+        this.add.text(0, 0, 'Pulsa la tecla S para pasar al menú.', { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: 64});
         this.menuvideo.on('complete', video => {
 
             this.scene.start('Menu');
 
         });
+
+        this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+
         
+       
     }
     update(){
+
+        if(this.keyS.isDown){
+          this.scene.start('Menu')
+        }
         
     }
 }
