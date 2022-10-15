@@ -6,8 +6,8 @@ import { Intro } from './intro.js';
 let config = {
     type: Phaser.CANVAS,
     canvas: document.getElementById("juego"),
-    width:  1440,
-    height: 810,
+    width:  1500,
+    height: 1800,
     pixelArt: true,
 	scale: {
 		autoCenter: Phaser.Scale.CENTER_HORIZONTALLY,
@@ -15,12 +15,12 @@ let config = {
 		// con un mínimo y un máximo de tamaño
 		mode: Phaser.Scale.FIT,
 		min: {
-            width: 328,
+            width: 500,
             height: 188
         },
 		max: {
-            width: 1440,
-            height: 810
+            width: 1500,
+            height: 1800
         },
 		zoom: 1
     },
@@ -28,7 +28,7 @@ let config = {
     physics: { 
         default: 'arcade', 
         arcade: { 
-            gravity: { y: 200 }, 
+            gravity: { y: 700 }, 
             debug: true 
         },
         checkCollision: {

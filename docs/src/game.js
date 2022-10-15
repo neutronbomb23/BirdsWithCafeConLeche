@@ -42,10 +42,10 @@ create(){
 
     this.puhInit();
     
-    this.platform = this.physics.add.image(720,450, 'platform').setImmovable(true).setScale(1);
+    this.platform = this.physics.add.image(700,1650, 'platform').setImmovable(true).setScale(1);
     this.platform.body.allowGravity = false;
 
-    this.floor = this.physics.add.image(720,800, 'floor').setImmovable(true).setScale(3);
+    this.floor = this.physics.add.image(720,800, 'floor').setImmovable(true).setScale(1);
     this.floor.body.allowGravity = false;
 
     /*let velocity = 100 * Phaser.Math.Between(1.3,2);
@@ -94,7 +94,7 @@ summonObstacles(){
     const obstaclesList = ['bone', 'birdClaw', 'birdSkull']
 
     const obsGen = () => {
-        const xCoord = Math.random() * 1440
+        const xCoord = Math.random() * 1500
         let obsGen = obstaclesList[Math.floor(Math.random() * 3)]
         obstacles.create(xCoord, 10, obsGen)
     }
@@ -137,7 +137,7 @@ characterInputManager(fly = false){
     }
     else{
         if(this.keyW.isDown){
-            this.puh.setVelocityY(-500)
+            this.puh.setVelocityY(-1000)
         }
         else if (this.keyS.isDown){
             this.puh.setVelocityY(250);
@@ -146,13 +146,15 @@ characterInputManager(fly = false){
             this.puh.setVelocityY(100);
         }
     }
+    if(this.keyQ.isDown){
+        this.scene.start('game');
+    }
 }
 
 gameOver(){
     this.puh.visible = false;
     console.log('fin');
     this.gameover.visible = true;
-    this.scene.pause();
     this.song.stop();
 }
 
@@ -165,7 +167,7 @@ update(){
         this.scene.start('game');
     }
 
-        if(this.puh.y > 950) {
+        if(this.puh.y > 1790) {
            
             this.gameOver();
 
