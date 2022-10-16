@@ -166,7 +166,7 @@ update(){
         this.scene.start('game');
     }
 
-        if(this.puh.y > 1790) {
+        if(this.puh.y > 1600) {
            
             this.gameOver();
 
