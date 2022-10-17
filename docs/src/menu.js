@@ -14,17 +14,20 @@ export class Menu extends Phaser.Scene {
         this.load.image('menuFondo', 'assets/menu.jpg');
         this.load.image('puh', 'assets/puh.png');
         this.load.audio('menuMusic', 'assets/audio/menuMusic.mp3');
-        this.load.image('logo', 'assets/logopng.png');
+        this.load.image('text', 'assets/birdstext.png');
+        this.load.image('paloma', 'assets/paloma.png');
 
     }
 
     create(){
 
-        this.add.image(720,410, 'menuFondo'); // Imagen fondo
-        this.add.image(720,150, 'logo');
+        this.add.image(720,900, 'menuFondo').setScale(1.3); // Imagen fondo
+        this.add.image(720, 600, 'paloma').setScale(0.4);
+        this.add.image(720,150, 'text').setScale(1.3);
+        
        
-        let playButton = this.add.image(720, 450, 'playButton').setScale(0.6); // Botón de play
-        let optionsButton = this.add.image(720, 600 , 'optionsButton').setScale(0.6); // Botón de play
+        let playButton = this.add.image(720, 950, 'playButton').setScale(1); // Botón de play
+        let optionsButton = this.add.image(720, 1200 , 'optionsButton').setScale(1); // Botón de play
         //this.add.sprite(100,100,'puh');
       
 

@@ -7,7 +7,7 @@ import { GameOver } from './GameOver.js';
 let config = {
     type: Phaser.CANVAS,
     canvas: document.getElementById("juego"),
-    width:  1500,
+    width:  1440,
     height: 1800,
     pixelArt: true,
 	scale: {
