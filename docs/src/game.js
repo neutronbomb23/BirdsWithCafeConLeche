@@ -1,5 +1,7 @@
 import { GameOver } from "./GameOver.js";
 
+const DEBUG = true;
+
 export class Game extends Phaser.Scene{
 
 constructor(){
@@ -9,7 +11,6 @@ constructor(){
 init(){
     this.score = 0;
 }
-
 preload(){
     this.load.image('background', 'assets/backgroundd.png');
     this.load.image('puh', 'assets/puh/puh.png');
@@ -65,6 +66,12 @@ create(){
     //this.physics.add.collider(this.birdSkull, this.platform, this.addScore.bind(this), null);
     //this.physics.add.collider(this.birdClaw, this.platform, this.addScore.bind(this), null);
 
+
+    //CAMARA
+    this.cameras.main.startFollow(this.puh); // Sigue a puh 
+    this.cameras.main.setFollowOffset(0, 400) // Distancia entre el la camara y puh
+
+
     this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
     this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
     this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
@@ -106,7 +113,7 @@ summonObstacles(){
 }
 
 puhInit(){
-    this.puh = this.physics.add.image(400,20, 'puh').setImmovable(false).setScale(2);
+    this.puh = this.physics.add.image(400,400, 'puh').setImmovable(false).setScale(2);
     this.puh.setBounce(3);
     this.puh.body.allowGravity = true;
     this.puh.setGravityY(9000);
@@ -159,8 +166,11 @@ gameOver(){
 
 
 update(){
+    if(DEBUG){
+    console.log(this.puh.y)
+    }
 
-    this.characterInputManager(false);
+    this.characterInputManager(true);
 
     if(this.keyQ.isDown){
         this.scene.start('game');
@@ -170,6 +180,10 @@ update(){
            
             this.gameOver();
 
+        }
+
+        if (this.puh.y < 300){ // Para el seguimiento de camara
+            this.cameras.main.stopFollow();
         }
     }
 }
