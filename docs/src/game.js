@@ -61,7 +61,7 @@ create(){
     this.platform.body.onWorldBounds=true;
     this.physics.add.collider(this.platform, this.floor);
     
-    //this.physics.add.collider(this.bone, this.platform, this.addScore.bind(this), null);
+    this.physics.add.collider(this.puh, this.platform, this.addScore.bind(this), null);
     //this.physics.add.collider(this.birdSkull, this.platform, this.addScore.bind(this), null);
     //this.physics.add.collider(this.birdClaw, this.platform, this.addScore.bind(this), null);
 

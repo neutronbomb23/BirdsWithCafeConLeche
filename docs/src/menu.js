@@ -16,14 +16,14 @@ export class Menu extends Phaser.Scene {
         this.load.audio('menuMusic', 'assets/audio/menuMusic.mp3');
         this.load.image('text', 'assets/birdstext.png');
         this.load.image('paloma', 'assets/paloma.png');
-        this.load.image('centralperk', 'assets/centralperk.png');
+        this.load.image('centralperk', 'assets/logopng.png');
 
     }
 
     create(){
 
         this.add.image(720,900, 'menuFondo').setScale(1.3); // Imagen fondo
-        this.add.image(720,500, 'centralperk').setScale(0.5); // Imagen fondo
+        this.add.image(720,500, 'centralperk').setScale(1.5); // Imagen fondo
         this.add.image(220, 1050, 'paloma').setScale(0.4);
         this.add.image(1250, 1050, 'paloma').setScale(0.4);
         this.add.image(720,150, 'text').setScale(1.3);
