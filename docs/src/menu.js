@@ -17,7 +17,8 @@ export class Menu extends Phaser.Scene {
         this.load.image('text', 'assets/birdstext.png');
         this.load.image('paloma', 'assets/paloma.png');
         this.load.image('centralperk', 'assets/logopng.png');
-
+        this.load.image('returnButton', 'assets/returnpng.png');
+        this.load.image('controls', 'assets/quit.png'); // cambiar por la imágen de controles cuando se tenga
     }
 
     create(){
@@ -47,8 +48,19 @@ export class Menu extends Phaser.Scene {
 
 
         optionsButton.on("pointerup", ()=>{
-            this.scene.start('Menu');
-            this.menuMusic.stop();
+            //this.scene.start('Menu');
+            playButton.visible = false;
+            optionsButton.visible = false;
+            let controls = this.add.image(720, 1100, 'controls').setScale(1);
+            let returnButton = this.add.image(720, 1600, 'returnButton');
+            returnButton.setInteractive();
+            returnButton.on("pointerup", ()=> {
+                returnButton.visible = false; 
+                controls.visible = false; 
+                playButton.visible = true;
+                optionsButton.visible = true;
+            })
+            //this.menuMusic.stop();
         })
 
 
