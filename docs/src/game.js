@@ -69,8 +69,9 @@ create(){
 
     //CAMARA
     this.cameras.main.startFollow(this.puh); // Sigue a puh 
-    this.cameras.main.setFollowOffset(0, 400) // Distancia entre el la camara y puh
-
+    this.cameras.main.setFollowOffset(0, 400); // Distancia entre el la camara y puh
+    this.cameras.main.setLerp(0, 0.05);
+    this.cameras.main.scrollX = false;
 
     this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
     this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
