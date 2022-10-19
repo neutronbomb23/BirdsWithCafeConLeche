@@ -1,9 +1,9 @@
 import { GameOver } from "./GameOver.js";
-
-const DEBUG = true;
+import Puh from './puh.js';
+const DEBUG = false;
 
 const CAMPOSY = 400; var camCurrentPosY = CAMPOSY; // Respecto a Puh
-const CAMERASPEED = 75; // Velocidad a la que sube en funcion del tiempo
+const CAMERASPEED = 100; // Velocidad a la que sube en funcion del tiempo
 var cameraMoves = true;
 const TOP = 1100; // punto en el eje y en el que se detiene la camara
 
@@ -20,8 +20,9 @@ init(){
     this.score = 0;
 }
 preload(){
-    this.load.image('background', 'assets/white.png');
-    this.load.image('puh', 'assets/puh/puh.png');
+    this.load.image('background', 'assets/backgroundd.png');
+    this.load.spritesheet('puhIddle', 'assets/puh/puh.png', {frameWidth:32,  frameHeight: 32});
+    this.load.spritesheet('puhMove', 'assets/puh/Walk.png', {frameWidth:32,  frameHeight: 32});
     this.load.image('platform', 'assets/platform.png');
     this.load.image('floor', 'assets/floor.png');
     this.load.image('bone', 'assets/obstacles/bone.png');
@@ -32,11 +33,15 @@ preload(){
 
 create(){
     startTime = this.time.now;
+    cameraMoves = true;
+
     this.song = this.sound.add('song');
     this.song.play();
 
-    this.physics.world.setBoundsCollision(false,true,true, false); // Define limites del mapa
-    this.add.image(300,200, 'background').setScale(100); // Imagen fondo
+    this.physics.world.setBoundsCollision(true,true,true, false); // Define limites del mapa
+    this.add.image(720,410, 'background'); // Imagen fondo
+
+    new Puh(this, 600, 1000);
 
     this.initScore();
     
