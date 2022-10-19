@@ -2,16 +2,16 @@ import { GameOver } from "./GameOver.js";
 
 const DEBUG = true;
 
-const CAMPOSY = 400; var camCurrentPosY = CAMPOSY; 
-const CAMERASPEED = 75; 
+const CAMPOSY = 400; var camCurrentPosY = CAMPOSY; // Respecto a Puh
+const CAMERASPEED = 75; // Velocidad a la que sube en funcion del tiempo
 var cameraMoves = true;
+const TOP = 1100; // punto en el eje y en el que se detiene la camara
 
-const PUHX = 700; const PUHY = 1500;
+const PUHX = 700; const PUHY = 1500; // Posiciones iniciales de puh
 
-var startTime;
+var startTime; // Runtime en el momento en el que empieza la escena
 
 export class Game extends Phaser.Scene{
-
 constructor(){
     super({key: 'game'});
 }
@@ -112,10 +112,10 @@ initPuh(){
 }
 
 updateCamera(){
-    var runTimeSecs = (this.time.now- startTime) * 0.001;
+    var runTimeSecs = (this.time.now - startTime) * 0.001; // Tiempo desde que se inicio la escena
     if(DEBUG)console.log(runTimeSecs)
-    camCurrentPosY = CAMPOSY + runTimeSecs*CAMERASPEED - (PUHY - this.puh.y);
-    this.cameras.main.setFollowOffset(0, camCurrentPosY); // Distancia entre el la camara y puh
+    camCurrentPosY = CAMPOSY + runTimeSecs*CAMERASPEED - (PUHY - this.puh.y); // Distancia entre el la camara y puh
+    this.cameras.main.setFollowOffset(0, camCurrentPosY); // Set de la posición y de la camara
 }
 
 addScore(){
@@ -188,10 +188,10 @@ gameOver(){
 
 update(){
     if(cameraMoves){
-    this.updateCamera();
+        this.updateCamera(); // Actualiza su posición respecto a puh
     }
     else{
-        this.cameras.main.stopFollow();
+        this.cameras.main.stopFollow(); // Se queda quieta en el eje Y
     }
 
     if(DEBUG){
@@ -205,12 +205,10 @@ update(){
     }
 
         if(this.puh.y > 1600) {
-           
             this.gameOver();
-
         }
 
-        if (camCurrentPosY > 1100){ // Para el seguimiento de camara
+        if (camCurrentPosY > TOP){ // Detiene el seguimiento de camara
             cameraMoves = false;
         }
     }
