@@ -3,10 +3,12 @@ import { GameOver } from "./GameOver.js";
 const DEBUG = true;
 
 const CAMPOSY = 400; var camCurrentPosY = CAMPOSY; 
-const CAMERASPEED = 50; 
+const CAMERASPEED = 75; 
 var cameraMoves = true;
 
 const PUHX = 700; const PUHY = 1500;
+
+var startTime;
 
 export class Game extends Phaser.Scene{
 
@@ -29,6 +31,7 @@ preload(){
 }
 
 create(){
+    startTime = this.time.now;
     this.song = this.sound.add('song');
     this.song.play();
 
@@ -96,7 +99,7 @@ initScore(){
 initCamera(){
     this.cameras.main.startFollow(this.puh); // Sigue a puh 
     this.cameras.main.setFollowOffset(0, CAMPOSY); // Distancia entre el la camara y puh
-    this.cameras.main.setLerp(0, 0.05);
+    this.cameras.main.setLerp(0, 0.1);
     this.cameras.main.scrollX = false;
 }
 
@@ -109,7 +112,7 @@ initPuh(){
 }
 
 updateCamera(){
-    var runTimeSecs = this.time.now * 0.001;
+    var runTimeSecs = (this.time.now- startTime) * 0.001;
     if(DEBUG)console.log(runTimeSecs)
     camCurrentPosY = CAMPOSY + runTimeSecs*CAMERASPEED - (PUHY - this.puh.y);
     this.cameras.main.setFollowOffset(0, camCurrentPosY); // Distancia entre el la camara y puh
@@ -198,7 +201,7 @@ update(){
     this.characterInputManager(true);
 
     if(this.keyQ.isDown){
-        this.scene.start('game');
+        this.scene.restart();
     }
 
         if(this.puh.y > 1600) {
