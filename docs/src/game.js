@@ -1,7 +1,12 @@
 import { GameOver } from "./GameOver.js";
 
 const DEBUG = true;
-const CAMERAY = 400; const CAMERASPEED = 10;
+
+const CAMPOSY = 400; var camCurrentPosY = CAMPOSY; 
+const CAMERASPEED = 50; 
+var cameraMoves = true;
+
+const PUHX = 700; const PUHY = 1500;
 
 export class Game extends Phaser.Scene{
 
@@ -90,13 +95,13 @@ initScore(){
 
 initCamera(){
     this.cameras.main.startFollow(this.puh); // Sigue a puh 
-    this.cameras.main.setFollowOffset(0, 400); // Distancia entre el la camara y puh
+    this.cameras.main.setFollowOffset(0, CAMPOSY); // Distancia entre el la camara y puh
     this.cameras.main.setLerp(0, 0.05);
     this.cameras.main.scrollX = false;
 }
 
 initPuh(){
-    this.puh = this.physics.add.image(400,1450, 'puh').setImmovable(false).setScale(2);
+    this.puh = this.physics.add.image(PUHX, PUHY, 'puh').setImmovable(false).setScale(2);
     this.puh.setBounce(3);
     this.puh.body.allowGravity = true;
     this.puh.setGravityY(9000);
@@ -105,8 +110,9 @@ initPuh(){
 
 updateCamera(){
     var runTimeSecs = this.time.now * 0.001;
-    console.log(runTimeSecs)
-    this.cameras.main.setFollowOffset(0, CAMERAY + runTimeSecs*CAMERASPEED); // Distancia entre el la camara y puh
+    if(DEBUG)console.log(runTimeSecs)
+    camCurrentPosY = CAMPOSY + runTimeSecs*CAMERASPEED - (PUHY - this.puh.y);
+    this.cameras.main.setFollowOffset(0, camCurrentPosY); // Distancia entre el la camara y puh
 }
 
 addScore(){
@@ -178,12 +184,19 @@ gameOver(){
 
 
 update(){
+    if(cameraMoves){
+    this.updateCamera();
+    }
+    else{
+        this.cameras.main.stopFollow();
+    }
+
     if(DEBUG){
     console.log(this.puh.y)
     }
 
     this.characterInputManager(true);
-    this.updateCamera();
+
     if(this.keyQ.isDown){
         this.scene.start('game');
     }
@@ -194,8 +207,8 @@ update(){
 
         }
 
-        if (this.puh.y < 300){ // Para el seguimiento de camara
-            this.cameras.main.stopFollow();
+        if (camCurrentPosY > 1100){ // Para el seguimiento de camara
+            cameraMoves = false;
         }
     }
 }
