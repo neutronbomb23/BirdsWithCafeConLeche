@@ -1,6 +1,7 @@
 import { GameOver } from "./GameOver.js";
 
 const DEBUG = true;
+const CAMERAY = 400; const CAMERASPEED = 10;
 
 export class Game extends Phaser.Scene{
 
@@ -40,7 +41,7 @@ create(){
         repeat: -1
     });*/
 
-    this.puhInit();
+    this.initPuh();
     
     this.platform = this.physics.add.image(700,1650, 'platform').setImmovable(true).setScale(1);
     this.platform.body.allowGravity = false;
@@ -68,10 +69,7 @@ create(){
 
 
     //CAMARA
-    this.cameras.main.startFollow(this.puh); // Sigue a puh 
-    this.cameras.main.setFollowOffset(0, 400); // Distancia entre el la camara y puh
-    this.cameras.main.setLerp(0, 0.05);
-    this.cameras.main.scrollX = false;
+    this.initCamera();
 
     this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
     this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
@@ -88,6 +86,27 @@ initScore(){
         fill: '#fff',
         fontFamily: 'verdana, arial, sans-serif' 
     });
+}
+
+initCamera(){
+    this.cameras.main.startFollow(this.puh); // Sigue a puh 
+    this.cameras.main.setFollowOffset(0, 400); // Distancia entre el la camara y puh
+    this.cameras.main.setLerp(0, 0.05);
+    this.cameras.main.scrollX = false;
+}
+
+initPuh(){
+    this.puh = this.physics.add.image(400,1450, 'puh').setImmovable(false).setScale(2);
+    this.puh.setBounce(3);
+    this.puh.body.allowGravity = true;
+    this.puh.setGravityY(9000);
+    this.puh.setCollideWorldBounds(true);
+}
+
+updateCamera(){
+    var runTimeSecs = this.time.now * 0.001;
+    console.log(runTimeSecs)
+    this.cameras.main.setFollowOffset(0, CAMERAY + runTimeSecs*CAMERASPEED); // Distancia entre el la camara y puh
 }
 
 addScore(){
@@ -111,14 +130,6 @@ summonObstacles(){
         callback: obsGen,
         loop: true,
     });
-}
-
-puhInit(){
-    this.puh = this.physics.add.image(400,400, 'puh').setImmovable(false).setScale(2);
-    this.puh.setBounce(3);
-    this.puh.body.allowGravity = true;
-    this.puh.setGravityY(9000);
-    this.puh.setCollideWorldBounds(true);
 }
 
 characterInputManager(fly = false){
@@ -172,7 +183,7 @@ update(){
     }
 
     this.characterInputManager(true);
-
+    this.updateCamera();
     if(this.keyQ.isDown){
         this.scene.start('game');
     }
