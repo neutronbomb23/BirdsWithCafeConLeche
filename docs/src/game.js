@@ -20,7 +20,7 @@ init(){
     this.score = 0;
 }
 preload(){
-    this.load.image('background', 'assets/backgroundd.png');
+    this.load.image('background', 'assets/white.png');
     this.load.image('puh', 'assets/puh/puh.png');
     this.load.image('platform', 'assets/platform.png');
     this.load.image('floor', 'assets/floor.png');
@@ -35,8 +35,8 @@ create(){
     this.song = this.sound.add('song');
     this.song.play();
 
-    this.physics.world.setBoundsCollision(true,true,true, false); // Define limites del mapa
-    this.add.image(720,410, 'background'); // Imagen fondo
+    this.physics.world.setBoundsCollision(false,true,true, false); // Define limites del mapa
+    this.add.image(300,200, 'background').setScale(100); // Imagen fondo
 
     this.initScore();
     
