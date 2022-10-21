@@ -9,8 +9,8 @@ export default class FallingObjects extends Phaser.GameObjects.Sprite{
         
         this.scene.add.image(0,0, name);
       
-        //this.body.setBounce(2,2);
-       // this.body.setCollideWorldBounds(true);
+        this.body.setBounce(2,2);
+        this.body.setCollideWorldBounds(true);
     }
 
 
