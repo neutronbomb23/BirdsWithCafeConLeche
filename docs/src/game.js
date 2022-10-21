@@ -1,6 +1,5 @@
 import { GameOver } from "./GameOver.js";
 import Puh from './puh.js';
-import PuhAn from './puhAnims'
 const DEBUG = false;
 
 const CAMPOSY = 400; var camCurrentPosY = CAMPOSY; // Respecto a Puh
@@ -22,7 +21,7 @@ init(){
 }
 preload(){ // precarga los assets
     this.load.image('background', 'assets/backgroundd.png');// fondo
-    this.load.spritesheet('puhIdle', 'assets/puh/puh.png', {frameWidth:32,  frameHeight: 32});// idle de Puh
+    this.load.spritesheet('puhIddle', 'assets/puh/puh.png', {frameWidth:32,  frameHeight: 32});// idle de Puh
     this.load.spritesheet('puhMove', 'assets/puh/Walk.png', {frameWidth:32,  frameHeight: 32});// Movimineto de Puh
     this.load.image('platform', 'assets/platform.png');// plataforma
     this.load.image('floor', 'assets/floor.png');// suelo
@@ -43,8 +42,6 @@ create(){ // se ejecura una sola vez cuando filnaliza el preload
     this.add.image(720,410, 'background'); // Imagen fondo
 
     new Puh(this, 600, 1000);// instanciación de Puh
-    new PuhAn(this, 600, 1000);// instanciación de Puh
-
 
     this.initScore();
     
