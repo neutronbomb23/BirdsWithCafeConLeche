@@ -1,4 +1,5 @@
 import { GameOver } from "./GameOver.js";
+import { GamePause } from "./inGamePause.js";
 import FallingObjects from "./fallingObjects.js";
 import Puh from './puh.js';
 const DEBUG = false;
@@ -91,7 +92,8 @@ create(){
     this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
     this.keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
     this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-
+    this.keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
+ 
     this.cursors = this.input.keyboard.createCursorKeys();     
 }
 
@@ -208,6 +210,11 @@ update(t,dt){
     if(this.keyQ.isDown){
         this.scene.restart();
     }
+    if(this.keyZ.isDown){
+        this.scene.launch('GamePause', {me: this.scene});
+        this.scene.pause();
+    }
+
 
         if(this.puh.y > 1600) {
             this.gameOver();
