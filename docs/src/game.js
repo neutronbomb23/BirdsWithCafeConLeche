@@ -81,7 +81,7 @@ create(){
     this.obstaclesList = ['bone', 'birdClaw', 'birdSkull']
     this.obstacles = this.physics.add.group();
 
-    this.physics.add.collider(this.obstacles, this.puh);
+    this.physics.add.collider(this.obstacles, this.puh, this.gameOver.bind(this), null);
     this.physics.add.collider(this.obstacles, this.platform);
     
     //CAMARA
