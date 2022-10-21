@@ -28,20 +28,35 @@ constructor(scene, x, y){
     this. d = this.scene.input.keyboard.addKey('D');
 }
 
-preUpdate(t, dt){
-    super.preUpdate(t,dt);
-
-    if(this.w.isDown){
-        this.y -= 400 * dt/1000;
-    }
-    if(this.s.isDown){
-        this.y += 400 * dt/1000;
-    }
+characterInputManager(fly = false, dt){
     if(this.a.isDown){
         this.x -= 400 * dt/1000;
     }
-    if(this.d.isDown){
+    else if(this.d.isDown){
         this.x += 400 * dt/1000;
     }
+    if (!fly){
+        if(this.w.isDown && this.puh.body.touching.down){
+            this.y -= 400 * dt/1000;
+        }
+    }
+    else{
+        if(this.w.isDown){
+            this.y -= 400 * dt/1000;
+        }
+        else if (this.s.isDown){
+            this.y += 400 * dt/1000;
+        }
+        else{ 
+            this.y += 100 * dt/1000;
+        }
+    }
+}
+
+
+preUpdate(t, dt){
+    super.preUpdate(t,dt);
+
+    this.characterInputManager(true, dt);
 }
 }

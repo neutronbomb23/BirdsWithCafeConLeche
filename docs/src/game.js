@@ -19,16 +19,16 @@ constructor(){
 init(){
     this.score = 0;
 }
-preload(){
-    this.load.image('background', 'assets/backgroundd.png');
-    this.load.spritesheet('puhIddle', 'assets/puh/puh.png', {frameWidth:32,  frameHeight: 32});
-    this.load.spritesheet('puhMove', 'assets/puh/Walk.png', {frameWidth:32,  frameHeight: 32});
-    this.load.image('platform', 'assets/platform.png');
-    this.load.image('floor', 'assets/floor.png');
-    this.load.image('bone', 'assets/obstacles/bone.png');
-    this.load.image('birdSkull', 'assets/obstacles/birdSkull.png');
-    this.load.image('birdClaw', 'assets/obstacles/birdClaw.png');
-    this.load.audio('song','assets/audio/cty.mp3');
+preload(){ // precarga los assets
+    this.load.image('background', 'assets/backgroundd.png');// fondo
+    this.load.spritesheet('puhIddle', 'assets/puh/puh.png', {frameWidth:32,  frameHeight: 32});// idle de Puh
+    this.load.spritesheet('puhMove', 'assets/puh/Walk.png', {frameWidth:32,  frameHeight: 32});// Movimineto de Puh
+    this.load.image('platform', 'assets/platform.png');// plataforma
+    this.load.image('floor', 'assets/floor.png');// suelo
+    this.load.image('bone', 'assets/obstacles/bone.png');// hueso
+    this.load.image('birdSkull', 'assets/obstacles/birdSkull.png');// calavera de pájaro
+    this.load.image('birdClaw', 'assets/obstacles/birdClaw.png');// garra de pájaro
+    this.load.audio('song','assets/audio/cty.mp3');// sonido
 }
 
 create(){
@@ -41,7 +41,9 @@ create(){
     this.physics.world.setBoundsCollision(true,true,true, false); // Define limites del mapa
     this.add.image(720,410, 'background'); // Imagen fondo
 
-    new Puh(this, 600, 1000);
+    this.puh = new Puh(this, 600, 1000);// instanciación de Puh
+    //new PuhAn(this, 600, 1000);// instanciación de Puh
+
 
     this.initScore();
     
@@ -53,8 +55,6 @@ create(){
         frameRate: 10,
         repeat: -1
     });*/
-
-    this.initPuh();
     
     this.platform = this.physics.add.image(700,1650, 'platform').setImmovable(true).setScale(1);
     this.platform.body.allowGravity = false;
@@ -150,7 +150,6 @@ characterInputManager(fly = false){
 
     if(this.keyA.isDown){
         this.puh.setVelocityX(-400);
-        //this.puh.anims.play('walk', true);
     }
     else if(this.keyD.isDown){
         this.puh.setVelocityX(400);
@@ -202,8 +201,6 @@ update(){
     if(DEBUG){
     console.log(this.puh.y)
     }
-
-    this.characterInputManager(true);
 
     if(this.keyQ.isDown){
         this.scene.restart();
