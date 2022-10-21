@@ -14,7 +14,7 @@ constructor(scene, x, y){
 
     this.scene.anims.create({
         key: 'move',
-        frames: scene.anims.generateFrameNumbers('puhIddle', {start:0, end:5}),
+        frames: scene.anims.generateFrameNumbers('puhMove', {start:0, end:3}),
         frameRate: 5,
         repeat: -1
     });
@@ -30,10 +30,13 @@ constructor(scene, x, y){
 }
 
 characterInputManager(fly = false, dt){
+    //this.play('iddle');
     if(this.a.isDown){
+        //if(this.anim.currentAnim.key === 'move')this.play
         this.body.setVelocityX(-400);
     }
     else if(this.d.isDown){
+        //if(this.anim.currentAnim.key === 'move')this.play
         this.body.setVelocityX(400);
     }
     else{
