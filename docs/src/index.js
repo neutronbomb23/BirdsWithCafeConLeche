@@ -2,6 +2,7 @@ import { Menu } from './menu.js';
 import { Game } from './game.js';
 import { Intro } from './intro.js';
 import { GameOver } from './GameOver.js';
+import { GamePause } from './inGamePause.js';
 
 
 let config = {
@@ -27,7 +28,7 @@ let config = {
 		zoom: 1
     },
     
-    scene: [Intro, Menu, Game, GameOver],
+    scene: [Intro, Menu, Game, GameOver, GamePause],
     physics: { 
         default: 'arcade', 
         arcade: { 
@@ -42,7 +43,7 @@ let config = {
         }
     },
 
-   // transparent: true
+   transparent: true
    
     
 };
