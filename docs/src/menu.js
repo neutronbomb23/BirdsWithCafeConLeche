@@ -7,7 +7,7 @@ export class Menu extends Phaser.Scene {
       super({ key: 'Menu' }); 
     }
 
-    preload(){// precarga los assets
+    preload(){
 
         this.load.image('playButton', 'assets/startpng.png');
         this.load.image('optionsButton', 'assets/controlspng.png');
@@ -21,7 +21,7 @@ export class Menu extends Phaser.Scene {
         this.load.image('controls', 'assets/quit.png'); // cambiar por la imágen de controles cuando se tenga
     }
 
-    create(){// se ejecura una sola vez cuando filnaliza el preload
+    create(){
 
         this.add.image(720,900, 'menuFondo').setScale(1.3); // Imagen fondo
         this.add.image(720,500, 'centralperk').setScale(1.5); // Imagen fondo

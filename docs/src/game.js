@@ -13,25 +13,25 @@ var startTime; // Runtime en el momento en el que empieza la escena
 
 export class Game extends Phaser.Scene{
 constructor(){
-    super({key: 'game'}); // llama a la clase superior (phaser.js)
+    super({key: 'game'});
 }
 
 init(){
     this.score = 0;
 }
-preload(){ // precarga los assets
-    this.load.image('background', 'assets/backgroundd.png');// fondo
-    this.load.spritesheet('puhIddle', 'assets/puh/puh.png', {frameWidth:32,  frameHeight: 32});// idle de Puh
-    this.load.spritesheet('puhMove', 'assets/puh/Walk.png', {frameWidth:32,  frameHeight: 32});// Movimineto de Puh
-    this.load.image('platform', 'assets/platform.png');// plataforma
-    this.load.image('floor', 'assets/floor.png');// suelo
-    this.load.image('bone', 'assets/obstacles/bone.png');// hueso
-    this.load.image('birdSkull', 'assets/obstacles/birdSkull.png');// calavera de pájaro
-    this.load.image('birdClaw', 'assets/obstacles/birdClaw.png');// garra de pájaro
-    this.load.audio('song','assets/audio/cty.mp3');// sonido
+preload(){
+    this.load.image('background', 'assets/backgroundd.png');
+    this.load.spritesheet('puhIddle', 'assets/puh/puh.png', {frameWidth:32,  frameHeight: 32});
+    this.load.spritesheet('puhMove', 'assets/puh/Walk.png', {frameWidth:32,  frameHeight: 32});
+    this.load.image('platform', 'assets/platform.png');
+    this.load.image('floor', 'assets/floor.png');
+    this.load.image('bone', 'assets/obstacles/bone.png');
+    this.load.image('birdSkull', 'assets/obstacles/birdSkull.png');
+    this.load.image('birdClaw', 'assets/obstacles/birdClaw.png');
+    this.load.audio('song','assets/audio/cty.mp3');
 }
 
-create(){ // se ejecura una sola vez cuando filnaliza el preload
+create(){
     startTime = this.time.now;
     cameraMoves = true;
 
@@ -41,7 +41,7 @@ create(){ // se ejecura una sola vez cuando filnaliza el preload
     this.physics.world.setBoundsCollision(true,true,true, false); // Define limites del mapa
     this.add.image(720,410, 'background'); // Imagen fondo
 
-    new Puh(this, 600, 1000);// instanciación de Puh
+    new Puh(this, 600, 1000);
 
     this.initScore();
     
@@ -69,8 +69,8 @@ create(){ // se ejecura una sola vez cuando filnaliza el preload
     }
     */
     
-    this.physics.add.collider(this.puh, this.platform);// colisión entre Puh y la plataforma
-    this.physics.add.collider(this.puh, this.floor);// colisión entre Puh y el suelo
+    this.physics.add.collider(this.puh, this.platform);
+    this.physics.add.collider(this.puh, this.floor);
 
     this.platform.setCollideWorldBounds(true);
     this.platform.body.onWorldBounds=true;
@@ -134,9 +134,9 @@ summonObstacles(){
     const obstaclesList = ['bone', 'birdClaw', 'birdSkull']
 
     const obsGen = () => {
-        const xCoord = Math.random() * 1500// posición aleatoria
-        let obsGen = obstaclesList[Math.floor(Math.random() * 3)]// escoger un obstáculo
-        obstacles.create(xCoord, 10, obsGen)// instanciar el obstáculo
+        const xCoord = Math.random() * 1500
+        let obsGen = obstaclesList[Math.floor(Math.random() * 3)]
+        obstacles.create(xCoord, 10, obsGen)
     }
 
     const obsGenLoop = this.time.addEvent({
@@ -191,7 +191,7 @@ gameOver(){
 }
 
 
-update(){// se ejecura una vez por frame
+update(){
     if(cameraMoves){
         this.updateCamera(); // Actualiza su posición respecto a puh
     }
