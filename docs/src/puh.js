@@ -46,7 +46,7 @@ characterInputManager(fly = false, dt){
         else if (this.body.touching.down){ 
             this.body.setVelocityY(0);
         }
-        else if(this.puh.body.touching.up) this.puh.setVelocityY(0);
+        else if(this.body.touching.up) this.puh.setVelocityY(0);
     }
     else{
         if(this.w.isDown){
