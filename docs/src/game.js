@@ -23,7 +23,7 @@ init(){
 preload(){ // precarga los assets
     this.load.image('background', 'assets/backgroundd.png');// fondo
     this.load.spritesheet('puhIddle', 'assets/puh/puh.png', {frameWidth:32,  frameHeight: 32});// idle de Puh
-    this.load.spritesheet('puhMove', 'assets/puh/Walk.png', {frameWidth:32,  frameHeight: 32});// Movimineto de Puh
+    //this.load.spritesheet('puhMove', 'assets/puh/Walk.png', {frameWidth:32,  frameHeight: 32});// Movimineto de Puh
     this.load.image('platform', 'assets/platform.png');// plataforma
     this.load.image('floor', 'assets/floor.png');// suelo
     this.load.image('bone', 'assets/obstacles/bone.png');// hueso
@@ -75,9 +75,6 @@ create(){
     this.platform.setCollideWorldBounds(true);
     this.platform.body.onWorldBounds=true;
     this.physics.add.collider(this.platform, this.floor);
-    
-    this.physics.add.collider(this.puh, this.platform, this.addScore.bind(this), null);
-    //this.physics.add.collider(this.birdSkull, this.platform, this.addScore.bind(this), null);
     //this.physics.add.collider(this.birdClaw, this.platform, this.addScore.bind(this), null);
 
     this.obstaclesList = ['bone', 'birdClaw', 'birdSkull']

@@ -40,7 +40,9 @@ let config = {
             left: true,
             right: true
         }
-    }
+    },
+
+   // transparent: true
    
     
 };
