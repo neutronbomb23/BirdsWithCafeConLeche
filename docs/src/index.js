@@ -38,7 +38,9 @@ let config = {
             left: true,
             right: true
         }
-    }
+    },
+    transparent: true
+
 };
 
 new Phaser.Game(config);
