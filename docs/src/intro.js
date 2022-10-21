@@ -7,11 +7,11 @@ export class Intro extends Phaser.Scene {
       super({ key: 'Intro' }); 
     }
 
-    preload (){
+    preload (){// precarga los assets
         this.load.video('wench', './assets/video/video.webm');
         this.load.text('text');
     }
-    create (){
+    create (){// se ejecura una sola vez cuando filnaliza el preload
 
         this.menuvideo = this.add.video(0,0, 'wench').setOrigin(0,0);
         this.menuvideo.play();
@@ -29,7 +29,7 @@ export class Intro extends Phaser.Scene {
         
        
     }
-    update(){
+    update(){// se ejecura una vez por frame
 
         if(this.keyS.isDown){
           this.scene.start('Menu')

@@ -8,11 +8,11 @@ export class GameOver extends Phaser.Scene {
       super({ key: 'GameOver' }); 
     }
 
-    preload (){
+    preload (){// precarga los assets
         this.load.video('video', './assets/video/wench.webm');
         this.load.text('text');
     }
-    create (){
+    create (){// se ejecura una sola vez cuando filnaliza el preload
 
         this.gameOverVideo = this.add.video(0,0, 'video').setOrigin(0,0);
         this.gameOverVideo.play();
@@ -22,7 +22,7 @@ export class GameOver extends Phaser.Scene {
         this.keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
 
     }
-    update(){
+    update(){// se ejecura una vez por frame
 
         if(this.keyR.isDown){
           this.scene.start('game')
