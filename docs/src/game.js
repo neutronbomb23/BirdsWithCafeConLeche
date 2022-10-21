@@ -1,11 +1,6 @@
-import FallingObjects from "./fallingObjects.js";
 import { GameOver } from "./GameOver.js";
 import Puh from './puh.js';
-<<<<<<< Updated upstream
 import PuhAn from './puhAnims'
-=======
-
->>>>>>> Stashed changes
 const DEBUG = false;
 
 const CAMPOSY = 400; var camCurrentPosY = CAMPOSY; // Respecto a Puh
@@ -40,11 +35,11 @@ preload(){ // precarga los assets
 create(){ // se ejecura una sola vez cuando filnaliza el preload
     startTime = this.time.now;
     cameraMoves = true;
-    this.lastTimeObbs = 0;
+
     this.song = this.sound.add('song');
     this.song.play();
 
-    //this.physics.world.setBoundsCollision(true,true,true, false); // Define limites del mapa
+    this.physics.world.setBoundsCollision(true,true,true, false); // Define limites del mapa
     this.add.image(720,410, 'background'); // Imagen fondo
 
     new Puh(this, 600, 1000);// instanciación de Puh
@@ -52,7 +47,8 @@ create(){ // se ejecura una sola vez cuando filnaliza el preload
 
 
     this.initScore();
-
+    
+    this.summonObstacles();
 
     /*this.anims.create({
         key: 'walk',
@@ -78,7 +74,7 @@ create(){ // se ejecura una sola vez cuando filnaliza el preload
     
     this.physics.add.collider(this.puh, this.platform);// colisión entre Puh y la plataforma
     this.physics.add.collider(this.puh, this.floor);// colisión entre Puh y el suelo
-    
+
     this.platform.setCollideWorldBounds(true);
     this.platform.body.onWorldBounds=true;
     this.physics.add.collider(this.platform, this.floor);
@@ -86,12 +82,8 @@ create(){ // se ejecura una sola vez cuando filnaliza el preload
     this.physics.add.collider(this.puh, this.platform, this.addScore.bind(this), null);
     //this.physics.add.collider(this.birdSkull, this.platform, this.addScore.bind(this), null);
     //this.physics.add.collider(this.birdClaw, this.platform, this.addScore.bind(this), null);
-    this.obstaclesList = ['bone', 'birdClaw', 'birdSkull']
-    this.obstacles = this.physics.add.group();
 
-    this.physics.add.collider(this.obstacles, this.puh);
-    this.physics.add.collider(this.obstacles, this.platform);
-    
+
     //CAMARA
     this.initCamera();
 
@@ -121,10 +113,10 @@ initCamera(){
 
 initPuh(){
     this.puh = this.physics.add.image(PUHX, PUHY, 'puh').setImmovable(false).setScale(2);
-    
+    this.puh.setBounce(3);
     this.puh.body.allowGravity = true;
     this.puh.setGravityY(9000);
-    //this.puh.setCollideWorldBounds(true);
+    this.puh.setCollideWorldBounds(true);
 }
 
 updateCamera(){
@@ -140,6 +132,22 @@ addScore(){
         console.log('1 punto');
 }
 
+summonObstacles(){
+    const obstacles = this.physics.add.group();
+    const obstaclesList = ['bone', 'birdClaw', 'birdSkull']
+
+    const obsGen = () => {
+        const xCoord = Math.random() * 1500// posición aleatoria
+        let obsGen = obstaclesList[Math.floor(Math.random() * 3)]// escoger un obstáculo
+        obstacles.create(xCoord, 10, obsGen)// instanciar el obstáculo
+    }
+
+    const obsGenLoop = this.time.addEvent({
+        delay: 500,
+        callback: obsGen,
+        loop: true,
+    });
+}
 
 characterInputManager(fly = false){
 
@@ -174,8 +182,7 @@ characterInputManager(fly = false){
         }
     }
     if(this.keyQ.isDown){
-        this.song.stop();
-        this.scene.restart();
+        this.scene.start('game');
     }
 }
 
@@ -186,25 +193,8 @@ gameOver(){
     this.scene.start('GameOver');
 }
 
-generateObs(){
-    let idObs = this.obstaclesList[Math.floor(Math.random() * 3)]
-    let toni =  new FallingObjects(this, 100, idObs);
-    this.obstacles.add(toni);
 
-    //toni.setBounce(2);  
-    
-    console.log(idObs);
-}
-update(t,dt){// se ejecura una vez por frame
- 
-    this.lastTimeObbs += dt;
-    if(this.lastTimeObbs > 1000)
-    {
-        this.generateObs();
-        console.log(this.lastTimeObbs);
-        this.lastTimeObbs = 0;
-    }
-
+update(){// se ejecura una vez por frame
     if(cameraMoves){
         this.updateCamera(); // Actualiza su posición respecto a puh
     }
@@ -218,6 +208,9 @@ update(t,dt){// se ejecura una vez por frame
 
     this.characterInputManager(true);
 
+    if(this.keyQ.isDown){
+        this.scene.restart();
+    }
 
         if(this.puh.y > 1600) {
             this.gameOver();
