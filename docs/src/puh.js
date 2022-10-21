@@ -6,7 +6,7 @@ constructor(scene, x, y){
     this.scene.physics.add.existing(this);
 
     this.scene.anims.create({
-        key: 'iddle',
+        key: 'idle',
         frames: scene.anims.generateFrameNumbers('puhIddle', {start:0, end:3}),
         frameRate: 5,
         repeat: -1
@@ -18,10 +18,16 @@ constructor(scene, x, y){
         frameRate: 5,
         repeat: -1
     });
-     //if(this.anim.currentAnim.key === 'move')this.play
 
+    this.scene.anims.create({
+        key: 'fly',
+        frames: scene.anims.generateFrameNumbers('puhFly', {start:0, end:5}),
+        frameRate: 5,
+        repeat: -1
+    });
+
+    this.play('idle');
     this.setScale(3);
-    this.play('iddle');
 
     this. w = this.scene.input.keyboard.addKey('W');
     this. s = this.scene.input.keyboard.addKey('S');
@@ -30,13 +36,10 @@ constructor(scene, x, y){
 }
 
 characterInputManager(fly = false, dt){
-    //this.play('iddle');
     if(this.a.isDown){
-        //if(this.anim.currentAnim.key === 'move')this.play
         this.body.setVelocityX(-400);
     }
     else if(this.d.isDown){
-        //if(this.anim.currentAnim.key === 'move')this.play
         this.body.setVelocityX(400);
     }
     else{
@@ -64,10 +67,23 @@ characterInputManager(fly = false, dt){
     }
 }
 
+animationManager(){
+    if(!this.body.touching.down){
+        if(this.anims.currentAnim.key !== 'fly') {this.play('fly');}
+    }
+    else if (this.body.velocity.x != 0){
+        if(this.anims.currentAnim.key !== 'move') {this.play('move');}
+    }
+    else{
+        if(this.anims.currentAnim.key !== 'idle') {this.play('idle');}
+    }
+}
+
 
 preUpdate(t, dt){
     super.preUpdate(t,dt);
 
     this.characterInputManager(true, dt);
+    this.animationManager();
 }
 }

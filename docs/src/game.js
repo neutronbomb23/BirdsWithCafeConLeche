@@ -25,6 +25,7 @@ preload(){ // precarga los assets
     this.load.image('background', 'assets/backgroundd.png');// fondo
     this.load.spritesheet('puhIddle', 'assets/puh/puh.png', {frameWidth:32,  frameHeight: 32});// idle de Puh
     this.load.spritesheet('puhMove', 'assets/puh/caminar.png', {frameWidth:32,  frameHeight: 32});// Movimiento de Puh
+    this.load.spritesheet('puhFly', 'assets/puh/Walk.png', {frameWidth:32,  frameHeight: 32});// Vuelo de Puh
     this.load.image('platform', 'assets/platform.png');// plataforma
     this.load.image('floor', 'assets/floor.png');// suelo
     this.load.image('bone', 'assets/obstacles/bone.png');// hueso
