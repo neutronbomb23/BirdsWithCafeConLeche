@@ -3,6 +3,7 @@ constructor(scene, x, y){
     super(scene, x, y, 'puh');
 
     this.scene.add.existing(this);
+    this.scene.physics.add.existing(this);
 
     this.scene.anims.create({
         key: 'iddle',
@@ -30,25 +31,32 @@ constructor(scene, x, y){
 
 characterInputManager(fly = false, dt){
     if(this.a.isDown){
-        this.x -= 400 * dt/1000;
+        this.body.setVelocityX(-400);
     }
     else if(this.d.isDown){
-        this.x += 400 * dt/1000;
+        this.body.setVelocityX(400);
+    }
+    else{
+        this.body.setVelocityX(0);
     }
     if (!fly){
-        if(this.w.isDown && this.puh.body.touching.down){
-            this.y -= 400 * dt/1000;
+        if(this.w.isDown && this.body.touching.down){
+            this.body.setVelocityY(-2000)
         }
+        else if (this.body.touching.down){ 
+            this.body.setVelocityY(0);
+        }
+        else if(this.puh.body.touching.up) this.puh.setVelocityY(0);
     }
     else{
         if(this.w.isDown){
-            this.y -= 400 * dt/1000;
+            this.body.setVelocityY(-1000)
         }
         else if (this.s.isDown){
-            this.y += 400 * dt/1000;
+            this.body.setVelocityY(250);
         }
         else{ 
-            this.y += 100 * dt/1000;
+            this.body.setVelocityY(100);
         }
     }
 }

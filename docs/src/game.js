@@ -39,6 +39,7 @@ create(){
     this.song = this.sound.add('song');
     this.song.play();
 
+
     //this.physics.world.setBoundsCollision(true,true,true, false); // Define limites del mapa
     this.add.image(720,410, 'background'); // Imagen fondo
 
@@ -116,7 +117,7 @@ initPuh(){
     this.puh = this.physics.add.image(PUHX, PUHY, 'puh').setImmovable(false).setScale(2);
     this.puh.setBounce(3);
     this.puh.body.allowGravity = true;
-    this.puh.setGravityY(9000);
+
     //this.puh.setCollideWorldBounds(true);
 }
 
