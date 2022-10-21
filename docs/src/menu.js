@@ -9,15 +9,15 @@ export class Menu extends Phaser.Scene {
 
     preload(){// precarga los assets
 
-        this.load.image('playButton', 'assets/startpng.png');
-        this.load.image('optionsButton', 'assets/controlspng.png');
-        this.load.image('menuFondo', 'assets/menu.jpg');
-        this.load.image('puh', 'assets/puh.png');
+        this.load.image('playButton', 'assets/startpng.png');// botón de juegar
+        this.load.image('optionsButton', 'assets/controlspng.png');// votón de opciones
+        this.load.image('menuFondo', 'assets/menu.jpg');// fondo
+        this.load.image('puh', 'assets/puh.png');// Puh
         this.load.audio('menuMusic', 'assets/audio/menuMusic.mp3');
         this.load.image('text', 'assets/birdstext.png');
-        this.load.image('paloma', 'assets/paloma.png');
+        this.load.image('paloma', 'assets/paloma.png');// Palomo Rick
         this.load.image('centralperk', 'assets/logopng.png');
-        this.load.image('returnButton', 'assets/returnpng.png');
+        this.load.image('returnButton', 'assets/returnpng.png');// botón de reinicio
         this.load.image('controls', 'assets/quit.png'); // cambiar por la imágen de controles cuando se tenga
     }
 
@@ -31,14 +31,14 @@ export class Menu extends Phaser.Scene {
         
        
         let playButton = this.add.image(720, 950, 'playButton').setScale(1); // Botón de play
-        let optionsButton = this.add.image(720, 1200 , 'optionsButton').setScale(1); // Botón de play
+        let optionsButton = this.add.image(720, 1200 , 'optionsButton').setScale(1); // Botón de opciones
         //this.add.sprite(100,100,'puh');
       
 
         playButton.setInteractive();
         optionsButton.setInteractive();
 
-        this.menuMusic = this.sound.add('menuMusic');
+        this.menuMusic = this.sound.add('menuMusic');// sonido añadido
         
         this.menuMusic.play();
         playButton.on("pointerup", ()=>{
