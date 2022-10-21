@@ -1,4 +1,5 @@
 import { GameOver } from "./GameOver.js";
+import FallingObjects from "./fallingObjects.js";
 import Puh from './puh.js';
 const DEBUG = false;
 
@@ -34,18 +35,16 @@ preload(){
 create(){
     startTime = this.time.now;
     cameraMoves = true;
-
+    this.lastTimeObbs = 0;
     this.song = this.sound.add('song');
     this.song.play();
 
-    this.physics.world.setBoundsCollision(true,true,true, false); // Define limites del mapa
+    //this.physics.world.setBoundsCollision(true,true,true, false); // Define limites del mapa
     this.add.image(720,410, 'background'); // Imagen fondo
 
     new Puh(this, 600, 1000);
 
     this.initScore();
-    
-    this.summonObstacles();
 
     /*this.anims.create({
         key: 'walk',
@@ -80,7 +79,12 @@ create(){
     //this.physics.add.collider(this.birdSkull, this.platform, this.addScore.bind(this), null);
     //this.physics.add.collider(this.birdClaw, this.platform, this.addScore.bind(this), null);
 
+    this.obstaclesList = ['bone', 'birdClaw', 'birdSkull']
+    this.obstacles = this.physics.add.group();
 
+    this.physics.add.collider(this.obstacles, this.puh);
+    this.physics.add.collider(this.obstacles, this.platform);
+    
     //CAMARA
     this.initCamera();
 
@@ -189,9 +193,27 @@ gameOver(){
     this.song.stop();
     this.scene.start('GameOver');
 }
+generateObs(){
+    let idObs = this.obstaclesList[Math.floor(Math.random() * 3)]
+    let toni =  new FallingObjects(this, 100, idObs);
+    this.obstacles.add(toni);
+
+    //toni.setBounce(2);  
+    
+    console.log(idObs);
+}
 
 
-update(){
+update(t,dt){
+
+    this.lastTimeObbs += dt;
+    if(this.lastTimeObbs > 1000)
+    {
+        this.generateObs();
+        console.log(this.lastTimeObbs);
+        this.lastTimeObbs = 0;
+    }
+
     if(cameraMoves){
         this.updateCamera(); // Actualiza su posición respecto a puh
     }
@@ -204,10 +226,6 @@ update(){
     }
 
     this.characterInputManager(true);
-
-    if(this.keyQ.isDown){
-        this.scene.restart();
-    }
 
         if(this.puh.y > 1600) {
             this.gameOver();
