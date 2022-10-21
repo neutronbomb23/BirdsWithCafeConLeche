@@ -5,6 +5,7 @@ import { GameOver } from './GameOver.js';
 
 
 let config = {
+    
     type: Phaser.CANVAS,
     canvas: document.getElementById("juego"),
     width:  1440,
@@ -25,6 +26,7 @@ let config = {
         },
 		zoom: 1
     },
+    
     scene: [Intro, Menu, Game, GameOver],
     physics: { 
         default: 'arcade', 
@@ -39,6 +41,8 @@ let config = {
             right: true
         }
     }
+   
+    
 };
 
 new Phaser.Game(config);

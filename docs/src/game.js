@@ -117,7 +117,7 @@ initPuh(){
     this.puh.setBounce(3);
     this.puh.body.allowGravity = true;
     this.puh.setGravityY(9000);
-    this.puh.setCollideWorldBounds(true);
+    //this.puh.setCollideWorldBounds(true);
 }
 
 updateCamera(){
@@ -131,23 +131,6 @@ addScore(){
         this.score++;
         this.scoreText.setText('Points: ' + this.score);
         console.log('1 punto');
-}
-
-summonObstacles(){
-    const obstacles = this.physics.add.group();
-    const obstaclesList = ['bone', 'birdClaw', 'birdSkull']
-
-    const obsGen = () => {
-        const xCoord = Math.random() * 1500
-        let obsGen = obstaclesList[Math.floor(Math.random() * 3)]
-        obstacles.create(xCoord, 10, obsGen)
-    }
-
-    const obsGenLoop = this.time.addEvent({
-        delay: 500,
-        callback: obsGen,
-        loop: true,
-    });
 }
 
 characterInputManager(fly = false){
@@ -230,7 +213,10 @@ update(t,dt){
         if(this.puh.y > 1600) {
             this.gameOver();
         }
-
+        if(this.obstacles.y > 1600)
+        {
+            this.addScore();
+        }
         if (camCurrentPosY > TOP){ // Detiene el seguimiento de camara
             cameraMoves = false;
         }
