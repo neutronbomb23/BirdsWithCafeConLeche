@@ -30,10 +30,10 @@ constructor(scene, x, y){
     this.body.setCollideWorldBounds();
     this.setScale(3);
 
-    this. w = this.scene.input.keyboard.addKey('W');
-    this. s = this.scene.input.keyboard.addKey('S');
-    this. a = this.scene.input.keyboard.addKey('A');
-    this. d = this.scene.input.keyboard.addKey('D');
+    this.w = this.scene.input.keyboard.addKey('W');
+    this.s = this.scene.input.keyboard.addKey('S');
+    this.a = this.scene.input.keyboard.addKey('A');
+    this.d = this.scene.input.keyboard.addKey('D');
 }
 
 characterInputManager(fly = false, dt){
