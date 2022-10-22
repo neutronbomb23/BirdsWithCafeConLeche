@@ -1,5 +1,6 @@
 import { Menu } from './menu.js';
 import { Game } from './game.js';
+
  
 export class GameOver extends Phaser.Scene {
 
@@ -9,27 +10,43 @@ export class GameOver extends Phaser.Scene {
     }
 
     preload (){
-        this.load.video('video', './assets/video/wench.webm');
-        this.load.text('text');
-    }
-    create (){
 
-        this.gameOverVideo = this.add.video(0,0, 'video').setOrigin(0,0);
-        this.gameOverVideo.play();
-        this.add.text(400, 1200, 'Pulsa la tecla Q para pasar al menú principal. \nPulsa R para volver a intentarlo.', { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: 45, color: 'yellow'});
-  
-        this.keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
-        this.keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
+      this.load.image('gameOverPng' , 'assets/gameOverPng.png');
 
-    }
-    update(){
-
-        if(this.keyR.isDown){
-          this.scene.start('game')
-        }
-        if(this.keyQ.isDown){
-            this.scene.start('Menu')
-          }
+      this.load.text('tryAgain');
+       
+        this.load.image('returnButton', 'assets/returnpng.png');
         
+        this.load.image('menuButton', 'assets/controlspng.png');
+
+    }
+    
+    create (){
+        this.add.image(730, 300, 'gameOverPng');
+        this.tryagainText = this.add.text(300,600, '                 WANNA PLAY AGAIN?\n I´LL END UP EATING YOU ANYWAYS!', { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: 50, color: 'black'});
+        this.tryagainText.visible = false;
+        let returnButton = this.add.image(720, 950, 'playButton').setScale(1); // Botón de play
+        let menuButton = this.add.image(720, 1200 , 'optionsButton').setScale(1); // Botón para volver al menú, hay que cambiar el aspecto
+        returnButton.setInteractive();
+        menuButton.setInteractive();
+
+        returnButton.on("pointerover", ()=>{
+          this.tryagainText.visible = true;
+      });
+      returnButton.on("pointerout", ()=>{
+        this.tryagainText.visible = false;
+    });
+
+        returnButton.on("pointerup", ()=>{
+            this.scene.start('game');
+            this.scene.stop();
+        });
+
+        menuButton.on("pointerup", ()=>{
+            this.scene.start('Menu');
+            this.GameOver.stop();
+        });
+   
+    
     }
 }

@@ -88,11 +88,11 @@ create(){
     //CAMARA
     this.initCamera();
 
-    this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+   /* this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
     this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-    this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+    this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);*/
     this.keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
-    this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+    //this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
     this.keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
  
     this.cursors = this.input.keyboard.createCursorKeys();     
@@ -126,6 +126,7 @@ updateCamera(){
     if(DEBUG)console.log(runTimeSecs)
     camCurrentPosY = CAMPOSY + runTimeSecs*CAMERASPEED - (PUHY - this.puh.y); // Distancia entre el la camara y puh
     this.cameras.main.setFollowOffset(0, camCurrentPosY); // Set de la posición y de la camara
+
 }
 
 addScore(){
@@ -133,8 +134,7 @@ addScore(){
         this.scoreText.setText('Points: ' + this.score);
         console.log('1 punto');
 }
-
-characterInputManager(fly = false){
+/*characterInputManager(fly = false){
 
     if(this.keyA.isDown){
         this.puh.setVelocityX(-400);
@@ -168,11 +168,11 @@ characterInputManager(fly = false){
     if(this.keyQ.isDown){
         this.scene.start('game');
     }
-}
+}*/
 
 gameOver(){
     this.puh.visible = false;
-    console.log('fin');
+    console.log('Puh Abatido');
     this.song.stop();
     this.scene.start('GameOver');
 }
@@ -210,6 +210,7 @@ update(t,dt){
 
     if(this.keyQ.isDown){
         this.scene.restart();
+        this.song.stop();
     }
     if(this.keyZ.isDown){
         this.scene.launch('GamePause', {me: this.scene});
@@ -219,6 +220,7 @@ update(t,dt){
 
         if(this.puh.y > 1600) {
             this.gameOver();
+    
         }
         if(this.obstacles.y > 1600)
         {
