@@ -27,6 +27,7 @@ constructor(scene, x, y){
     });
 
     this.play('idle');
+    this.body.setCollideWorldBounds();
     this.setScale(3);
 
     this. w = this.scene.input.keyboard.addKey('W');
@@ -37,11 +38,11 @@ constructor(scene, x, y){
 
 characterInputManager(fly = false, dt){
     if(this.a.isDown){
-        this.body.setVelocityX(-400);
+        this.body.setVelocityX(-500);
         this.setFlip(true, false)
     }
     else if(this.d.isDown){
-        this.body.setVelocityX(400);
+        this.body.setVelocityX(500);
         this.setFlip(false, false)
     }
     else{
@@ -49,22 +50,22 @@ characterInputManager(fly = false, dt){
     }
     if (!fly){
         if(this.w.isDown && this.body.touching.down){
-            this.body.setVelocityY(-2000)
+            this.body.setVelocityY(-800)
         }
         else if (this.body.touching.down){ 
             this.body.setVelocityY(0);
         }
-        else if(this.body.touching.up) this.puh.setVelocityY(0);
+        else if(this.body.touching.up) this.body.setVelocityY(0);
     }
     else{
         if(this.w.isDown){
-            this.body.setVelocityY(-1000)
+            this.body.setVelocityY(-500)
         }
         else if (this.s.isDown){
-            this.body.setVelocityY(250);
+            this.body.setVelocityY(500);
         }
         else{ 
-            this.body.setVelocityY(100);
+            this.body.setVelocityY(200);
         }
     }
 }
@@ -80,7 +81,6 @@ animationManager(){
         if(this.anims.currentAnim.key !== 'idle') {this.play('idle');}
     }
 }
-
 
 preUpdate(t, dt){
     super.preUpdate(t,dt);

@@ -43,7 +43,7 @@ create(){
 
 
     //this.physics.world.setBoundsCollision(true,true,true, false); // Define limites del mapa
-    this.add.image(720,410, 'background'); // Imagen fondo
+    this.add.image(720, 410, 'background'); // Imagen fondo
 
     this.puh = new Puh(this, 600, 1000);// instanciación de Puh
     //new PuhAn(this, 600, 1000);// instanciación de Puh
