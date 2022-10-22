@@ -31,7 +31,7 @@ preload(){ // precarga los assets
     this.load.image('bone', 'assets/obstacles/bone.png');// hueso
     this.load.image('birdSkull', 'assets/obstacles/birdSkull.png');// calavera de pájaro
     this.load.image('birdClaw', 'assets/obstacles/birdClaw.png');// garra de pájaro
-    this.load.audio('song','assets/audio/cty.mp3');// sonido
+    this.load.audio('song','assets/audio/game.mp3');// sonido
 }
 
 create(){
@@ -185,7 +185,9 @@ generateObs(){
     
     console.log(idObs);
 }
-
+stopMusic(){
+    this.song.stop();
+}
 
 update(t,dt){
 
