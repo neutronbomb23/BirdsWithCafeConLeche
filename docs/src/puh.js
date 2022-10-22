@@ -38,9 +38,11 @@ constructor(scene, x, y){
 characterInputManager(fly = false, dt){
     if(this.a.isDown){
         this.body.setVelocityX(-400);
+        this.setFlip(true, false)
     }
     else if(this.d.isDown){
         this.body.setVelocityX(400);
+        this.setFlip(false, false)
     }
     else{
         this.body.setVelocityX(0);
