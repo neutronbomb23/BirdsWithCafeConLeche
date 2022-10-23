@@ -83,7 +83,8 @@ export class Game extends Phaser.Scene{
 
         this.keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
         this.keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
-        this.cursors = this.input.keyboard.createCursorKeys();     
+        this.ESC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
+        this.cursors = this.input.keyboard.createCursorKeys();    
     }
 
     initScore(){
@@ -156,7 +157,7 @@ export class Game extends Phaser.Scene{
             this.song.stop();
         }
 
-        if(this.keyZ.isDown){
+        if(this.ESC.isDown){
             this.scene.launch('GamePause', {me: this.scene});
             this.scene.pause();
         }
