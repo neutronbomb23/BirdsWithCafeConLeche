@@ -2,7 +2,7 @@ import { GameOver } from "./GameOver.js";
 import { GamePause } from "./inGamePause.js";
 import FallingObjects from "./fallingObjects.js";
 import Puh from './puh.js';
-const DEBUG = false;
+const DEBUG = true;
 
 const CAMPOSY = 400; var camCurrentPosY = CAMPOSY; // Respecto a Puh
 const CAMERASPEED = 100; // Velocidad a la que sube en funcion del tiempo
@@ -53,7 +53,7 @@ export class Game extends Phaser.Scene{
         this.platform = this.physics.add.image(700,1650, 'platform').setImmovable(true).setScale(1);
         this.platform.body.allowGravity = false;
 
-        this.floor = this.physics.add.image(720,800, 'floor').setImmovable(true).setScale(1);
+        this.floor = this.physics.add.image(720,800, 'floor').setImmovable(true).setScale(3);
         this.floor.body.allowGravity = false;
 
         /*let velocity = 100 * Phaser.Math.Between(1.3,2);
@@ -74,6 +74,7 @@ export class Game extends Phaser.Scene{
         this.obstaclesList = ['bone', 'birdClaw', 'birdSkull']
         this.obstacles = this.physics.add.group();
 
+        this.physics.add.collider(this.obstacles, this.floor, this.addScore.bind(this), null);
         this.physics.add.collider(this.obstacles, this.puh, this.gameOver.bind(this), null);
         this.physics.add.collider(this.obstacles, this.platform);
     
@@ -120,9 +121,9 @@ export class Game extends Phaser.Scene{
         this.scene.start('GameOver');
     }   
 
-    generateObs(){
+    generateObs(dt){
         let idObs = this.obstaclesList[Math.floor(Math.random() * 3)]
-        let toni =  new FallingObjects(this, 100, idObs);
+        var toni =  new FallingObjects(this, (-(this.time.now - startTime)*CAMERASPEED*dt/10000), idObs);
         this.obstacles.add(toni);
 
         //toni.setBounce(2);  
@@ -138,7 +139,7 @@ export class Game extends Phaser.Scene{
         this.lastTimeObbs += dt;
         if(this.lastTimeObbs > 1000)
         {
-            this.generateObs();
+            this.generateObs(dt);
             console.log(this.lastTimeObbs);
             this.lastTimeObbs = 0;
         }
@@ -175,6 +176,7 @@ export class Game extends Phaser.Scene{
         
         if(DEBUG){
             console.log(this.puh.y)
+            console.log((-(this.time.now - startTime)*CAMERASPEED)*dt/10000)
         }
     }
 }

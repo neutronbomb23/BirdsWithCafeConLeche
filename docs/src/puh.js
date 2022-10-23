@@ -27,13 +27,17 @@ constructor(scene, x, y){
     });
 
     this.play('idle');
-    this.body.setCollideWorldBounds();
+    this.body.setCollideWorldBounds(false,true,true,false);
     this.setScale(3);
 
     this.w = this.scene.input.keyboard.addKey('W');
     this.s = this.scene.input.keyboard.addKey('S');
     this.a = this.scene.input.keyboard.addKey('A');
     this.d = this.scene.input.keyboard.addKey('D');
+}
+
+getX(){
+    return this.x;
 }
 
 characterInputManager(fly = false, dt){
