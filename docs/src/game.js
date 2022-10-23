@@ -43,7 +43,7 @@ export class Game extends Phaser.Scene{
         this.song.play();
 
 
-        //this.physics.world.setBoundsCollision(true,true,true, false); // Define limites del mapa
+        this.physics.world.setBoundsCollision(true, true, false, false); // Define limites del mapa
         this.add.image(720, 410, 'background'); // Imagen fondo
 
         this.puh = new Puh(this, 600, 1000);// instanciación de Puh
@@ -53,7 +53,7 @@ export class Game extends Phaser.Scene{
         this.platform = this.physics.add.image(700,1650, 'platform').setImmovable(true).setScale(1);
         this.platform.body.allowGravity = false;
 
-        this.floor = this.physics.add.image(720,800, 'floor').setImmovable(true).setScale(3);
+        this.floor = this.physics.add.image(720,800, 'floor').setImmovable(true).setScale(2);
         this.floor.body.allowGravity = false;
 
         /*let velocity = 100 * Phaser.Math.Between(1.3,2);
