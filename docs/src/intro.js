@@ -15,7 +15,7 @@ export class Intro extends Phaser.Scene {
 
         this.menuvideo = this.add.video(0,0, 'wench').setOrigin(0,0);
         this.menuvideo.play();
-        this.add.text(260, 700, 'Pulsa la tecla S para pasar al menú.', { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: 64, color: 'yellow'});
+        this.add.text(260, 720, 'Pulsa la tecla S para pasar al menú.', { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: 64, color: 'yellow'});
         this.menuvideo.on('complete', video => {
 
             this.scene.start('Menu');

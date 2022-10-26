@@ -17,7 +17,7 @@ export class GameOver extends Phaser.Scene {
        
         this.load.image('returnButton', 'assets/returnpng.png');
         
-        this.load.image('menuButton', 'assets/controlspng.png');
+        this.load.image('menuButton', 'assets/menubut.png');
 
     }
     
@@ -26,7 +26,7 @@ export class GameOver extends Phaser.Scene {
         this.tryagainText = this.add.text(300,600, '                 WANNA PLAY AGAIN?\n I´LL END UP EATING YOU ANYWAYS!', { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: 50, color: 'black'});
         this.tryagainText.visible = false;
         let returnButton = this.add.image(720, 950, 'playButton').setScale(1); // Botón de play
-        let menuButton = this.add.image(720, 1200 , 'optionsButton').setScale(1); // Botón para volver al menú, hay que cambiar el aspecto
+        let menuButton = this.add.image(720, 1200 , 'menuButton').setScale(1); // Botón para volver al menú, hay que cambiar el aspecto
         returnButton.setInteractive();
         menuButton.setInteractive();
 
