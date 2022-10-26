@@ -23,7 +23,7 @@ export class Game extends Phaser.Scene{
     }
 
     preload(){ // precarga los assets
-        this.load.image('background', 'assets/backgroundd.png');// fondo
+        this.load.image('background', 'assets/wallpaperProvisional.png');// fondo
         this.load.spritesheet('puhIddle', 'assets/puh/puh.png', {frameWidth:32,  frameHeight: 32});// idle de Puh
         this.load.spritesheet('puhMove', 'assets/puh/caminar.png', {frameWidth:32,  frameHeight: 32});// Movimiento de Puh
         this.load.spritesheet('puhFly', 'assets/puh/Walk.png', {frameWidth:32,  frameHeight: 32});// Vuelo de Puh
@@ -44,7 +44,7 @@ export class Game extends Phaser.Scene{
 
 
         this.physics.world.setBoundsCollision(true, true, false, false); // Define limites del mapa
-        this.add.image(720, 410, 'background'); // Imagen fondo
+        this.add.image(720, 800, 'background').setScale(6); // Imagen fondo
 
         this.puh = new Puh(this, 600, 1000);// instanciación de Puh
 

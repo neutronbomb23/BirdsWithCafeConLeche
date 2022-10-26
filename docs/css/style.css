@@ -71,7 +71,7 @@ footer{
 }
 
 body {
-    background-color: burlywood;
-    /*background-image: url("https://www.bypeople.com/wp-content/uploads/2014/05/light-live-background-css.jpg");*/
+   /* background-color: burlywood;*/
+    background-image: url("https://www.bypeople.com/wp-content/uploads/2014/05/light-live-background-css.jpg");
     background-size: cover;
 }
