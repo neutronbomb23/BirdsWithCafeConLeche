@@ -109,7 +109,14 @@ export class Scene2 extends Phaser.Scene{
         this.song.stop();
     }
 
+    loadScene = true;
     update(t,dt){
+        if(this.loadScene){
+            this.scene.restart();
+            this.song.stop();
+            this.loadScene = false;
+        }
+
         this.lastTimeObbs += dt;
         if(this.lastTimeObbs > 1000)
         {
