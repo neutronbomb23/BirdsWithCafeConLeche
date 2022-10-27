@@ -1,6 +1,7 @@
 export default class Puh extends Phaser.GameObjects.Sprite{
     constructor(scene, x, y){
         super(scene, x, y, 'puh');
+        this.fly = false;
 
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
@@ -40,7 +41,11 @@ export default class Puh extends Phaser.GameObjects.Sprite{
         return this.x;
     }
 
-    characterInputManager(fly = false, dt){
+    setFly(enabled){
+        this.fly = enabled;
+    }
+
+    characterInputManager(dt){
         if(this.a.isDown){
             this.body.setVelocityX(-500);
             this.setFlip(true, false)
@@ -52,7 +57,7 @@ export default class Puh extends Phaser.GameObjects.Sprite{
         else{
             this.body.setVelocityX(0);
         }
-        if (!fly){
+        if (!this.fly){
             if(this.w.isDown && this.body.touching.down){
                 this.body.setVelocityY(-800)
             }
