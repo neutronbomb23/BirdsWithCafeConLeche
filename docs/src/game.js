@@ -58,6 +58,9 @@ export class Game extends Phaser.Scene{
         this.platform1 = this.physics.add.image(400,1400, 'platform').setImmovable(true).setScale(1);
         this.platform1.body.allowGravity = false;
 
+        this.platform3 = this.physics.add.image(900,600, 'platform').setImmovable(true).setScale(1);
+        this.platform3.body.allowGravity = false;
+
         this.floor = this.physics.add.image(900,1090, 'floor').setImmovable(true).setScale(1.3);
         this.floor.body.allowGravity = false;
 
@@ -67,10 +70,10 @@ export class Game extends Phaser.Scene{
         this.platform2 = this.physics.add.image(150,600, 'platform').setImmovable(true).setScale(1.2);
         this.platform2.body.allowGravity = false;
 
-        this.portal = this.physics.add.image(800, 100, 'portal').setImmovable(true).setScale(0.3);
+        this.portal = this.physics.add.image(600, 0, 'portal').setImmovable(true).setScale(0.3);
         this.portal.body.allowGravity = false;
 
-        this.floor2 = this.physics.add.image(700,300, 'floor').setImmovable(true).setScale(0.7);
+        this.floor2 = this.physics.add.image(600,200, 'floor').setImmovable(true).setScale(0.7);
         this.floor2.body.allowGravity = false;
 
         /*let velocity = 100 * Phaser.Math.Between(1.3,2);
@@ -97,7 +100,9 @@ export class Game extends Phaser.Scene{
         this.physics.add.collider(this.obstacles, this.platform1);
         this.physics.add.collider(this.puh, this.platform1);
         this.physics.add.collider(this.obstacles, this.platform2);
+        this.physics.add.collider(this.obstacles, this.platform3);
         this.physics.add.collider(this.puh, this.platform2);
+        this.physics.add.collider(this.puh, this.platform3);
         this.physics.add.collider(this.obstacles, this.floor1);
         this.physics.add.collider(this.puh, this.floor1);
         this.physics.add.collider(this.obstacles, this.floor2);

@@ -28,6 +28,7 @@ export class Scene2 extends Phaser.Scene{
         this.load.image('floor', 'assets/floor.png');// suelo
         this.load.image('bone', 'assets/obstacles/bone.png');// hueso
         this.load.image('birdSkull', 'assets/obstacles/birdSkull.png');// calavera de pájaro
+        this.load.image('zarzas', 'assets/zarzas.png');// calavera de pájaro
         this.load.image('birdClaw', 'assets/obstacles/birdClaw.png');// garra de pájaro
         this.load.audio('song','assets/audio/game.mp3');// sonido
     }
@@ -43,16 +44,33 @@ export class Scene2 extends Phaser.Scene{
         this.physics.world.setBoundsCollision(true, true, false, false); // Define limites del mapa
         this.add.image(720, 800, 'background').setScale(6); // Imagen fondo
 
-        this.puh = new Puh(this, 600, 1000);// instanciación de Puh
+        this.puh = new Puh(this, 600, 1500);// instanciación de Puh
     
         this.platform = this.physics.add.image(700,1650, 'platform').setImmovable(true).setScale(1);
         this.platform.body.allowGravity = false;
 
-        this.floor = this.physics.add.image(720,800, 'floor').setImmovable(true).setScale(2);
+        this.floor1 = this.physics.add.image(300,1400, 'floor').setImmovable(true).setScale(1);
+        this.floor1.body.allowGravity = false;
+
+        this.floor = this.physics.add.image(720,1100, 'floor').setImmovable(true).setScale(1);
         this.floor.body.allowGravity = false;
-    
+
+        this.platform1 = this.physics.add.image(1000,860, 'platform').setImmovable(true).setScale(1);
+        this.platform1.body.allowGravity = false;
+
+        this.zarzas = this.physics.add.image(200, 860, 'zarzas').setImmovable(true).setScale(1);
+        this.zarzas.body.allowGravity = false;
+
+        this.floor2 = this.physics.add.image(500,400, 'floor').setImmovable(true).setScale(1);
+        this.floor2.body.allowGravity = false;
+
+        this.zarzas1 = this.physics.add.image(800, 150, 'zarzas').setImmovable(true).setScale(1);
+        this.zarzas1.body.allowGravity = false;
+
         this.physics.add.collider(this.puh, this.platform);
+        this.physics.add.collider(this.puh, this.platform1);
         this.physics.add.collider(this.puh, this.floor);
+        this.physics.add.collider(this.puh, this.floor1);
 
         this.platform.setCollideWorldBounds(true);
         this.platform.body.onWorldBounds=true;
@@ -63,7 +81,18 @@ export class Scene2 extends Phaser.Scene{
         this.obstacles = this.physics.add.group();
 
         this.physics.add.collider(this.obstacles, this.puh, this.gameOver.bind(this), null);
-        this.physics.add.collider(this.obstacles, this.platform);
+        this.physics.add.collider(this.zarzas, this.puh, this.gameOver.bind(this), null);
+        this.physics.add.collider(this.zarzas1, this.puh, this.gameOver.bind(this), null);
+        this.physics.add.collider(this.obstacles, this.platform1);
+        this.physics.add.collider(this.obstacles, this.floor);
+        this.physics.add.collider(this.obstacles, this.floor1);
+        this.physics.add.collider(this.obstacles, this.floor2);
+
+        this.physics.add.collider(this.puh, this.platform1);
+        this.physics.add.collider(this.puh, this.floor);
+        this.physics.add.collider(this.puh, this.floor1);
+        this.physics.add.collider(this.puh, this.floor2);
+    
     
         //CAMARA
         this.initCamera();
