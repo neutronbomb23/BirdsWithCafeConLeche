@@ -1,5 +1,6 @@
 import { Menu } from './menu.js';
 import { Game } from './game.js';
+import { Scene2 } from "./Scene2.js";
  
 export class GamePause extends Phaser.Scene {
 

@@ -85,11 +85,11 @@ export default class Puh extends Phaser.GameObjects.Sprite{
             if(this.anims.currentAnim.key !== 'idle') {this.play('idle');}
         }
     }
-
+    
     preUpdate(t, dt){
         super.preUpdate(t,dt);
 
-        this.characterInputManager(true, dt);
+        this.characterInputManager(false, dt);
         this.animationManager();
     }
 }

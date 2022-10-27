@@ -1,8 +1,8 @@
 import { GameOver } from "./GameOver.js";
+import { Game } from "./game.js";
 import { GamePause } from "./inGamePause.js";
 import FallingObjects from "./fallingObjects.js";
 import Puh from './puh.js';
-import { Scene2 } from "./Scene2.js";
 const DEBUG = true;
 
 const CAMPOSY = 400; var camCurrentPosY = CAMPOSY; // Respecto a Puh
@@ -14,13 +14,9 @@ const PUHX = 700; const PUHY = 1500; // Posiciones iniciales de puh
 
 var startTime; // Runtime en el momento en el que empieza la escena
 
-export class Game extends Phaser.Scene{
+export class Scene2 extends Phaser.Scene{
     constructor(){
-        super({key: 'game'});
-    }
-
-    init(){
-    this.score = 0;
+        super({key: 'Scene2'});
     }
 
     preload(){ // precarga los assets
@@ -34,8 +30,7 @@ export class Game extends Phaser.Scene{
         this.load.image('birdSkull', 'assets/obstacles/birdSkull.png');// calavera de pájaro
         this.load.image('birdClaw', 'assets/obstacles/birdClaw.png');// garra de pájaro
         this.load.audio('song','assets/audio/game.mp3');// sonido
-        this.load.image('portal', 'assets/portal.png');
-        }
+    }
 
     create(){
         startTime = this.time.now;
@@ -48,37 +43,13 @@ export class Game extends Phaser.Scene{
         this.physics.world.setBoundsCollision(true, true, false, false); // Define limites del mapa
         this.add.image(720, 800, 'background').setScale(6); // Imagen fondo
 
-        this.puh = new Puh(this, 700, 1450);// instanciación de Puh
-
-        this.initScore();
+        this.puh = new Puh(this, 600, 1000);// instanciación de Puh
     
         this.platform = this.physics.add.image(700,1650, 'platform').setImmovable(true).setScale(1);
         this.platform.body.allowGravity = false;
 
-        this.platform1 = this.physics.add.image(400,1400, 'platform').setImmovable(true).setScale(1);
-        this.platform1.body.allowGravity = false;
-
-        this.floor = this.physics.add.image(900,1090, 'floor').setImmovable(true).setScale(1.3);
+        this.floor = this.physics.add.image(720,800, 'floor').setImmovable(true).setScale(2);
         this.floor.body.allowGravity = false;
-
-        this.floor1 = this.physics.add.image(350,850, 'floor').setImmovable(true).setScale(0.7);
-        this.floor1.body.allowGravity = false;
-
-        this.platform2 = this.physics.add.image(150,600, 'platform').setImmovable(true).setScale(1.2);
-        this.platform2.body.allowGravity = false;
-
-        this.portal = this.physics.add.image(800, 100, 'portal').setImmovable(true).setScale(0.3);
-        this.portal.body.allowGravity = false;
-
-        this.floor2 = this.physics.add.image(700,300, 'floor').setImmovable(true).setScale(0.7);
-        this.floor2.body.allowGravity = false;
-
-        /*let velocity = 100 * Phaser.Math.Between(1.3,2);
-
-        if(Phaser.Math.Between(0,10)>5){
-            velocity = 0 - velocity;
-        }
-        */
     
         this.physics.add.collider(this.puh, this.platform);
         this.physics.add.collider(this.puh, this.floor);
@@ -91,18 +62,8 @@ export class Game extends Phaser.Scene{
         this.obstaclesList = ['bone', 'birdClaw', 'birdSkull']
         this.obstacles = this.physics.add.group();
 
-        this.physics.add.collider(this.obstacles, this.floor, this.addScore.bind(this), null);
         this.physics.add.collider(this.obstacles, this.puh, this.gameOver.bind(this), null);
         this.physics.add.collider(this.obstacles, this.platform);
-        this.physics.add.collider(this.obstacles, this.platform1);
-        this.physics.add.collider(this.puh, this.platform1);
-        this.physics.add.collider(this.obstacles, this.platform2);
-        this.physics.add.collider(this.puh, this.platform2);
-        this.physics.add.collider(this.obstacles, this.floor1);
-        this.physics.add.collider(this.puh, this.floor1);
-        this.physics.add.collider(this.obstacles, this.floor2);
-        this.physics.add.collider(this.puh, this.portal, this.nextLevel.bind(this),null);
-        this.physics.add.collider(this.puh, this.floor2);
     
         //CAMARA
         this.initCamera();
@@ -110,21 +71,7 @@ export class Game extends Phaser.Scene{
         this.keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
         this.keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
         this.ESC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
-       // this.cursors = this.input.keyboard.createCursorKeys();    
-    }
-
-    initScore(){
-        this.scoreText = this.add.text(16,16, 'Points: 0', {
-        fontSize: '40px',
-        fill: '#fff',
-        fontFamily: 'verdana, arial, sans-serif' 
-        });
-    }
-    
-    addScore(){
-        this.score++;
-        this.scoreText.setText('Points: ' + this.score);
-        console.log('1 punto');
+        this.cursors = this.input.keyboard.createCursorKeys();    
     }
 
     initCamera(){
@@ -147,13 +94,6 @@ export class Game extends Phaser.Scene{
         this.song.stop();
         this.scene.start('GameOver');
     }   
-
-    nextLevel(){
-
-        this.song.stop();
-        this.scene.start('Scene2');
-
-    }
 
     generateObs(dt){
         let idObs = this.obstaclesList[Math.floor(Math.random() * 3)]
@@ -195,11 +135,15 @@ export class Game extends Phaser.Scene{
             this.scene.pause();
         }
 
-       /* if(this.puh.y > 1600) {
+        if(this.puh.y > 1600) {
             this.gameOver();
     
-        }*/
+        }
 
+        if(this.obstacles.y > 1600){
+            this.addScore();
+        }            
+        
         if (camCurrentPosY > TOP){ // Detiene el seguimiento de camara
             cameraMoves = false;
         }
