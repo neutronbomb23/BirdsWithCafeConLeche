@@ -16,10 +16,9 @@ export class GameOver extends Phaser.Scene {
 
       this.load.text('tryAgain');
        
-        this.load.image('returnButton', 'assets/returnpng.png');
+      this.load.image('returnButton', 'assets/returnpng.png');
         
-        this.load.image('menuButton', 'assets/menubut.png');
-
+      this.load.image('menuButton', 'assets/menubut.png');
     }
     
     create (){

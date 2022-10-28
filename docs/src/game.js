@@ -3,7 +3,7 @@ import { GamePause } from "./inGamePause.js";
 import FallingObjects from "./fallingObjects.js";
 import Puh from './puh.js';
 import { Scene2 } from "./Scene2.js";
-const DEBUG = true;
+const DEBUG = false;
 
 const CAMPOSY = 400; var camCurrentPosY = CAMPOSY; // Respecto a Puh
 const CAMERASPEED = 100; // Velocidad a la que sube en funcion del tiempo
@@ -167,7 +167,7 @@ export class Game extends Phaser.Scene{
 
         //toni.setBounce(2);  
     
-        console.log(idObs);
+        //console.log(idObs);
     }
 
     stopMusic(){
@@ -179,7 +179,7 @@ export class Game extends Phaser.Scene{
         if(this.lastTimeObbs > 1000)
         {
             this.generateObs(dt);
-            console.log(this.lastTimeObbs);
+            //console.log(this.lastTimeObbs);
             this.lastTimeObbs = 0;
         }
 

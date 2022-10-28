@@ -93,7 +93,6 @@ export default class Puh extends Phaser.GameObjects.Sprite{
     
     preUpdate(t, dt){
         super.preUpdate(t,dt);
-
         this.characterInputManager(false, dt);
         this.animationManager();
     }
