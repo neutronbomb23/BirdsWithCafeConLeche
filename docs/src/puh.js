@@ -45,7 +45,7 @@ export default class Puh extends Phaser.GameObjects.Sprite{
         this.fly = enabled;
     }
 
-    characterInputManager(dt){
+    characterInputManager(){
         if(this.a.isDown){
             this.body.setVelocityX(-500);
             this.setFlip(true, false)
@@ -93,7 +93,7 @@ export default class Puh extends Phaser.GameObjects.Sprite{
     
     preUpdate(t, dt){
         super.preUpdate(t,dt);
-        this.characterInputManager(false, dt);
+        this.characterInputManager(this.fly);
         this.animationManager();
     }
 }
