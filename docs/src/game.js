@@ -61,6 +61,9 @@ export class Game extends Phaser.Scene{
         this.platform3 = this.physics.add.image(900,600, 'platform').setImmovable(true).setScale(1);
         this.platform3.body.allowGravity = false;
 
+        this.platform3 = this.physics.add.image(0, 350, 'platform').setImmovable(true).setScale(1);
+        this.platform3.body.allowGravity = false;
+
         this.floor = this.physics.add.image(900,1090, 'floor').setImmovable(true).setScale(1.3);
         this.floor.body.allowGravity = false;
 

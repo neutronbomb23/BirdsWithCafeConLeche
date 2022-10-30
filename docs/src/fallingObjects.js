@@ -9,10 +9,10 @@ export default class FallingObjects extends Phaser.GameObjects.Sprite{
         this.scene.add.image(0,0, name);
     
         this.body.setCollideWorldBounds(true);
+
         this.INITIALTIME= -1; // se inicializa luego
         this.LIFETIME = 10;
-
-        this.init = true;
+        this.BOUNCE_VELOCITY_X = 200;
     }
 
     RandomInt(min, max) { // Funcion Aux
@@ -24,25 +24,29 @@ export default class FallingObjects extends Phaser.GameObjects.Sprite{
     colisionManager(){
         if(this.body.touching.down){ // Si colisionan por abajo
             let dir = this.RandomInt(0,2)
-            if (dir  === 0){ this.body.setVelocityX(200); } // Derecha
-            else { this.body.setVelocityX(-200); } // Izquierda
+            if (dir  === 0){ this.body.setVelocityX(this.BOUNCE_VELOCITY_X); } // Derecha
+            else { this.body.setVelocityX(-this.BOUNCE_VELOCITY_X); } // Izquierda
             this.body.setVelocityY(-350);
+        }
+        else if(this.body.touching.left){
+            this.body.setVelocityX(this.BOUNCE_VELOCITY_X)
+        }
+        else if(this.body.touching.right){
+            this.body.setVelocityX(this.BOUNCE_VELOCITY_X)
         }
     }
 
     preUpdate(t,dt){
-        if(this.init){ // cambiar?
+        if(this.INITIALTIME < 0) { 
             this.INITIALTIME = dt * t / 10000
-            this.init = false;
         }
+
         super.preUpdate(t,dt);
-
         this.colisionManager();
-        let currentTime = dt * t / 10000;
 
-        if(currentTime -this.INITIALTIME >= this.LIFETIME){
-            this.destroy()
-            console.log("Destruido")
+        let currentTime = dt * t / 10000;
+        if(currentTime - this.INITIALTIME >= this.LIFETIME){
+            this.destroy();
         }
     }
 }
