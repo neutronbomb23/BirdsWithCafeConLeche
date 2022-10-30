@@ -1,6 +1,7 @@
 export default class FallingObjects extends Phaser.GameObjects.Sprite{
     constructor(scene, y, name){
-        const xCoord = Math.random() * 1440 // Posición aleatoria
+        let min = Math.ceil(48); let max = Math.floor(1400);
+        const xCoord = (Math.floor(Math.random() * (max - min + 1)) + min) // Posición aleatoria
         super(scene, xCoord, y, name);
 
         this.scene.add.existing(this);
@@ -11,8 +12,8 @@ export default class FallingObjects extends Phaser.GameObjects.Sprite{
         this.body.setCollideWorldBounds(true);
 
         this.INITIALTIME= -1; // se inicializa luego
-        this.LIFETIME = 10;
         this.BOUNCE_VELOCITY_X = 200;
+        const LIFETIME = 15;
     }
 
     RandomInt(min, max) { // Funcion Aux

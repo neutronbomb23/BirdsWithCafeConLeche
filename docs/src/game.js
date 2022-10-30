@@ -49,6 +49,7 @@ export class Game extends Phaser.Scene{
         this.add.image(720, 800, 'background').setScale(6); // Imagen fondo
 
         this.puh = new Puh(this, 700, 1450);// instanciación de Puh
+        this.puh.setFly(true)
 
         this.initScore();
     
@@ -162,12 +163,9 @@ export class Game extends Phaser.Scene{
 
     generateObs(dt){
         let idObs = this.obstaclesList[Math.floor(Math.random() * 3)]
-        var toni =  new FallingObjects(this, (-(this.time.now - startTime)*CAMERASPEED*dt/10000), idObs);
+        let y =(300 -(this.time.now - startTime) * CAMERASPEED*dt/10000)
+        var toni =  new FallingObjects(this, y, idObs);
         this.obstacles.add(toni);
-
-        //toni.setBounce(2);  
-    
-        //console.log(idObs);
     }
 
     stopMusic(){
@@ -179,7 +177,6 @@ export class Game extends Phaser.Scene{
         if(this.lastTimeObbs > 1000)
         {
             this.generateObs(dt);
-            //console.log(this.lastTimeObbs);
             this.lastTimeObbs = 0;
         }
 
@@ -210,7 +207,7 @@ export class Game extends Phaser.Scene{
         }
         
         if(DEBUG){
-            console.log(this.puh.y)
+            console.log(this.puh.x)
             console.log((-(this.time.now - startTime)*CAMERASPEED)*dt/10000)
         }
     }
