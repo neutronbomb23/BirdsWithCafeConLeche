@@ -1,9 +1,9 @@
 import { GameOver } from "./GameOver.js";
 import { GamePause } from "./inGamePause.js";
 import FallingObjects from "./fallingObjects.js";
-
 import Puh from './puh.js';
 import { Scene2 } from "./Scene2.js";
+
 const DEBUG = false;
 
 const CAMPOSY = 400; var camCurrentPosY = CAMPOSY; // Respecto a Puh
@@ -18,12 +18,12 @@ var startTime; // Runtime en el momento en el que empieza la escena
 export class Game extends Phaser.Scene{
     constructor(){
         
-        super({key: 'game'});
+        super({key: 'game'}); //Idemtificador para llamar a este escena desde otras.
     }
 
-    init(){
+    /*init(){
     this.score = 0;
-    }
+    }*/
 
     preload(){ // precarga los assets
         this.load.image('background', 'assets/wallpaperProvisional.png');// fondo
@@ -51,10 +51,11 @@ export class Game extends Phaser.Scene{
         this.add.image(720, 800, 'background').setScale(6); // Imagen fondo
 
         this.puh = new Puh(this, 700, 1450);// instanciación de Puh
-        this.puh.setFly(true)
+        this.puh.setFly(true) // Llamada a método para cambiar el booleano de la clase puh que determina si vuela o no.
 
-        this.initScore();
+        //this.initScore();
     
+        //Creación de todos los objetos del mapa, se les quita la gravedad y se les hace inamovibles.
         this.platform = this.physics.add.image(700,1650, 'platform').setImmovable(true).setScale(1);
         this.platform.body.allowGravity = false;
 
@@ -86,16 +87,16 @@ export class Game extends Phaser.Scene{
         }
         */
     
-        this.physics.add.collider(this.puh, this.platform);
-        this.physics.add.collider(this.puh, this.floor);
+        this.physics.add.collider(this.puh, this.platform); // Se dice que colisionan puh y la plataforma.
+        this.physics.add.collider(this.puh, this.floor); // Se dice que colisionan puh y el suelo.
 
-        this.platform.setCollideWorldBounds(true);
-        this.platform.body.onWorldBounds=true;
-        this.physics.add.collider(this.platform, this.floor);
+        this.platform.setCollideWorldBounds(true); // Hace que las plataformas no puedan salirse del mapa
+        this.platform.body.onWorldBounds=true; 
+        this.physics.add.collider(this.platform, this.floor); // Se dice que colisionan el suelo y la plataforma
         //this.physics.add.collider(this.birdClaw, this.platform, this.addScore.bind(this), null);
 
-        this.obstaclesList = ['bone', 'birdClaw', 'birdSkull']
-        this.obstacles = this.physics.add.group();
+        this.obstaclesList = ['bone', 'birdClaw', 'birdSkull'] // Creación del array de la lista de objetos cargados en el preload.
+        this.obstacles = this.physics.add.group(); // A este "grupo" se le añade físicas.
 
         this.physics.add.collider(this.obstacles, this.floor, this.addScore.bind(this), null);
         this.physics.add.collider(this.obstacles, this.puh, this.gameOver.bind(this), null);

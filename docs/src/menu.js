@@ -41,20 +41,20 @@ export class Menu extends Phaser.Scene {
         this.menuMusic = this.sound.add('menuMusic');
         
         this.menuMusic.play();
-        playButton.on("pointerup", ()=>{
+        playButton.on("pointerup", ()=>{ //Método para empezar el juego cuando se pulse el botón play, también para la música para evitar que se escuche en la escena del juego.
             this.scene.start('game');
             this.menuMusic.stop();
         })
 
 
-        optionsButton.on("pointerup", ()=>{
+        optionsButton.on("pointerup", ()=>{ //Método que te lleva a la sección de controles.
             //this.scene.start('Menu');
-            playButton.visible = false;
-            optionsButton.visible = false;
-            let controls = this.add.image(720, 1075, 'controls').setScale(1.2);
-            let returnButton = this.add.image(720, 1600, 'returnButton');
-            returnButton.setInteractive();
-            returnButton.on("pointerup", ()=> {
+            playButton.visible = false; //Se hace invisible el botón play.
+            optionsButton.visible = false; //Se hace invisible el botón de opciones.
+            let controls = this.add.image(720, 1075, 'controls').setScale(1.2); //Se imprime en pantalla la imagen que muestra los controles.
+            let returnButton = this.add.image(720, 1600, 'returnButton'); //Se imprime un botón  que te lleva de vuelta a la sección principal del menú principal.
+            returnButton.setInteractive(); //Se hace el botón interactivo.
+            returnButton.on("pointerup", ()=> { //Si se presiona el botón que te devuelve al menú principal, vuelven a aparecer los botones play y controls. Desapaprece el otro y la imagen de los controles.
                 returnButton.visible = false; 
                 controls.visible = false; 
                 playButton.visible = true;
@@ -67,6 +67,8 @@ export class Menu extends Phaser.Scene {
     }
 
 }
+
+
 //Podemos cambiar el viewport de la cámara con setViewport:
 
 // this es una Scene

@@ -45,7 +45,7 @@ let config = {
         }
     },
 
-   transparent: true
+   transparent: false
    
     
 };
