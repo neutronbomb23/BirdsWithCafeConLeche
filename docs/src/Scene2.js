@@ -28,7 +28,7 @@ export class Scene2 extends Phaser.Scene{
         this.load.image('floor', 'assets/floor.png');// suelo
         this.load.image('bone', 'assets/obstacles/bone.png');// hueso
         this.load.image('birdSkull', 'assets/obstacles/birdSkull.png');// calavera de pájaro
-        this.load.image('zarzas', 'assets/zarzas.png');// calavera de pájaro
+        this.load.image('zarzas', 'assets/zarzas.png');// zarzas
         this.load.image('birdClaw', 'assets/obstacles/birdClaw.png');// garra de pájaro
         this.load.audio('song','assets/audio/game.mp3');// sonido
     }

@@ -4,6 +4,7 @@ import { Intro } from './intro.js';
 import { GameOver } from './GameOver.js';
 import { Scene2 } from "./Scene2.js";
 import { GamePause } from './inGamePause.js';
+import { BossScene } from './BossScene.js';
 //import { FadeScene } from './fadeOutScene.js';
 
 
@@ -30,7 +31,7 @@ let config = {
 		zoom: 1
     },
     
-    scene: [Intro, Menu, Game, Scene2, GameOver, GamePause],
+    scene: [Intro, Menu, Game, Scene2, GameOver, GamePause, BossScene],
     physics: { 
         default: 'arcade', 
         arcade: { 
