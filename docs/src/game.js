@@ -1,6 +1,7 @@
 import { GameOver } from "./GameOver.js";
 import { GamePause } from "./inGamePause.js";
 import FallingObjects from "./fallingObjects.js";
+
 import Puh from './puh.js';
 import { Scene2 } from "./Scene2.js";
 const DEBUG = false;
@@ -16,6 +17,7 @@ var startTime; // Runtime en el momento en el que empieza la escena
 
 export class Game extends Phaser.Scene{
     constructor(){
+        
         super({key: 'game'});
     }
 

@@ -12,8 +12,8 @@ export default class FallingObjects extends Phaser.GameObjects.Sprite{
         this.body.setCollideWorldBounds(true);
 
         this.INITIALTIME= -1; // se inicializa luego
-        this.BOUNCE_VELOCITY_X = 200;
-        const LIFETIME = 15;
+        this.BOUNCE_VELOCITY_X = 600;
+        const LIFETIME = 2;
     }
 
     RandomInt(min, max) { // Funcion Aux
@@ -27,7 +27,7 @@ export default class FallingObjects extends Phaser.GameObjects.Sprite{
             let dir = this.RandomInt(0,2)
             if (dir  === 0){ this.body.setVelocityX(this.BOUNCE_VELOCITY_X); } // Derecha
             else { this.body.setVelocityX(-this.BOUNCE_VELOCITY_X); } // Izquierda
-            this.body.setVelocityY(-350);
+            this.body.setVelocityY(-500);
         }
         else if(this.body.touching.left){
             this.body.setVelocityX(this.BOUNCE_VELOCITY_X)

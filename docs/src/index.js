@@ -4,6 +4,7 @@ import { Intro } from './intro.js';
 import { GameOver } from './GameOver.js';
 import { Scene2 } from "./Scene2.js";
 import { GamePause } from './inGamePause.js';
+//import { FadeScene } from './fadeOutScene.js';
 
 
 let config = {
