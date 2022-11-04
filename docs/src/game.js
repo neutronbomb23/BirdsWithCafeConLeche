@@ -51,7 +51,7 @@ export class Game extends Phaser.Scene{
         this.add.image(720, 800, 'background').setScale(6); // Imagen fondo
 
         this.puh = new Puh(this, 700, 1450);// instanciación de Puh
-        this.puh.setFly(true) // Llamada a método para cambiar el booleano de la clase puh que determina si vuela o no.
+        this.puh.setFly(false) // Llamada a método para cambiar el booleano de la clase puh que determina si vuela o no.
 
         //this.initScore();
     
@@ -98,7 +98,7 @@ export class Game extends Phaser.Scene{
         this.obstaclesList = ['bone', 'birdClaw', 'birdSkull'] // Creación del array de la lista de objetos cargados en el preload.
         this.obstacles = this.physics.add.group(); // A este "grupo" se le añade físicas.
 
-        this.physics.add.collider(this.obstacles, this.floor, this.addScore.bind(this), null);
+        //this.physics.add.collider(this.obstacles, this.floor, this.addScore.bind(this), null);
         this.physics.add.collider(this.obstacles, this.puh, this.gameOver.bind(this), null);
         this.physics.add.collider(this.obstacles, this.platform);
         this.physics.add.collider(this.obstacles, this.platform1);
@@ -122,7 +122,7 @@ export class Game extends Phaser.Scene{
        // this.cursors = this.input.keyboard.createCursorKeys();    
     }
 
-    initScore(){
+    /*itScore(){
         this.scoreText = this.add.text(16,16, 'Points: 0', {
         fontSize: '40px',
         fill: '#fff',
@@ -134,7 +134,7 @@ export class Game extends Phaser.Scene{
         this.score++;
         this.scoreText.setText('Points: ' + this.score);
         console.log('1 punto');
-    }
+    }*/
 
     initCamera(){
         this.cameras.main.startFollow(this.puh); // Sigue a puh 
