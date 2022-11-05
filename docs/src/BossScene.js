@@ -20,15 +20,14 @@ export class BossScene extends Phaser.Scene{
         this.load.spritesheet('puhIddle', 'assets/puh/puh.png', {frameWidth:32,  frameHeight: 32});// idle de Puh
         this.load.spritesheet('puhMove', 'assets/puh/caminar.png', {frameWidth:32,  frameHeight: 32});// Movimiento de Puh
         this.load.spritesheet('puhFly', 'assets/puh/Walk.png', {frameWidth:32,  frameHeight: 32});// Vuelo de Puh
-        this.load.spritesheet('RickIddle', 'assets/pigeon_pecking/Rick.png', {frameWidth:48,  frameHeight: 32});// idle de Rick
-        this.load.spritesheet('RickWalk', 'assets/pigeon_walking/Rick.png', {frameWidth:31,  frameHeight: 32});// movimiento de Rick
+        this.load.spritesheet('RickIddle', 'assets/Rick/pigeon_pecking.png', {frameWidth:48,  frameHeight: 32});// idle de Rick
+        this.load.spritesheet('RickWalk', 'assets/Rick/pigeon_walking.png', {frameWidth:31,  frameHeight: 32});// movimiento de Rick
         this.load.image('floor', 'assets/floor.png');// suelo
         this.load.audio('song','assets/audio/game.mp3');// sonido
     }
 
     create(){
         startTime = this.time.now;
-        this.lastTimeObbs = 0;
         this.song = this.sound.add('song');
         this.song.play();
 
@@ -37,6 +36,7 @@ export class BossScene extends Phaser.Scene{
         this.add.image(720, 800, 'background').setScale(6); // Imagen fondo
 
         this.puh = new Puh(this, 600, 200);// instanciación de Puh
+        this.puh.setFly(true) // Llamada a método para cambiar el booleano de la clase puh que determina si vuela o no.
         this.rick = new Rick(this, 900, 200);// instanciación de Rick
 
         this.floor = this.physics.add.image(720,1250, 'floor').setImmovable(true).setScale(3);// instanciación del suelo
@@ -45,8 +45,8 @@ export class BossScene extends Phaser.Scene{
         this.physics.add.collider(this.puh, this.floor);// colisión etre Puh y el suelo
         this.physics.add.collider(this.rick, this.floor);// colisión entre Rick y el suelo
 
-       // this.platform.setCollideWorldBounds(true);
-       // this.platform.body.onWorldBounds=true;
+        this.floor.setCollideWorldBounds(true);
+        this.floor.body.onWorldBounds=true;
 
     }
 
