@@ -32,7 +32,7 @@ export class Menu extends Phaser.Scene {
         
         let bossButton = this.add.image(720, 500, 'playButton').setScale(1); // Botón de Boss
         let playButton = this.add.image(720, 950, 'playButton').setScale(1); // Botón de play
-        let optionsButton = this.add.image(720, 1200 , 'optionsButton').setScale(1); // Botón de play
+        let optionsButton = this.add.image(720, 1200 , 'optionsButton').setScale(1); // Botón de opciones
         //this.add.sprite(100,100,'puh');
       
         bossButton.setInteractive();
