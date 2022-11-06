@@ -21,24 +21,33 @@ export default class Rick extends Phaser.GameObjects.Sprite{
             repeat: -1
         });
 
-        this.play('idleR');
+        this.play('idelR');
         this.body.setCollideWorldBounds(true);
-        this.setScale(10);
+        this.setScale(8);
     }
 
     getX(){
         return this.x;
     }
 
-    animationManager(){
-        if(Math.abs(Puh.getX - this.getX) < 400) this.play('walk');
+    /*animationManager(){
+        console.log(Puh.getX());
+        console.log(this.x);
+        if(Math.abs(Puh.getX() - this.x) < 1000) 
+        {
+            console.log('entra');
+            if(Puh.getX - this.getX < 0)this.setFlip(true, false);
+            else this.setFlip(false, false);
+            this.play('walk');
+        }
         else{
+            console.log('else');
            this.play('idleR');
         }
-    }
+    }*/
     
     preUpdate(t, dt){
         super.preUpdate(t,dt);
-       this.animationManager();
+       //this.animationManager();
     }
 }

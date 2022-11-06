@@ -1,9 +1,9 @@
 import { GameOver } from "./GameOver.js";
 import { GamePause } from "./inGamePause.js";
 import Puh from './puh.js';
-import Rick from "./Rick.js";
-const DEBUG = true;
+import Rick from './rick.js';
 
+const CAMPOSY = 400; var camCurrentPosY = CAMPOSY; // Respecto a Puh
 const TOP = 1100; // punto en el eje y en el que se detiene la camara
 
 const PUHX = 700; const PUHY = 1500; // Posiciones iniciales de puh
@@ -21,7 +21,7 @@ export class BossScene extends Phaser.Scene{
         this.load.spritesheet('puhMove', 'assets/puh/caminar.png', {frameWidth:32,  frameHeight: 32});// Movimiento de Puh
         this.load.spritesheet('puhFly', 'assets/puh/Walk.png', {frameWidth:32,  frameHeight: 32});// Vuelo de Puh
         this.load.spritesheet('RickIddle', 'assets/Rick/pigeon_pecking.png', {frameWidth:48,  frameHeight: 32});// idle de Rick
-        this.load.spritesheet('RickWalk', 'assets/Rick/pigeon_walking.png', {frameWidth:31,  frameHeight: 32});// movimiento de Rick
+        this.load.spritesheet('RickWalk', 'assets/Rick/pigeon_walking.png', {frameWidth:32,  frameHeight: 32});// movimiento de Rick
         this.load.image('floor', 'assets/floor.png');// suelo
         this.load.audio('song','assets/audio/game.mp3');// sonido
     }
@@ -39,17 +39,15 @@ export class BossScene extends Phaser.Scene{
         this.puh.setFly(true) // Llamada a método para cambiar el booleano de la clase puh que determina si vuela o no.
         this.rick = new Rick(this, 900, 200);// instanciación de Rick
 
-        this.floor = this.physics.add.image(720,1250, 'floor').setImmovable(true).setScale(3);// instanciación del suelo
+        this.floor = this.physics.add.image(720,1550, 'floor').setImmovable(true).setScale(3);
         this.floor.body.allowGravity = false;
 
-        this.physics.add.collider(this.puh, this.floor);// colisión etre Puh y el suelo
+        this.physics.add.collider(this.puh, this.floor);// colisión entre Puh y el suelo
         this.physics.add.collider(this.rick, this.floor);// colisión entre Rick y el suelo
 
-        this.floor.setCollideWorldBounds(true);
-        this.floor.body.onWorldBounds=true;
-
+        this.platform.setCollideWorldBounds(true);
+        this.platform.body.onWorldBounds=true;
     }
-
 
     gameOver(){
         this.puh.visible = false;
