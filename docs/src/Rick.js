@@ -26,28 +26,35 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         this.setScale(8);
     }
 
-    /*getX(){
+    getX(){
         return this.x;
     }
 
     animationManager(){
-        console.log(Puh.getX());
-        console.log(this.x);
-        if(Math.abs(Puh.getX() - this.x) < 1000) 
+        let puhPos = Puh.getX;
+        console.log(puhPos);
+        console.log(this.getX());
+        let range = 600 - this.x;;// rango de persecución
+        console.log(range);
+        if(Math.abs(range) <= 300) 
         {
+            if(this.anims.currentAnim.key !== 'walk'){
             console.log('entra');
-            if(Puh.getX - this.getX < 0)this.setFlip(true, false);
+            if(range < 0)this.setFlip(true, false);
             else this.setFlip(false, false);
             this.play('walk');
+            }
         }
         else{
+            if(this.anims.currentAnim.key !== 'idleR') {
             console.log('else');
            this.play('idleR');
+            }
         }
-    }*/
+    }
     
     preUpdate(t, dt){
         super.preUpdate(t,dt);
-       //this.animationManager();
+        this.animationManager();
     }
 }
