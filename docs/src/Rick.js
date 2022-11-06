@@ -21,16 +21,16 @@ export default class Rick extends Phaser.GameObjects.Sprite{
             repeat: -1
         });
 
-        this.play('idelR');
+        this.play('idleR');
         this.body.setCollideWorldBounds(true);
         this.setScale(8);
     }
 
-    getX(){
+    /*getX(){
         return this.x;
     }
 
-    /*animationManager(){
+    animationManager(){
         console.log(Puh.getX());
         console.log(this.x);
         if(Math.abs(Puh.getX() - this.x) < 1000) 
