@@ -7,8 +7,29 @@ export default class FallingObjects extends Phaser.GameObjects.Sprite{
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
         
-        this.scene.add.image(0,0, name);
-    
+        this.scene.anims.create({
+            key: 'bone',
+            frames: scene.anims.generateFrameNumbers('boneAn', {start:0, end:7}),
+            frameRate: 20,
+            repeat: -1
+        });
+
+        this.scene.anims.create({
+            key: 'skull',
+            frames: scene.anims.generateFrameNumbers('skullAn', {start:0, end:7}),
+            frameRate: 20,
+            repeat: -1
+        });
+
+        this.scene.anims.create({
+            key: 'claw',
+            frames: scene.anims.generateFrameNumbers('clawAn', {start:0, end:7}),
+            frameRate: 20,
+            repeat: -1
+        });
+        
+        this.play(name);
+
         this.body.setCollideWorldBounds(true);
 
         this.INITIALTIME= -1; // se inicializa luego
@@ -38,11 +59,12 @@ export default class FallingObjects extends Phaser.GameObjects.Sprite{
     }
 
     preUpdate(t,dt){
+        super.preUpdate(t,dt);
         if(this.INITIALTIME < 0) { 
             this.INITIALTIME = dt * t / 10000
         }
 
-        super.preUpdate(t,dt);
+
         this.colisionManager();
 
         let currentTime = dt * t / 10000;

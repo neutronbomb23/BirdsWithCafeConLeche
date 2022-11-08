@@ -37,6 +37,9 @@ export class Game extends Phaser.Scene{
         this.load.image('birdClaw', 'assets/obstacles/birdClaw.png');// garra de pájaro
         this.load.audio('song','assets/audio/game.mp3');// sonido
         this.load.image('portal', 'assets/portal.png');
+        this.load.spritesheet('skullAn', 'assets/obstacles/HeadAnimation.png', {frameWidth:32,  frameHeight: 32});
+        this.load.spritesheet('clawAn', 'assets/obstacles/ClawAnimation.png', {frameWidth:32,  frameHeight: 32});
+        this.load.spritesheet('boneAn', 'assets/obstacles/BoneAnimation.png', {frameWidth:32,  frameHeight: 32});
         }
 
     create(){
@@ -95,7 +98,7 @@ export class Game extends Phaser.Scene{
         this.physics.add.collider(this.platform, this.floor); // Se dice que colisionan el suelo y la plataforma
         //this.physics.add.collider(this.birdClaw, this.platform, this.addScore.bind(this), null);
 
-        this.obstaclesList = ['bone', 'birdClaw', 'birdSkull'] // Creación del array de la lista de objetos cargados en el preload.
+        this.obstaclesList = ['bone', 'claw', 'skull'] // Creación del array de la lista de objetos cargados en el preload.
         this.obstacles = this.physics.add.group(); // A este "grupo" se le añade físicas.
 
         //this.physics.add.collider(this.obstacles, this.floor, this.addScore.bind(this), null);

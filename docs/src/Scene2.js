@@ -31,6 +31,9 @@ export class Scene2 extends Phaser.Scene{
         this.load.image('zarzas', 'assets/zarzas.png');// zarzas
         this.load.image('birdClaw', 'assets/obstacles/birdClaw.png');// garra de pájaro
         this.load.audio('song','assets/audio/game.mp3');// sonido
+        this.load.spritesheet('skullAn', 'assets/obstacles/BoneAnimation.png', {frameWidth:32,  frameHeight: 32});
+        this.load.spritesheet('clawAn', 'assets/obstacles/ClawAnimation.png', {frameWidth:32,  frameHeight: 32});
+        this.load.spritesheet('headAn', 'assets/obstacles/HeadAnimation.png', {frameWidth:32,  frameHeight: 32});
     }
 
     create(){
