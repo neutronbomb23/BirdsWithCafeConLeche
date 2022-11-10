@@ -1,7 +1,7 @@
 import { GameOver } from "./GameOver.js";
 import { GamePause } from "./inGamePause.js";
 import Puh from './puh.js';
-import Rick from './rick.js';
+import Rick from './Rick.js';
 
 const CAMPOSY = 400; var camCurrentPosY = CAMPOSY; // Respecto a Puh
 const TOP = 1100; // punto en el eje y en el que se detiene la camara

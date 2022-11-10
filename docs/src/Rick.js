@@ -1,4 +1,3 @@
-import Puh from './puh.js';
 
 export default class Rick extends Phaser.GameObjects.Sprite{
     constructor(scene, x, y){
