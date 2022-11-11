@@ -35,7 +35,7 @@ export class BossScene extends Phaser.Scene{
         this.physics.world.setBoundsCollision(true, true, false, false); // Define limites del mapa
         this.add.image(720, 800, 'background').setScale(6); // Imagen fondo
 
-        this.puh = new Puh(this, 600, 200);// instanciación de Puh
+        this.puh = new Puh(this, 600, 1000);// instanciación de Puh
         this.puh.setFly(true) // Llamada a método para cambiar el booleano de la clase puh que determina si vuela o no.
         this.rick = new Rick(this, 900, 200);// instanciación de Rick
 
@@ -45,8 +45,15 @@ export class BossScene extends Phaser.Scene{
         this.physics.add.collider(this.puh, this.floor);// colisión entre Puh y el suelo
         this.physics.add.collider(this.rick, this.floor);// colisión entre Rick y el suelo
 
+        this.physics.add.collider(this.puh, this.platform);
+        this.physics.add.collider(this.rick, this.platform);
         this.platform.setCollideWorldBounds(true);
         this.platform.body.onWorldBounds=true;
+        this.physics.add.collider(this.platform, this.floor);
+
+        this.keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
+        this.keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
+        this.ESC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
     }
 
     gameOver(){
