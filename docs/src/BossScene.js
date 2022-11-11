@@ -68,6 +68,10 @@ export class BossScene extends Phaser.Scene{
         this.song.stop();
     }
 
+    GetPuhReference(){
+        return this.puh;
+    }
+
     loadScene = true;
     update(t,dt){
         if(this.loadScene){

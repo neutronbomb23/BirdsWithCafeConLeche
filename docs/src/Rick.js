@@ -3,6 +3,7 @@ export default class Rick extends Phaser.GameObjects.Sprite{
     constructor(scene, x, y){
         super(scene, x, y, 'rick');
 
+        let puh = scene.GetGetPuhReference;
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
 
@@ -25,12 +26,8 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         this.setScale(8);
     }
 
-    getX(){
-        return this.x;
-    }
-
     animationManager(){
-        let puhPos = Puh.getX;
+        let puhPos = puh.getX;
         console.log(puhPos);
         console.log(this.getX());
         let range = 600 - this.x;;// rango de persecución
