@@ -79,7 +79,7 @@ export default class Puh extends Phaser.GameObjects.Sprite{
         if(!this.body.touching.down){ // Vuelo
             if(this.anims.currentAnim.key !== 'fly') {this.play('fly');}
         }
-        else if (this.body.velocity.x != 0){c // Movimiento 
+        else if (this.body.velocity.x != 0){ // Movimiento 
             if(this.anims.currentAnim.key !== 'move') {this.play('move');}
         }
         else{ // Idle
