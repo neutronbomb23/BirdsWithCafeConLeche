@@ -25,47 +25,50 @@ export default class FallingObjects extends Phaser.GameObjects.Sprite{
     }
 
     initAnimations(scene, name){
-        this.scene.anims.create({
-            key: 'bone',
-            frames: scene.anims.generateFrameNumbers('boneAn', {start:0, end:7}),
-            frameRate: 20,
-            repeat: -1
-        });
-
-        this.scene.anims.create({
-            key: 'skull',
-            frames: scene.anims.generateFrameNumbers('skullAn', {start:0, end:7}),
-            frameRate: 20,
-            repeat: -1
-        });
-
-        this.scene.anims.create({
-            key: 'claw',
-            frames: scene.anims.generateFrameNumbers('clawAn', {start:0, end:7}),
-            frameRate: 20,
-            repeat: -1
-        });
+        //Se crea la animacion correspondiente
+        if(name == 'bone'){
+            this.scene.anims.create({
+                key: 'bone',
+                frames: scene.anims.generateFrameNumbers('boneAn', {start:0, end:7}),
+                frameRate: 20,
+                repeat: -1
+            });
+        }
+        else if(name == 'skull'){
+            this.scene.anims.create({
+                key: 'skull',
+                frames: scene.anims.generateFrameNumbers('skullAn', {start:0, end:7}),
+                frameRate: 20,
+                repeat: -1
+            });
+        }
+        else if (name == 'claw'){
+            this.scene.anims.create({
+                key: 'claw',
+                frames: scene.anims.generateFrameNumbers('clawAn', {start:0, end:7}),
+                frameRate: 20,
+                repeat: -1
+            });
+        }
         
-        this.play(name);
+        this.play(name); // Se establece la animación del objeto
     }
 
     updateAnimations(){
+        // CALAVERA (si se queda quieto se detiene su animación)
         if (this.body.touching.down && this.body.speed <= 1) { this.anims.timeScale = 0; }
     }
 
     colisionManager(){
-        if(this.body.touching.down){ // Si colisionan por abajo
-            if (this.RandomInt(0,2)  === 0){ this.body.setVelocityX(this.BOUNCE_VELOCITY_X); } // Derecha
-            else { this.body.setVelocityX(-this.BOUNCE_VELOCITY_X); } // Izquierda
-            this.body.setVelocityY(this.BOUNCE_VELOCITY_Y);
-            if (this.name == 'skull') {this.BOUNCE_VELOCITY_Y /= 2;  this.BOUNCE_VELOCITY_X /= 2;} 
-        }
-        else if(this.body.touching.left){
-            this.body.setVelocityX(this.BOUNCE_VELOCITY_X)
-        }
-        else if(this.body.touching.right){
-            this.body.setVelocityX(this.BOUNCE_VELOCITY_X)
-        }
+        if(this.body.touching.down){ // Si colisiona por abajo
+            if (this.RandomInt(0,2)  === 0){ this.body.setVelocityX(this.BOUNCE_VELOCITY_X); } // Derecha en X
+            else { this.body.setVelocityX(-this.BOUNCE_VELOCITY_X); } // Izquierda en X
+            this.body.setVelocityY(this.BOUNCE_VELOCITY_Y); // Aplica velocidad en Y
+
+            if (this.name == 'skull') {this.BOUNCE_VELOCITY_Y /= 2;  this.BOUNCE_VELOCITY_X /= 2;} // Decrementa la fuerza del rebote en la calavera
+        } 
+        else if(this.body.touching.left){ this.body.setVelocityX(this.BOUNCE_VELOCITY_X) } // Si colisiona por la izquierda
+        else if(this.body.touching.right){ this.body.setVelocityX(this.BOUNCE_VELOCITY_X) } // Si colisiona por la derecha
     }
 
     preUpdate(t,dt){
@@ -73,7 +76,7 @@ export default class FallingObjects extends Phaser.GameObjects.Sprite{
         if(this.INITIALTIME < 0) { 
             this.INITIALTIME = dt * t / 10000
         }
-
+        
         this.colisionManager();
         this.updateAnimations();
 

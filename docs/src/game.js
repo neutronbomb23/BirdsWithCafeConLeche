@@ -5,7 +5,6 @@ import Puh from './puh.js';
 import { Scene2 } from "./Scene2.js";
 
 const DEBUG = false;
-
 const CAMPOSY = 400; var camCurrentPosY = CAMPOSY; // Respecto a Puh
 const CAMERASPEED = 100; // Velocidad a la que sube en funcion del tiempo
 var cameraMoves = true;
