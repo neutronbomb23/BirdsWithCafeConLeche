@@ -10,15 +10,14 @@ export class GamePause extends Phaser.Scene {
     }
 
     preload (){
-       
         this.load.image('playButton', 'assets/startpng.png');
-        
-      
     }
+
     init(data){
         console.log(data);
         this.continue = data.me;
     }
+    
     create (){
         let playButton = this.add.image(720, 950, 'playButton').setScale(1); // Botón de play
       

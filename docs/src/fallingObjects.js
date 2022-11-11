@@ -12,10 +12,10 @@ export default class FallingObjects extends Phaser.GameObjects.Sprite{
 
         this.body.setCollideWorldBounds(true);
 
-        this.INITIALTIME= -1; // se inicializa luego
+        this.TIME = 0; // se inicializa luego
         this.BOUNCE_VELOCITY_X = 600;
         this.BOUNCE_VELOCITY_Y = -500;
-        const LIFETIME = 2;
+        this.LIFETIME = 15; 
     }
 
     RandomInt(min, max) { // Funcion Aux
@@ -73,17 +73,13 @@ export default class FallingObjects extends Phaser.GameObjects.Sprite{
 
     preUpdate(t,dt){
         super.preUpdate(t,dt);
-        if(this.INITIALTIME < 0) { 
-            this.INITIALTIME = dt * t / 10000
-        }
-        
+        this.TIME += dt / 1000;
+        console.log(this.TIME)
+
         this.colisionManager();
         this.updateAnimations();
 
-        let currentTime = dt * t / 10000;
-        if(currentTime - this.INITIALTIME >= this.LIFETIME){
-            this.destroy();
-        }
+        if(this.TIME >= this.LIFETIME){ this.destroy(); }
     }
 }
 
