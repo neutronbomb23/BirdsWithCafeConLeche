@@ -10,7 +10,7 @@ export class GameOver extends Phaser.Scene {
   }
 
   preload () {
-    this.load.image('gameOverBlanco' , 'assets/gameOverBlanco.png'); //Cargar la imagen de Game Over
+    this.load.image('gameOverBlanco' , 'assets/GameOverBlanco.png'); //Cargar la imagen de Game Over
 
     this.load.text('tryAgain'); //Cargar texto Try Again
        
