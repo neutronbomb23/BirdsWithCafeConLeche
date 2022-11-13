@@ -5,13 +5,12 @@
 }
 
 .subtitle{
-    font-size: 29px;
-    display: flex;
+    font-size: 20px;
     font-weight: bold;
     margin-left: 645px;
     margin-right: 645px;
     color: rgb(88, 0, 15);
-    background-color: rgb(255, 255, 255);
+    background-color: transparent;
     margin-top: 50px;
 
 }
@@ -76,7 +75,14 @@ footer{
 }
 
 body {
-   /* background-color: burlywood;*/
-    background-image: url("https://www.bypeople.com/wp-content/uploads/2014/05/light-live-background-css.jpg");
-    background-size: cover;
+        /* The image used */
+        background-image: url("https://images6.alphacoders.com/500/500276.jpg");
+        
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        
+        background-attachment: fixed;
+        
+        height: 300vh;
 }
