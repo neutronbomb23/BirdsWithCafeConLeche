@@ -5,18 +5,19 @@
 }
 
 .subtitle{
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
     margin-left: 645px;
     margin-right: 645px;
-    color: rgb(88, 0, 15);
+    color: rgb(0, 0, 0);
     background-color: transparent;
     margin-top: 50px;
 
 }
 
 .text{
-    font-size: 40px;
+    font-size: 22px;
+    font-weight: bold;
     display: flex;
     text-align: justify;
     text-justify: inter-word;
@@ -28,18 +29,10 @@
     font-size: 30px;
     margin-left: 30%;
 }
-
-.dbutton{
-    width: 250px;
-    display: block;
-    margin: auto;
-    margin-top: 50px;
-}
-
 .titles{
-    font-size: 35px;
+    font-size: 25px;
     color: rgb(255, 255, 255);
-    background-color: rgb(121, 115, 120);
+    background-color: rgb(255, 40, 2);
     width: 30%;
     margin-left: 35%;
     display: flex;
@@ -49,9 +42,9 @@
 }
 
 .des{
-    font-size: 35px;
+    font-size: 22px;
     color: rgb(255, 255, 255);
-    background-color: rgb(121, 115, 120);
+    background-color: rgb(255, 40, 2);
     width: 30%;
     margin-left: 35%;
     display: flex;
@@ -60,10 +53,12 @@
 }
 
 .socials{
-    width: 50px;
-    margin-left: 100px;
-    margin-top: 30px;
+    width: 200px;
+    display: block;
+    align-content: center;
+    margin-left: 45%;
 }
+
 
 .DASP{
     width: 145px;
@@ -72,11 +67,13 @@
 }
 footer{
     margin-left: 100px;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 body {
         /* The image used */
-        background-image: url("https://images6.alphacoders.com/500/500276.jpg");
+        background-image: url("https://images5.alphacoders.com/778/778643.jpg");
         
         background-size: cover;
         background-repeat: no-repeat;
