@@ -15,6 +15,7 @@ export default class Puh extends Phaser.GameObjects.Sprite{
         this.s = this.scene.input.keyboard.addKey('S');
         this.a = this.scene.input.keyboard.addKey('A');
         this.d = this.scene.input.keyboard.addKey('D');
+        this.cursors = this.scene.input.keyboard.createCursorKeys();
     }
 
     getX(){
@@ -27,24 +28,24 @@ export default class Puh extends Phaser.GameObjects.Sprite{
 
     characterInputManager(){
         // Horizontal
-        if(this.a.isDown){
+        if(this.a.isDown || this.cursors.left.isDown){
             this.body.setVelocityX(-500);
             this.setFlip(true, false);
         }
-        else if(this.d.isDown){
+        else if(this.d.isDown || this.cursors.right.isDown){
             this.body.setVelocityX(500);
             this.setFlip(false, false);
         }
         else{ this.body.setVelocityX(0); }
         //Vertical
         if (!this.fly){ // Si no hay vuelo activado
-            if(this.w.isDown && this.body.touching.down){ this.body.setVelocityY(-800) }
+            if((this.w.isDown || this.cursors.up.isDown) && this.body.touching.down){ this.body.setVelocityY(-800) }
             else if (this.body.touching.down){ this.body.setVelocityY(0); }
             else if(this.body.touching.up){ this.body.setVelocityY(0); }
         }
         else{ // Si hay vuelo activado
-            if(this.w.isDown){ this.body.setVelocityY(-500); }
-            else if(this.s.isDown){ this.body.setVelocityY(500); }
+            if(this.w.isDown || this.cursors.up.isDown){ this.body.setVelocityY(-500); }
+            else if(this.s.isDown || this.cursors.down.isDown){ this.body.setVelocityY(500); }
             else{ this.body.setVelocityY(200); }
         }
     }
