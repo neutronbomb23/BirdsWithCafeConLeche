@@ -25,11 +25,14 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         this.setScale(8);
     }
 
+    getX(){
+        return this.x; // Devuelve la posicion x de puh
+    }
+
     animationManager(){
-        /// getX es una funcion de puh por lo que this.getX() no tiene sentido sin definir antes getX() en rick
         let puhPos = this.puh.getX();
-        console.log(puhPos);
-        //console.log(this.getX());
+        //console.log(puhPos);
+        console.log(this.getX());
         let range = 600 - this.x;;// rango de persecución
         console.log(range);
         if(Math.abs(range) <= 300) 
