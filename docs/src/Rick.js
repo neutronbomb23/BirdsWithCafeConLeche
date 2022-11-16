@@ -2,7 +2,7 @@ export default class Rick extends Phaser.GameObjects.Sprite{
     constructor(scene, x, y){
         super(scene, x, y, 'rick');
 
-        let puh = scene.GetGetPuhReference;
+        this.puh = this.scene.GetPuhReference();
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
 
@@ -26,9 +26,9 @@ export default class Rick extends Phaser.GameObjects.Sprite{
     }
 
     animationManager(){
-        /// Puh no existe destro de rick, ademas getX es una funcion de puh por lo que this.getX() no tiene sentido sin definir antes getX() en rick
-        //let puhPos = puh.getX;
-        //console.log(puhPos);
+        /// getX es una funcion de puh por lo que this.getX() no tiene sentido sin definir antes getX() en rick
+        let puhPos = this.puh.getX();
+        console.log(puhPos);
         //console.log(this.getX());
         let range = 600 - this.x;;// rango de persecución
         console.log(range);
