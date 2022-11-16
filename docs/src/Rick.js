@@ -1,4 +1,3 @@
-
 export default class Rick extends Phaser.GameObjects.Sprite{
     constructor(scene, x, y){
         super(scene, x, y, 'rick');
@@ -16,7 +15,7 @@ export default class Rick extends Phaser.GameObjects.Sprite{
 
         this.scene.anims.create({
             key: 'walk',
-            frames: scene.anims.generateFrameNumbers('RickWalk', {start:0, end:24}),
+            frames: scene.anims.generateFrameNumbers('RickWalk', {start:0, end:23}),
             frameRate: 5,
             repeat: -1
         });
@@ -27,9 +26,10 @@ export default class Rick extends Phaser.GameObjects.Sprite{
     }
 
     animationManager(){
-        let puhPos = puh.getX;
-        console.log(puhPos);
-        console.log(this.getX());
+        /// Puh no existe destro de rick, ademas getX es una funcion de puh por lo que this.getX() no tiene sentido sin definir antes getX() en rick
+        //let puhPos = puh.getX;
+        //console.log(puhPos);
+        //console.log(this.getX());
         let range = 600 - this.x;;// rango de persecución
         console.log(range);
         if(Math.abs(range) <= 300) 

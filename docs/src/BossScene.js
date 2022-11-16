@@ -12,7 +12,7 @@ var startTime; // Runtime en el momento en el que empieza la escena
 
 export class BossScene extends Phaser.Scene{
     constructor(){
-        super({key: 'bossScene',});
+        super({key: 'bossScene'});
     }
 
     preload(){ // precarga los assets
@@ -45,11 +45,12 @@ export class BossScene extends Phaser.Scene{
         this.physics.add.collider(this.puh, this.floor);// colisión entre Puh y el suelo
         this.physics.add.collider(this.rick, this.floor);// colisión entre Rick y el suelo
 
-        this.physics.add.collider(this.puh, this.platform);
+        //No hay ningun platform creado al que aplicarle esto
+        /*this.physics.add.collider(this.puh, this.platform);
         this.physics.add.collider(this.rick, this.platform);
         this.platform.setCollideWorldBounds(true);
         this.platform.body.onWorldBounds=true;
-        this.physics.add.collider(this.platform, this.floor);
+        this.physics.add.collider(this.platform, this.floor);*/
 
         this.keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
         this.keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
