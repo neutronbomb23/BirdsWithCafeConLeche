@@ -16,17 +16,15 @@ let config = {
     height: 1800,
     pixelArt: true,
 	scale: {
-		autoCenter: Phaser.Scale.CENTER_HORIZONTALLY,
-		// Configuramos phaser para que se adapte al tamaño de pantalla donde ejecutadmos
-		// con un mínimo y un máximo de tamaño
+        autoCenter: Phaser.Scale.CENTER_BOTH,
 		mode: Phaser.Scale.FIT,
 		min: {
             width: 500,
-            height: 188
+            height: 308
         },
 		max: {
             width: 1500,
-            height: 1800
+            height: 2000
         },
 		zoom: 1
     },

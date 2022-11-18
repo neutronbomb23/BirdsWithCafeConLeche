@@ -9,7 +9,6 @@ export class Intro extends Phaser.Scene {
 
     preload (){
         this.load.video('wench', './assets/video/video.webm');
-        this.load.text('text');
     }
     create (){
 
