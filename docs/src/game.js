@@ -168,7 +168,9 @@ export class Game extends Phaser.Scene{
     generateObs(dt){
         let idObs = this.obstaclesList[Math.floor(Math.random() * 3)]
         let y =(300 -(this.time.now - startTime) * CAMERASPEED*dt/10000)
-        var toni =  new FallingObjects(this, y, idObs);
+        let toni =  new FallingObjects(this, y, idObs);
+
+        console.log(toni)
         this.obstacles.add(toni);
     }
 
@@ -201,7 +203,7 @@ export class Game extends Phaser.Scene{
             this.scene.pause();
         }
 
-       /* if(this.puh.y > 1600) {
+        /*if(this.puh.y > 1600) {
             this.gameOver();
     
         }*/

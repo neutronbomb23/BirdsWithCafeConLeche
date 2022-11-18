@@ -4,7 +4,7 @@ import { Scene2 } from "./Scene2.js";
 
  
 export class GameOver extends Phaser.Scene {
-  constructor() {
+    constructor() {
   // Nombre de la escena para el SceneManager
   super({ key: 'GameOver' }); // identificador para llamar a esta escena desde otras.
   }

@@ -13,7 +13,6 @@ export class Menu extends Phaser.Scene {
         this.load.image('playButton', 'assets/startpng.png');
         this.load.image('optionsButton', 'assets/controlspng.png');
         this.load.image('menuFondo', 'assets/menu.jpg');
-        this.load.image('puh', 'assets/puh.png');
         this.load.audio('menuMusic', 'assets/audio/menu.mp3');
         this.load.image('text', 'assets/birdstext.png');
         this.load.image('paloma', 'assets/paloma.png');

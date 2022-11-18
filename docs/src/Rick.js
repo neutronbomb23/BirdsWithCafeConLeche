@@ -31,8 +31,8 @@ export default class Rick extends Phaser.GameObjects.Sprite{
 
     animationManager(){
         let puhPos = this.puh.getX();
-        //console.log(puhPos);
-        console.log(this.getX());
+        console.log(puhPos);
+        //console.log(this.getX());
         let range = 600 - this.x;;// rango de persecución
         console.log(range);
         if(Math.abs(range) <= 300) 
