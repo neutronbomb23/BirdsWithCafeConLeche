@@ -4,6 +4,7 @@ import { GamePause } from "./inGamePause.js";
 import FallingObjects from "./fallingObjects.js";
 import Puh from './puh.js';
 import Platform from "./normalPlatform.js";
+
 const DEBUG = true;
 
 const CAMPOSY = 400; var camCurrentPosY = CAMPOSY; // Respecto a Puh
@@ -44,13 +45,15 @@ export class Scene2 extends Phaser.Scene{
         this.song = this.sound.add('song');
         this.song.play();
 
-
         this.physics.world.setBoundsCollision(true, true, false, false); // Define limites del mapa
         this.add.image(720, 800, 'background').setScale(6); // Imagen fondo
+        
+        this.platform = new Platform(this,600,1700);
 
         this.puh = new Puh(this, 600, 1500);// instanciación de Puh
+        this.puh.setFly(false)
     
-        this.platform = new Platform(this,600,1500);
+       
     
 
         this.floor1 = this.physics.add.image(300,1400, 'floor').setImmovable(true).setScale(1);
@@ -172,7 +175,7 @@ export class Scene2 extends Phaser.Scene{
             this.scene.pause();
         }
 
-        if(this.puh.y > 1600) {
+        if(this.puh.y > 2000) {
             this.gameOver();
     
         }
