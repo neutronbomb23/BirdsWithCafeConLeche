@@ -31,7 +31,6 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         let distY = Math.abs(this.y - puhPosY);
         let range = this.x - puhPosX;
         console.log(puhPosX);
-        //if()
         if(Math.abs(range) <= 500 && distY < 110) 
         {
             if(this.x > 300 && range > 0)
