@@ -45,14 +45,15 @@ export class BossScene extends Phaser.Scene{
 
         this.physics.add.collider(this.puh, this.floor);// colisión entre Puh y el suelo
         this.physics.add.collider(this.rick, this.floor);// colisión entre Rick y el suelo
+        this.physics.add.collider(this.puh, this.rick);// colisión entre Puh y el suelo
 
-        this.platform = this.physics.add.image(520,950, 'platform').setImmovable(true).setScale(1);
-        this.platform.body.allowGravity = false;
-        this.physics.add.collider(this.puh, this.platform);
-        this.physics.add.collider(this.rick, this.platform);
-        this.platform.setCollideWorldBounds(true);
-        this.platform.body.onWorldBounds=true;
-        this.physics.add.collider(this.platform, this.floor);
+       // this.platform = this.physics.add.image(520,950, 'platform').setImmovable(true).setScale(1);
+        //this.platform.body.allowGravity = false;
+        //this.physics.add.collider(this.puh, this.platform);
+        //this.physics.add.collider(this.rick, this.platform);
+       // this.platform.setCollideWorldBounds(true);
+       // this.platform.body.onWorldBounds=true;
+        //this.physics.add.collider(this.platform, this.floor);
 
         this.keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
         this.keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);

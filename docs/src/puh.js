@@ -22,6 +22,10 @@ export default class Puh extends Phaser.GameObjects.Sprite{
         return this.x; // Devuelve la posicion x de puh
     }
 
+    getY(){
+        return this.y; // Devuelve la posicion y de puh
+    }
+
     setFly(enabled){
         this.fly = enabled; // Permite cambiar de modo (mov con salto / vuelo)
     }

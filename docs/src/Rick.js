@@ -25,35 +25,40 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         this.setScale(8);
     }
 
-    getX(){
-        return this.x; // Devuelve la posicion x de puh
-    }
-
-    animationManager(){
-        let puhPos = this.puh.getX();
-        console.log(puhPos);
-        //console.log(this.getX());
-        let range = 600 - this.x;;// rango de persecución
-        console.log(range);
-        if(Math.abs(range) <= 300) 
+    movementManager(){
+        let puhPosX = this.puh.getX();
+        let puhPosY = this.puh.getY();
+        let distY = Math.abs(this.y - puhPosY);
+        let range = this.x - puhPosX;
+        console.log(puhPosX);
+        if(Math.abs(range) <= 500 && distY < 110) 
         {
-            if(this.anims.currentAnim.key !== 'walk'){
-            console.log('entra');
-            if(range < 0)this.setFlip(true, false);
-            else this.setFlip(false, false);
+            if(range > 0)
+            {
+                this.body.setVelocityX(-200);
+                this.setFlip(true, false);
+            }
+            else 
+            {
+                this.body.setVelocityX(200);
+                this.setFlip(false, false);
+            }
+            if(this.anims.currentAnim.key !== 'walk')
+            {
             this.play('walk');
             }
         }
         else{
-            if(this.anims.currentAnim.key !== 'idleR') {
-            console.log('else');
-           this.play('idleR');
+            if(this.anims.currentAnim.key !== 'idleR') 
+            {
+                this.body.setVelocityX(0);
+                this.play('idleR');
             }
         }
     }
     
     preUpdate(t, dt){
         super.preUpdate(t,dt);
-        this.animationManager();
+        this.movementManager();
     }
 }
