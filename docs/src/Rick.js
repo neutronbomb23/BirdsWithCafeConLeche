@@ -31,14 +31,15 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         let distY = Math.abs(this.y - puhPosY);
         let range = this.x - puhPosX;
         console.log(puhPosX);
+        //if()
         if(Math.abs(range) <= 500 && distY < 110) 
         {
-            if(range > 0)
+            if(this.x > 300 && range > 0)
             {
                 this.body.setVelocityX(-200);
                 this.setFlip(true, false);
             }
-            else 
+            else if(this.x < 1200 && range < 0)
             {
                 this.body.setVelocityX(200);
                 this.setFlip(false, false);
