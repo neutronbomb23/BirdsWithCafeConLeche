@@ -74,7 +74,6 @@ export default class FallingObjects extends Phaser.GameObjects.Sprite{
     preUpdate(t,dt){
         super.preUpdate(t,dt);
         this.TIME += dt / 1000;
-        console.log(this.TIME)
 
         this.colisionManager();
         this.updateAnimations();
