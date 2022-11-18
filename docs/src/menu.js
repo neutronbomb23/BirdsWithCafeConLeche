@@ -1,4 +1,5 @@
 import { Game } from './game.js';
+import { Scene2 } from './Scene2.js';
 import { BossScene } from './BossScene.js'
 
 export class Menu extends Phaser.Scene {
@@ -30,6 +31,7 @@ export class Menu extends Phaser.Scene {
         this.add.image(720,150, 'text').setScale(1.3);
         
         let bossButton = this.add.image(720, 500, 'playButton').setScale(1); // Botón de Boss
+        let scene2Button = this.add.image(320, 500, 'playButton').setScale(1); // Botón de Boss
         let playButton = this.add.image(720, 950, 'playButton').setScale(1); // Botón de play
         let optionsButton = this.add.image(720, 1200 , 'optionsButton').setScale(1); // Botón de opciones
         //this.add.sprite(100,100,'puh');
@@ -37,6 +39,7 @@ export class Menu extends Phaser.Scene {
         bossButton.setInteractive();
         playButton.setInteractive();
         optionsButton.setInteractive();
+        scene2Button.setInteractive();
 
         this.menuMusic = this.sound.add('menuMusic');
         
@@ -64,10 +67,13 @@ export class Menu extends Phaser.Scene {
         })
 
         bossButton.on("pointerup", ()=>{ //Método para empezar el juego cuando se pulse el botón play, también para la música para evitar que se escuche en la escena del juego.
+            this.scene.start('Scene2');
+            this.menuMusic.stop();
+        })
+        scene2Button.on("pointerup", ()=>{ //Método para empezar el juego cuando se pulse el botón play, también para la música para evitar que se escuche en la escena del juego.
             this.scene.start('bossScene');
             this.menuMusic.stop();
         })
-
 
     }
 

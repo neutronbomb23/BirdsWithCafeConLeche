@@ -3,6 +3,7 @@ import { Game } from "./game.js";
 import { GamePause } from "./inGamePause.js";
 import FallingObjects from "./fallingObjects.js";
 import Puh from './puh.js';
+import Platform from "./normalPlatform.js";
 const DEBUG = true;
 
 const CAMPOSY = 400; var camCurrentPosY = CAMPOSY; // Respecto a Puh
@@ -49,17 +50,14 @@ export class Scene2 extends Phaser.Scene{
 
         this.puh = new Puh(this, 600, 1500);// instanciación de Puh
     
-        this.platform = this.physics.add.image(700,1650, 'platform').setImmovable(true).setScale(1);
-        this.platform.body.allowGravity = false;
+        this.platform = new Platform(this,600,1500);
+    
 
         this.floor1 = this.physics.add.image(300,1400, 'floor').setImmovable(true).setScale(1);
         this.floor1.body.allowGravity = false;
 
         this.floor = this.physics.add.image(720,1100, 'floor').setImmovable(true).setScale(1);
         this.floor.body.allowGravity = false;
-
-        this.platform1 = this.physics.add.image(1000,860, 'platform').setImmovable(true).setScale(1);
-        this.platform1.body.allowGravity = false;
 
         this.zarzas = this.physics.add.image(200, 860, 'zarzas').setImmovable(true).setScale(1);
         this.zarzas.body.allowGravity = false;
@@ -75,9 +73,9 @@ export class Scene2 extends Phaser.Scene{
         this.physics.add.collider(this.puh, this.floor);
         this.physics.add.collider(this.puh, this.floor1);
 
-        this.platform.setCollideWorldBounds(true);
-        this.platform.body.onWorldBounds=true;
-        this.physics.add.collider(this.platform, this.floor);
+        //this.platform.setCollideWorldBounds(true);
+        //this.platform.body.onWorldBounds=true;
+        //this.physics.add.collider(this.platform, this.floor);
         //this.physics.add.collider(this.birdClaw, this.platform, this.addScore.bind(this), null);
 
         this.obstaclesList = ['bone', 'birdClaw', 'birdSkull']
