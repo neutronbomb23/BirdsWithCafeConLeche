@@ -34,18 +34,10 @@ export default class FallingObjects extends Phaser.GameObjects.Sprite{
                 repeat: -1
             });
         }
-        else if(name == 'skull'){
+        else if(name == 'birdSkull'){
             this.scene.anims.create({
-                key: 'skull',
+                key: 'birdSkull',
                 frames: scene.anims.generateFrameNumbers('skullAn', {start:0, end:7}),
-                frameRate: 20,
-                repeat: -1
-            });
-        }
-        else if (name == 'claw'){
-            this.scene.anims.create({
-                key: 'claw',
-                frames: scene.anims.generateFrameNumbers('clawAn', {start:0, end:7}),
                 frameRate: 20,
                 repeat: -1
             });
@@ -81,4 +73,3 @@ export default class FallingObjects extends Phaser.GameObjects.Sprite{
         if(this.TIME >= this.LIFETIME){ this.destroy(); }
     }
 }
-
