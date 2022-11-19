@@ -38,14 +38,16 @@ export class BossScene extends Phaser.Scene{
 
         this.puh = new Puh(this, 600, 1300);// instanciación de Puh
         this.puh.setFly(true) // Llamada a método para cambiar el booleano de la clase puh que determina si vuela o no.
-        this.rick = new Rick(this, 900, 200);// instanciación de Rick
+        this.rick = new Rick(this, 900, 1100);// instanciación de Rick
 
         this.floor = this.physics.add.image(720,1550, 'floor').setImmovable(true).setScale(3);
         this.floor.body.allowGravity = false;
 
         this.physics.add.collider(this.puh, this.floor);// colisión entre Puh y el suelo
         this.physics.add.collider(this.rick, this.floor);// colisión entre Rick y el suelo
-        this.physics.add.collider(this.puh, this.rick);// colisión entre Puh y el suelo
+        //this.physics.add.collider(this.rick, this.puh);// colisión entre Rick y Puh
+
+        //this.physics.add.collider(this.rick, this.puh, this.gameOver.bind(this), null);// game Over
 
        // this.platform = this.physics.add.image(520,950, 'platform').setImmovable(true).setScale(1);
         //this.platform.body.allowGravity = false;
@@ -60,12 +62,13 @@ export class BossScene extends Phaser.Scene{
         this.ESC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
     }
 
-    gameOver(){
+    gameOver(){     
+        this.scene.start('GameOver');
         this.puh.visible = false;
         this.rick.visible = false;
         console.log('Puh Abatido');
         this.song.stop();
-        this.scene.start('GameOver');
+   
     }   
 
     stopMusic(){

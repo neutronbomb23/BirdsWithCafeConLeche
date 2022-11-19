@@ -5,6 +5,8 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         this.puh = this.scene.GetPuhReference();
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
+        this.dash = false;// ataque
+        this.timer = 0;
 
         this.scene.anims.create({
             key: 'idleR',
@@ -19,10 +21,10 @@ export default class Rick extends Phaser.GameObjects.Sprite{
             frameRate: 5,
             repeat: -1
         });
-
-        this.play('idleR');
+        this.play('walk');
         this.body.setCollideWorldBounds(true);
         this.setScale(8);
+        this.setFlip(false, false);
     }
 
     movementManager(){
@@ -30,34 +32,73 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         let puhPosY = this.puh.getY();
         let distY = Math.abs(this.y - puhPosY);
         let range = this.x - puhPosX;
-        console.log(puhPosX);
-        if(Math.abs(range) <= 500 && distY < 110) 
+        console.log(this.dash);
+        if(!this.dash && distY < 110) 
         {
-            if(this.x > 300 && range > 0)
+            this.dash = true;
+            if(range > 0)
             {
-                this.body.setVelocityX(-200);
+                this.body.setVelocityX(-900);
                 this.setFlip(true, false);
             }
-            else if(this.x < 1200 && range < 0)
+            else
             {
-                this.body.setVelocityX(200);
+                this.body.setVelocityX(900);
                 this.setFlip(false, false);
             }
             if(this.anims.currentAnim.key !== 'walk')
             {
             this.play('walk');
             }
+            this.timer = 0;
         }
-        else{
-            if(this.anims.currentAnim.key !== 'idleR') 
+        if(this.dash && (this.x <= 200 || this.x >= 1300))
+        {
+            if(this.anims.currentAnim.key !== 'idelR')
             {
                 this.body.setVelocityX(0);
                 this.play('idleR');
             }
+            if(this.timer >= 150){
+                console.log("entra");
+                this.dash = false;
+            }
+        }
+
+        if(!this.dash)
+        {
+            this.walking();      
+        }
+    }
+
+    walking()
+    {
+        if(this.flipX)
+        {
+            this.body.setVelocityX(-200);// movimiento hacia la izquierda
+        }
+        else 
+        {
+            this.body.setVelocityX(200);// movimiento hacia la derecha
+        }
+        //console.log(this.x);
+        if(this.x >= 1150)
+        {
+            this.setFlip(true, false);// extremo derecho
+        }
+        else if(this.x <= 200)
+        {
+            this.setFlip(false, false);// extremo izquierdo
+        }
+    
+        if(this.anims.currentAnim.key !== 'walk')// animación de andar
+        {
+            this.play('walk');
         }
     }
     
     preUpdate(t, dt){
+        this.timer += dt;
         super.preUpdate(t,dt);
         this.movementManager();
     }
