@@ -4,6 +4,7 @@ import { GamePause } from "./inGamePause.js";
 import FallingObjects from "./fallingObjects.js";
 import Puh from './puh.js';
 import Platform from "./normalPlatform.js";
+import Claw from "./Claw.js";
 
 const DEBUG = true;
 
@@ -81,9 +82,12 @@ export class Scene2 extends Phaser.Scene{
         //this.physics.add.collider(this.platform, this.floor);
         //this.physics.add.collider(this.birdClaw, this.platform, this.addScore.bind(this), null);
 
-        this.obstaclesList = ['bone', 'birdClaw', 'birdSkull']
-        this.obstacles = this.physics.add.group();
+        this.obstaclesList = ['bone', 'birdSkull'] // Creación del array de la lista de objetos cargados en el preload.
+        this.obstacles = this.physics.add.group(); // A este "grupo" se le añade físicas.
+        this.claw = 'birdClaw';
+        this.clawobs = this.physics.add.group();
 
+        this.physics.add.collider(this.clawobs, this.puh, this.callClaw, null);
         this.physics.add.collider(this.obstacles, this.puh, this.gameOver.bind(this), null);
         this.physics.add.collider(this.zarzas, this.puh, this.gameOver.bind(this), null);
         this.physics.add.collider(this.zarzas1, this.puh, this.gameOver.bind(this), null);
@@ -105,6 +109,11 @@ export class Scene2 extends Phaser.Scene{
         this.keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
         this.ESC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
         this.cursors = this.input.keyboard.createCursorKeys();    
+    }
+
+
+    callClaw(obj1, obj2){
+        obj1.slowVel();
     }
 
     initCamera(){
@@ -129,13 +138,19 @@ export class Scene2 extends Phaser.Scene{
     }   
 
     generateObs(dt){
-        let idObs = this.obstaclesList[Math.floor(Math.random() * 3)]
-        var toni =  new FallingObjects(this, (-(this.time.now - startTime)*CAMERASPEED*dt/10000), idObs);
-        this.obstacles.add(toni);
-
-        //toni.setBounce(2);  
-    
-        console.log(idObs);
+        let randomNumb = Math.floor(Math.random() * 3);
+        if (randomNumb <= 2){
+            var idObs = this.obstaclesList[randomNumb];
+        }
+        let y =(300 -(this.time.now - startTime) * CAMERASPEED*dt/10000)
+        if (idObs == 'bone' || idObs == 'birdSkull'){
+            let toni =  new FallingObjects(this, y, idObs);
+            this.obstacles.add(toni);
+        }
+        else{
+            let toni = new Claw(this, y, 'birdClaw');
+            this.clawobs.add(toni);
+        }
     }
 
     stopMusic(){
