@@ -10,7 +10,6 @@ export class Menu extends Phaser.Scene {
     }
 
     preload(){
-
         this.load.image('playButton', 'assets/startpng.png');
         this.load.image('optionsButton', 'assets/controlspng.png');
         this.load.image('menuFondo', 'assets/menu.jpg');
@@ -45,7 +44,7 @@ export class Menu extends Phaser.Scene {
         
         this.menuMusic.play();
         playButton.on("pointerup", ()=>{ //Método para empezar el juego cuando se pulse el botón play, también para la música para evitar que se escuche en la escena del juego.
-            this.scene.start('game');
+            this.scene.start('Scene1');
             this.menuMusic.stop();
         })
 
