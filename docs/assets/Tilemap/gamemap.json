@@ -1264,7 +1264,7 @@
          "height":540,
          "id":6,
          "name":"decoracion",
-         "opacity":0.67,
+         "opacity":0.85,
          "type":"tilelayer",
          "visible":true,
          "width":45,
@@ -1825,7 +1825,7 @@
  "nextlayerid":13,
  "nextobjectid":44,
  "orientation":"orthogonal",
- "renderorder":"right-down",
+ "renderorder":"left-up",
  "tiledversion":"1.9.2",
  "tileheight":32,
  "tilesets":[

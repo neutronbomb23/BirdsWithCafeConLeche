@@ -76,8 +76,8 @@ export class Scene1 extends Phaser.Scene{
 
         this.physics.world.setBoundsCollision(true, true, false, false); // Define limites del mapa
 
-        this.puh = new Puh(this, 100, 1150);// instanciación de Puh
-        this.puh.setFly(false) // Llamada a método para cambiar el booleano de la clase puh que determina si vuela o no.
+        this.puh = new Puh(this, 100, 16800);// instanciación de Puh
+        this.puh.setFly(true) // Llamada a método para cambiar el booleano de la clase puh que determina si vuela o no.
 
         //this.initScore();
     
@@ -101,6 +101,9 @@ export class Scene1 extends Phaser.Scene{
         this.physics.add.collider(this.clawobs, this.puh, this.callClaw, null);
         this.physics.add.collider(this.obstacles, this.puh, this.gameOver.bind(this), null);
         this.physics.add.collider(this.puh, this.portal, this.nextLevel.bind(this),null);
+        this.physics.add.collider(this.clawobs, this.platformLayer);
+        this.physics.add.collider(this.obstacles, this.platformLayer);
+        this.physics.add.collider(this.puh, this.platformLayer);
     
         //CAMARA
         this.initCamera();
@@ -131,7 +134,7 @@ export class Scene1 extends Phaser.Scene{
 
     initCamera(){
         this.cameras.main.startFollow(this.puh); // Sigue a puh 
-        this.cameras.main.setFollowOffset(0, CAMPOSY); // Distancia entre el la camara y puh
+        this.cameras.main.setFollowOffset(0, -15000); // Distancia entre el la camara y puh
         this.cameras.main.setLerp(0, 0.1);
         this.cameras.main.scrollX = false;
     }
@@ -139,7 +142,7 @@ export class Scene1 extends Phaser.Scene{
     updateCamera(){
         var runTimeSecs = (this.time.now - startTime) * 0.001; // Tiempo desde que se inicio la escena
         if(DEBUG)console.log(runTimeSecs)
-        camCurrentPosY = CAMPOSY + runTimeSecs*CAMERASPEED - (PUHY - this.puh.y); // Distancia entre el la camara y puh
+        camCurrentPosY = -15000 + runTimeSecs*CAMERASPEED - (PUHY - this.puh.y); // Distancia entre el la camara y puh
         this.cameras.main.setFollowOffset(0, camCurrentPosY); // Set de la posición y de la camara
     }
 
@@ -162,7 +165,7 @@ export class Scene1 extends Phaser.Scene{
         if (randomNumb <= 2){
             var idObs = this.obstaclesList[randomNumb];
         }
-        let y =(300 -(this.time.now - startTime) * CAMERASPEED*dt/10000)
+        let y =(15400 -(this.time.now - startTime) * CAMERASPEED*dt/10000)
         if (idObs == 'bone' || idObs == 'birdSkull'){
             let toni =  new FallingObjects(this, y, idObs);
             this.obstacles.add(toni);
