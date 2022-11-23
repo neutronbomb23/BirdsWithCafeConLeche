@@ -170,7 +170,7 @@ export class Game extends Phaser.Scene{
     nextLevel(){
 
         this.song.stop();
-        this.scene.start('Scene2');
+        this.scene.start('game');
 
     }
 

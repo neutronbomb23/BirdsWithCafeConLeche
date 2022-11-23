@@ -58,7 +58,20 @@ export class Scene1 extends Phaser.Scene{
         this.fondoLayer = this.map.createFromObjects('fondo', {name: "fondoimg", key: 'fondoimg'});
         const myTileset = this.map.addTilesetImage('mundo', 'patronesTilemap');
         this.platformLayer = this.map.createLayer('plataformas', myTileset);
-        this.platformLayer.setCollision(1);
+        this.platformLayer.setCollision(66);
+        this.platformLayer.setCollision(81);
+        this.platformLayer.setCollision(82);
+        this.platformLayer.setCollision(83);
+        this.platformLayer.setCollision(84);
+        this.platformLayer.setCollision(85);
+        this.platformLayer.setCollision(86);
+        this.platformLayer.setCollision(87);
+        this.platformLayer.setCollision(97);
+        this.platformLayer.setCollision(98);
+        this.platformLayer.setCollision(99);
+        this.platformLayer.setCollision(113);
+        this.platformLayer.setCollision(114);
+        this.platformLayer.setCollision(115);
         this.decoracionLayer = this.map.createLayer('decoracion', myTileset);
 
         this.physics.world.setBoundsCollision(true, true, false, false); // Define limites del mapa
