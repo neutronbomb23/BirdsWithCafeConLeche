@@ -37,6 +37,7 @@ export class Game extends Phaser.Scene{
         this.load.image('birdClaw', 'assets/obstacles/birdClaw.png');// garra de pájaro
         this.load.audio('song','assets/audio/game.mp3');// sonido
         this.load.image('portal', 'assets/portal.png');
+        this.load.audio('crow', 'assets/audio/crow.mp3');
         this.load.spritesheet('skullAn', 'assets/obstacles/HeadAnimation.png', {frameWidth:32,  frameHeight: 32});
         this.load.spritesheet('clawAn', 'assets/obstacles/ClawAnimation.png', {frameWidth:32,  frameHeight: 32});
         this.load.spritesheet('boneAn', 'assets/obstacles/BoneAnimation.png', {frameWidth:32,  frameHeight: 32});
@@ -49,12 +50,18 @@ export class Game extends Phaser.Scene{
         this.song = this.sound.add('song');
         this.song.play();
 
+        this.fx = this.sound.add('crow');
+
+        
+
 
         this.physics.world.setBoundsCollision(true, true, false, false); // Define limites del mapa
         this.add.image(720, 800, 'background').setScale(6); // Imagen fondo
 
         this.puh = new Puh(this, 700, 1450);// instanciación de Puh
         this.puh.setFly(false) // Llamada a método para cambiar el booleano de la clase puh que determina si vuela o no.
+
+        this.entraGame = this.puh.entra = false;
 
         //this.initScore();
     
@@ -220,13 +227,18 @@ export class Game extends Phaser.Scene{
             this.scene.pause();
         }
 
-        /*if(this.puh.y > 1600) {
+        if(this.puh.y > 2000) {
             this.gameOver();
     
-        }*/
+        }
 
         if (camCurrentPosY > TOP){ // Detiene el seguimiento de camara
             cameraMoves = false;
+        }
+        
+        if(this.puh.entra){
+            console.log(this.puh.entra);
+            this.fx.play();
         }
         
         if(DEBUG){

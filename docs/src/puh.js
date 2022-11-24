@@ -36,10 +36,12 @@ export default class Puh extends Phaser.GameObjects.Sprite{
     }
 
     characterInputManager(){
+        this.entra = false;
         // Horizontal
         if(this.a.isDown || this.cursors.left.isDown){
             if(this.timer >= 5000){
                 this.body.setVelocityX(-500);
+                this.entra = true;
             }
             else{
                 this.body.setVelocityX(-250);
@@ -67,6 +69,7 @@ export default class Puh extends Phaser.GameObjects.Sprite{
             else if(this.s.isDown || this.cursors.down.isDown){ this.body.setVelocityY(500); }
             else{ this.body.setVelocityY(200); }
         }
+        this.entra = false;
     }
 
     initAnimations(scene, name){
