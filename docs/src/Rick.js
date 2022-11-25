@@ -22,22 +22,42 @@ export default class Rick extends Phaser.GameObjects.Sprite{
             repeat: -1
         });
 
-        
-        let tween = this.scene.tweens.add({
+       /* let Attack = this.scene.tweens.add({
             targets: this,
-            x: 700,
             duration: 1000,
             ease: 'Sine.easeInOut',
-            //yoyo: true,
+            onUpdate: function (tween)
+            {
+                const value = Math.floor(tween.getValue());
+
+                image.setTint(Phaser.Display.Color.GetColor(20, 30, 40));
+            },
+            yoyo: true,
             repeat: -1,
             delay: 10
         });
-        
+
+        Attack.pause();*/
+
 
         this.play('walk');
         this.body.setCollideWorldBounds(true);
         this.setScale(8);
         this.setFlip(false, false);
+
+        this.Damage = this.scene.tweens.add({
+            targets: this,
+            scale: this.scale*0.7,
+            duration: 1000,
+            ease: 'Sine.easeInOut',
+            yoyo: true,
+            repeat: -1,
+            delay: 10
+        });
+
+        console.log(this.Damage);
+        this.Damage.pause();
+        
     }
 
     movementManager(){
@@ -45,7 +65,7 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         let puhPosY = this.puh.getY();
         let distY = Math.abs(this.y - puhPosY);
         let range = this.x - puhPosX;
-        console.log(this.dash);
+        //console.log(this.dash);
         if(!this.dash && distY < 110) 
         {
             this.dash = true;
@@ -61,20 +81,22 @@ export default class Rick extends Phaser.GameObjects.Sprite{
             }
             if(this.anims.currentAnim.key !== 'walk')
             {
+            
             this.play('walk');
             }
             this.timer = 0;
         }
         if(this.dash && (this.x <= 200 || this.x >= 1300))
         {
-            //this.scene.TweenAnimation();
             if(this.anims.currentAnim.key !== 'idelR')
             {
+                this.Damage.resume();//tween de daño
                 this.body.setVelocityX(0);
                 this.play('idleR');
             }
             if(this.timer >= 150){
                 console.log("entra");
+                this.Damage.pause();
                 this.dash = false;
             }
         }
