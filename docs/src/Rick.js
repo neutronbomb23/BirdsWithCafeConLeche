@@ -21,6 +21,19 @@ export default class Rick extends Phaser.GameObjects.Sprite{
             frameRate: 5,
             repeat: -1
         });
+
+        
+        let tween = this.scene.tweens.add({
+            targets: this,
+            x: 700,
+            duration: 1000,
+            ease: 'Sine.easeInOut',
+            yoyo: true,
+            repeat: -1,
+            delay: 10
+        });
+        
+
         this.play('walk');
         this.body.setCollideWorldBounds(true);
         this.setScale(8);
@@ -54,6 +67,7 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         }
         if(this.dash && (this.x <= 200 || this.x >= 1300))
         {
+            //this.scene.TweenAnimation();
             if(this.anims.currentAnim.key !== 'idelR')
             {
                 this.body.setVelocityX(0);
