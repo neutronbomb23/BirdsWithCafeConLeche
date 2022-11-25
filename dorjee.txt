@@ -1,0 +1,54 @@
+  update(t,dt){
+
+        this.dtTime += dt;
+        if(this.dtTime = 10000) {
+        this.randomNumbSound();
+        this.dtTime = 0;
+        }
+        console.log(this.dt);
+        
+        this.lastTimeObbs += dt;
+        if(this.lastTimeObbs > 1000)
+        {
+            this.generateObs(dt);
+            this.lastTimeObbs = 0;
+        }
+
+        if(cameraMoves){
+            this.updateCamera(); // Actualiza su posición respecto a puh
+        }
+        else{
+            this.cameras.main.stopFollow(); // Se queda quieta en el eje Y
+        }
+
+        if(this.keyQ.isDown){
+            this.scene.restart();
+            this.song.stop();
+        }
+
+        if(this.ESC.isDown){
+            this.scene.launch('GamePause', {me: this.scene});
+            this.scene.pause();
+        }
+
+        if(this.puh.y > 2000) {
+            this.gameOver();
+    
+        }
+
+        if (camCurrentPosY > TOP){ // Detiene el seguimiento de camara
+            cameraMoves = false;
+        }
+        
+        
+        if((this.puh.chirp && this.soundRandom == 2) && !this.fx.isPlaying){
+
+            this.fx.play();
+        }
+        
+        if(DEBUG){
+            console.log(this.puh.x)
+            console.log((-(this.time.now - startTime)*CAMERASPEED)*dt/10000)
+        }
+    }
+}
