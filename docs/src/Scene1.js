@@ -37,6 +37,7 @@ export class Scene1 extends Phaser.Scene{
         this.load.image('birdClaw', 'assets/obstacles/birdClaw.png');// garra de pájaro
         this.load.audio('song','assets/audio/game.mp3');// sonido
         this.load.image('portal', 'assets/portal.png');
+        this.load.audio('crow', 'assets/audio/crow.mp3');
         this.load.spritesheet('skullAn', 'assets/obstacles/HeadAnimation.png', {frameWidth:32,  frameHeight: 32});
         this.load.spritesheet('clawAn', 'assets/obstacles/ClawAnimation.png', {frameWidth:32,  frameHeight: 32});
         this.load.spritesheet('boneAn', 'assets/obstacles/BoneAnimation.png', {frameWidth:32,  frameHeight: 32});
@@ -48,7 +49,8 @@ export class Scene1 extends Phaser.Scene{
         this.lastTimeObbs = 0;
         this.song = this.sound.add('song');
         this.song.play();
-
+        this.fx = this.sound.add('crow');
+        
         this.map = this.make.tilemap({ 
 			key: 'tilemap', 
 			tileWidth: 32, 
@@ -66,6 +68,8 @@ export class Scene1 extends Phaser.Scene{
         this.puh = new Puh(this, 100, 16800);// instanciación de Puh
         this.puh.body.setSize(this.puh.width - 10, this.puh.height, true);
         this.puh.setFly(false) // Llamada a método para cambiar el booleano de la clase puh que determina si vuela o no.
+        this.chirpFX = this.puh.chirp = false;
+
 
         //this.initScore();
     
@@ -148,6 +152,11 @@ export class Scene1 extends Phaser.Scene{
 
     }
 
+    randomNumbSound(){
+        this.soundRandom = Math.floor(Math.random() * 3);
+        return this.soundRandom;
+    }
+
     generateObs(dt){
         let randomNumb = Math.floor(Math.random() * 3);
         if (randomNumb <= 2){
@@ -170,6 +179,9 @@ export class Scene1 extends Phaser.Scene{
     }
 
     update(t,dt){
+
+        this.randomNumbSound();
+
         this.lastTimeObbs += dt;
         if(this.lastTimeObbs > 1000)
         {
@@ -194,10 +206,10 @@ export class Scene1 extends Phaser.Scene{
             this.scene.pause();
         }
 
-        /*if(this.puh.y > 1600) {
-            this.gameOver();
-    
-        }*/
+        if((this.puh.chirp && this.soundRandom == 2) && !this.fx.isPlaying){
+            console.log(this.puh.chirp);
+            this.fx.play();
+        }
 
         if (camCurrentPosY > TOP){ // Detiene el seguimiento de camara
             cameraMoves = false;

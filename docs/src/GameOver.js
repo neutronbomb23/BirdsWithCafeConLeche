@@ -40,7 +40,7 @@ export class GameOver extends Phaser.Scene {
 
     menuButton.on("pointerup", ()=>{ //Método que te lleva al menú principal si se presiona el botón menú.
     this.scene.start('Menu');
-    this.GameOver.stop();
+    this.scene.stop();
     });
   }
 }
