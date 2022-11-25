@@ -58,26 +58,14 @@ export class Scene1 extends Phaser.Scene{
         this.fondoLayer = this.map.createFromObjects('fondo', {name: "fondoimg", key: 'fondoimg'});
         const myTileset = this.map.addTilesetImage('mundo', 'patronesTilemap');
         this.platformLayer = this.map.createLayer('plataformas', myTileset);
-        this.platformLayer.setCollision(66);
-        this.platformLayer.setCollision(81);
-        this.platformLayer.setCollision(82);
-        this.platformLayer.setCollision(83);
-        this.platformLayer.setCollision(84);
-        this.platformLayer.setCollision(85);
-        this.platformLayer.setCollision(86);
-        this.platformLayer.setCollision(87);
-        this.platformLayer.setCollision(97);
-        this.platformLayer.setCollision(98);
-        this.platformLayer.setCollision(99);
-        this.platformLayer.setCollision(113);
-        this.platformLayer.setCollision(114);
-        this.platformLayer.setCollision(115);
+        this.platformLayer.setCollisionByExclusion(-1, true);
         this.decoracionLayer = this.map.createLayer('decoracion', myTileset);
 
         this.physics.world.setBoundsCollision(true, true, false, false); // Define limites del mapa
 
         this.puh = new Puh(this, 100, 16800);// instanciación de Puh
-        this.puh.setFly(true) // Llamada a método para cambiar el booleano de la clase puh que determina si vuela o no.
+        this.puh.body.setSize(this.puh.width - 10, this.puh.height, true);
+        this.puh.setFly(false) // Llamada a método para cambiar el booleano de la clase puh que determina si vuela o no.
 
         //this.initScore();
     
@@ -101,7 +89,6 @@ export class Scene1 extends Phaser.Scene{
         this.physics.add.collider(this.clawobs, this.puh, this.callClaw, null);
         this.physics.add.collider(this.obstacles, this.puh, this.gameOver.bind(this), null);
         this.physics.add.collider(this.puh, this.portal, this.nextLevel.bind(this),null);
-        this.physics.add.collider(this.clawobs, this.platformLayer);
         this.physics.add.collider(this.obstacles, this.platformLayer);
         this.physics.add.collider(this.puh, this.platformLayer);
     
@@ -110,7 +97,7 @@ export class Scene1 extends Phaser.Scene{
 
         this.keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
         this.keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
-        this.ESC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);    
+        this.ESC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);   
     }
 
     /*itScore(){
@@ -129,6 +116,7 @@ export class Scene1 extends Phaser.Scene{
     
     callClaw(obj1, obj2){
         obj1.slowVel();
+        obj2.destroy();
     }
 
 
@@ -165,7 +153,7 @@ export class Scene1 extends Phaser.Scene{
         if (randomNumb <= 2){
             var idObs = this.obstaclesList[randomNumb];
         }
-        let y =(15400 -(this.time.now - startTime) * CAMERASPEED*dt/10000)
+        let y =(-1500 + this.puh.y);
         if (idObs == 'bone' || idObs == 'birdSkull'){
             let toni =  new FallingObjects(this, y, idObs);
             this.obstacles.add(toni);

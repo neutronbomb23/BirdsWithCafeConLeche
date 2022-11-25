@@ -35,7 +35,7 @@ let config = {
     physics: { 
         default: 'arcade', 
         arcade: { 
-            gravity: { y: 700 }, 
+            gravity: { y: 1000 }, 
             debug: true 
         },
         checkCollision: {

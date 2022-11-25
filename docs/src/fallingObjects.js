@@ -4,10 +4,9 @@ export default class FallingObjects extends Phaser.GameObjects.Sprite{
         const xCoord = (Math.floor(Math.random() * (max - min + 1)) + min) // Posición aleatoria
         super(scene, xCoord, y, name);
         this.name = name;
-
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
-        
+        this.setScale(1.5);
         this.initAnimations(scene, name);
 
         this.body.setCollideWorldBounds(true);
@@ -15,7 +14,7 @@ export default class FallingObjects extends Phaser.GameObjects.Sprite{
         this.TIME = 0; // se inicializa luego
         this.BOUNCE_VELOCITY_X = 600;
         this.BOUNCE_VELOCITY_Y = -500;
-        this.LIFETIME = 15; 
+        this.LIFETIME = 10; 
     }
 
     RandomInt(min, max) { // Funcion Aux
@@ -48,19 +47,19 @@ export default class FallingObjects extends Phaser.GameObjects.Sprite{
 
     updateAnimations(){
         // CALAVERA (si se queda quieto se detiene su animación)
-        if (this.body.touching.down && this.body.speed <= 1) { this.anims.timeScale = 0; }
+        if (this.body.onFloor() && this.body.speed <= 1) { this.anims.timeScale = 0; }
     }
 
     colisionManager(){
-        if(this.body.touching.down){ // Si colisiona por abajo
+        if(this.body.onFloor()){ // Si colisiona por abajo
             if (this.RandomInt(0,2)  === 0){ this.body.setVelocityX(this.BOUNCE_VELOCITY_X); } // Derecha en X
             else { this.body.setVelocityX(-this.BOUNCE_VELOCITY_X); } // Izquierda en X
             this.body.setVelocityY(this.BOUNCE_VELOCITY_Y); // Aplica velocidad en Y
 
             if (this.name == 'skull') {this.BOUNCE_VELOCITY_Y /= 2;  this.BOUNCE_VELOCITY_X /= 2;} // Decrementa la fuerza del rebote en la calavera
         } 
-        else if(this.body.touching.left){ this.body.setVelocityX(this.BOUNCE_VELOCITY_X) } // Si colisiona por la izquierda
-        else if(this.body.touching.right){ this.body.setVelocityX(this.BOUNCE_VELOCITY_X) } // Si colisiona por la derecha
+        else if(this.body.onWall()){ this.body.setVelocityX(this.BOUNCE_VELOCITY_X) } // Si colisiona por la izquierda
+        else if(this.body.onWall()){ this.body.setVelocityX(this.BOUNCE_VELOCITY_X) } // Si colisiona por la derecha
     }
 
     preUpdate(t,dt){

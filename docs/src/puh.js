@@ -44,11 +44,11 @@ export default class Puh extends Phaser.GameObjects.Sprite{
 
             if(this.timer >= 5000){
                
-                this.body.setVelocityX(-500);
+                this.body.setVelocityX(-350);
              
             }
             else{
-                this.body.setVelocityX(-250);
+                this.body.setVelocityX(-175);
             }
             this.setFlip(true, false);
         }
@@ -57,17 +57,17 @@ export default class Puh extends Phaser.GameObjects.Sprite{
             this.chirp = true;
 
             this.setFlip(true, false);if(this.timer >= 5000){
-                this.body.setVelocityX(500);
+                this.body.setVelocityX(350);
             }
             else{
-                this.body.setVelocityX(250);
+                this.body.setVelocityX(175);
             }
             this.setFlip(false, false);
         }
         else{ this.body.setVelocityX(0), this.chirp = false; }
         //Vertical
         if (!this.fly){ // Si no hay vuelo activado
-            if((this.w.isDown || this.cursors.up.isDown) && this.body.touching.down){ this.body.setVelocityY(-800); this.chirp = true;}
+            if((this.w.isDown || this.cursors.up.isDown) && this.body.onFloor()){ this.body.setVelocityY(-750); this.chirp = true;}
             else if (this.body.touching.down){ this.body.setVelocityY(0);this.chirp = false; }
             else if(this.body.touching.up){ this.body.setVelocityY(0); this.chirp = false;}
         }
@@ -106,7 +106,7 @@ export default class Puh extends Phaser.GameObjects.Sprite{
     }
 
     animationManager(){
-        if(!this.body.touching.down){ // Vuelo
+        if(!this.body.onFloor()){ // Vuelo
             if(this.anims.currentAnim.key !== 'fly') {this.play('fly');}
         }
         else if (this.body.velocity.x != 0){ // Movimiento 

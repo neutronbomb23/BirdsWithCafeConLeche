@@ -34,7 +34,7 @@ export class GameOver extends Phaser.Scene {
     });
 
     returnButton.on("pointerup", ()=>{ //Método que te lleva al nivel donde has muerto si se presiona el botón play.
-    this.scene.start('game');
+    this.scene.start('Scene1');
     this.scene.stop();
     });
 
