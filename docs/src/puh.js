@@ -36,12 +36,16 @@ export default class Puh extends Phaser.GameObjects.Sprite{
     }
 
     characterInputManager(){
-        this.entra = false;
+        //this.chirp = false;
         // Horizontal
         if(this.a.isDown || this.cursors.left.isDown){
+
+            this.chirp = true;
+
             if(this.timer >= 5000){
+               
                 this.body.setVelocityX(-500);
-                this.entra = true;
+             
             }
             else{
                 this.body.setVelocityX(-250);
@@ -49,6 +53,9 @@ export default class Puh extends Phaser.GameObjects.Sprite{
             this.setFlip(true, false);
         }
         else if(this.d.isDown || this.cursors.right.isDown){
+
+            this.chirp = true;
+
             this.setFlip(true, false);if(this.timer >= 5000){
                 this.body.setVelocityX(500);
             }
@@ -57,19 +64,19 @@ export default class Puh extends Phaser.GameObjects.Sprite{
             }
             this.setFlip(false, false);
         }
-        else{ this.body.setVelocityX(0); }
+        else{ this.body.setVelocityX(0), this.chirp = false; }
         //Vertical
         if (!this.fly){ // Si no hay vuelo activado
-            if((this.w.isDown || this.cursors.up.isDown) && this.body.touching.down){ this.body.setVelocityY(-800) }
-            else if (this.body.touching.down){ this.body.setVelocityY(0); }
-            else if(this.body.touching.up){ this.body.setVelocityY(0); }
+            if((this.w.isDown || this.cursors.up.isDown) && this.body.touching.down){ this.body.setVelocityY(-800); this.chirp = true;}
+            else if (this.body.touching.down){ this.body.setVelocityY(0);this.chirp = false; }
+            else if(this.body.touching.up){ this.body.setVelocityY(0); this.chirp = false;}
         }
         else{ // Si hay vuelo activado
-            if(this.w.isDown || this.cursors.up.isDown){ this.body.setVelocityY(-500); }
-            else if(this.s.isDown || this.cursors.down.isDown){ this.body.setVelocityY(500); }
-            else{ this.body.setVelocityY(200); }
+            if(this.w.isDown || this.cursors.up.isDown){ this.body.setVelocityY(-500);  this.chirp = true;}
+            else if(this.s.isDown || this.cursors.down.isDown){ this.body.setVelocityY(500); this.chirp = true;}
+            else{ this.body.setVelocityY(200); this.chirp = false; }
         }
-        this.entra = false;
+       
     }
 
     initAnimations(scene, name){

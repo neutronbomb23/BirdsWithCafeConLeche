@@ -61,7 +61,7 @@ export class Game extends Phaser.Scene{
         this.puh = new Puh(this, 700, 1450);// instanciación de Puh
         this.puh.setFly(false) // Llamada a método para cambiar el booleano de la clase puh que determina si vuela o no.
 
-        this.entraGame = this.puh.entra = false;
+        this.chirpFX = this.puh.chirp = false;
 
         //this.initScore();
     
@@ -195,6 +195,8 @@ export class Game extends Phaser.Scene{
             let toni = new Claw(this, y, 'birdClaw');
             this.clawobs.add(toni);
         }
+
+        console.log(randomNumb)
         
     }
 
@@ -202,7 +204,15 @@ export class Game extends Phaser.Scene{
         this.song.stop();
     }
 
+    randomNumbSound(){
+        this.soundRandom = Math.floor(Math.random() * 3);
+        return this.soundRandom;
+    }
+
     update(t,dt){
+
+        this.randomNumbSound();
+        
         this.lastTimeObbs += dt;
         if(this.lastTimeObbs > 1000)
         {
@@ -236,8 +246,9 @@ export class Game extends Phaser.Scene{
             cameraMoves = false;
         }
         
-        if(this.puh.entra){
-            console.log(this.puh.entra);
+        console.log (this.soundRandom);
+        if(this.puh.chirp && this.soundRandom == 2){
+            console.log(this.puh.chirp);
             this.fx.play();
         }
         

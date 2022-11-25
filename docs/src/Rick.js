@@ -28,7 +28,7 @@ export default class Rick extends Phaser.GameObjects.Sprite{
             x: 700,
             duration: 1000,
             ease: 'Sine.easeInOut',
-            yoyo: true,
+            //yoyo: true,
             repeat: -1,
             delay: 10
         });
