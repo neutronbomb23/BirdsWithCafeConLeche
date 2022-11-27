@@ -69,20 +69,6 @@ export class Scene1 extends Phaser.Scene{
         this.puh.body.setSize(this.puh.width - 10, this.puh.height, true);
         this.puh.setFly(false) // Llamada a método para cambiar el booleano de la clase puh que determina si vuela o no.
         this.chirpFX = this.puh.chirp = false;
-
-
-        //this.initScore();
-    
-        //Creación de todos los objetos del mapa, se les quita la gravedad y se les hace inamovibles.
-
-        /*let velocity = 100 * Phaser.Math.Between(1.3,2);
-
-        if(Phaser.Math.Between(0,10)>5){
-            velocity = 0 - velocity;
-        }
-        */
-        //this.physics.add.collider(this.birdClaw, this.platform, this.addScore.bind(this), null);
-
         this.obstaclesList = ['bone', 'birdSkull'] // Creación del array de la lista de objetos cargados en el preload.
         this.obstacles = this.physics.add.group(); // A este "grupo" se le añade físicas.
         this.claw = 'birdClaw';
@@ -103,21 +89,6 @@ export class Scene1 extends Phaser.Scene{
         this.keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
         this.ESC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);   
     }
-
-    /*itScore(){
-        this.scoreText = this.add.text(16,16, 'Points: 0', {
-        fontSize: '40px',
-        fill: '#fff',
-        fontFamily: 'verdana, arial, sans-serif' 
-        });
-    }
-    
-    addScore(){
-        this.score++;
-        this.scoreText.setText('Points: ' + this.score);
-        console.log('1 punto');
-    }*/
-    
     callClaw(obj1, obj2){
         obj1.slowVel();
         obj2.destroy();
@@ -153,8 +124,9 @@ export class Scene1 extends Phaser.Scene{
     }
 
     randomNumbSound(){
-        this.soundRandom = Math.floor(Math.random() * 3);
+        this.soundRandom = Math.floor(Math.random() * 100);
         return this.soundRandom;
+        console.log(this.soundRandom)
     }
 
     generateObs(dt){
