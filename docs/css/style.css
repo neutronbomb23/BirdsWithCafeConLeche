@@ -86,7 +86,6 @@
 
 footer{
     color: rgb(255, 255, 255);
-    /*background-color: rgb(0, 0, 0);*/
     margin-left: 100px;
     font-size: 15px;
     font-weight: bold;
@@ -95,7 +94,7 @@ footer{
 body {
         /* The image used */
         /*background-image: url("https://images5.alphacoders.com/778/778643.jpg");*/
-        background-image: url(../assets/Fondo_index.jpg); 
+        background-image: url(../assets/Fondo_index.jpg);
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;

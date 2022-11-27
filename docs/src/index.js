@@ -5,7 +5,7 @@ import { GameOver } from './GameOver.js';
 import { GamePause } from './inGamePause.js';
 import {Scene1 } from './Scene1.js';
 import {Scene2 } from './Scene2.js';
-import {BossScene } from './bossScene.js';
+import {BossScene } from './BossScene.js';
 
 
 let config = {
