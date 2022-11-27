@@ -70,7 +70,7 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         //console.log(this.dash);
         if(!this.dash && distY < 110) 
         {
-            this.dash = true;
+            if(this.x > 200 && this.x < 1300)this.dash = true;// si no está ya en los extremos
             if(range > 0)// puh está a la izquierda
             {
                 this.body.setVelocityX(-900);
@@ -96,13 +96,11 @@ export default class Rick extends Phaser.GameObjects.Sprite{
                 this.scene.Damage.resume();//tween de daño
                 if(this.first)
                 {
-                    console.log(this.first);
                     this.timer = 0;// contador a 0
                     this.first = false;// booleano a false para no reiniciar el contador a cero
                 }
             }
-            if(this.timer >= 350){
-                console.log("entra");
+            if(this.timer >= 1000){
                 this.dash = false;// fin del daño y del ataque
                 this.first = true;// booleano a true para reiniciar el contador en el siguiente ataque
                 this.scene.Damage.pause();// tween pausado
