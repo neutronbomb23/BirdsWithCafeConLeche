@@ -22,6 +22,7 @@ export class BossScene extends Phaser.Scene{
         this.load.spritesheet('puhFly', 'assets/puh/Walk.png', {frameWidth:32,  frameHeight: 32});// Vuelo de Puh
         this.load.spritesheet('RickIddle', 'assets/Rick/pigeon_pecking.png', {frameWidth:48,  frameHeight: 32});// idle de Rick
         this.load.spritesheet('RickWalk', 'assets/Rick/pigeon_walking.png', {frameWidth:32,  frameHeight: 32});// movimiento de Rick
+        this.load.spritesheet('RickAttack', 'assets/Rick/pigeon_red.png', {frameWidth:32,  frameHeight: 32});// ataque de Rick
         this.load.spritesheet('Rick', 'assets/Rick/pigeon.png', {frameWidth:32,  frameHeight: 32});// Rick
         this.load.image('floor', 'assets/floor.png');// suelo
         this.load.audio('song','assets/audio/game.mp3');// sonido

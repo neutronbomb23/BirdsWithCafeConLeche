@@ -23,23 +23,12 @@ export default class Rick extends Phaser.GameObjects.Sprite{
             repeat: -1
         });
 
-       /* let Attack = this.scene.tweens.add({
-            targets: this,
-            duration: 1000,
-            ease: 'Sine.easeInOut',
-            onUpdate: function (tween)
-            {
-                const value = Math.floor(tween.getValue());
-
-                image.setTint(Phaser.Display.Color.GetColor(20, 30, 40));
-            },
-            yoyo: true,
-            repeat: -1,
-            delay: 10
+        this.scene.anims.create({
+            key: 'attack',
+            frames: scene.anims.generateFrameNumbers('RickAttack', {start:0, end:23}),
+            frameRate: 5,
+            repeat: -1
         });
-
-        Attack.pause();*/
-
 
         this.play('walk');
         this.body.setCollideWorldBounds(true);
@@ -56,18 +45,17 @@ export default class Rick extends Phaser.GameObjects.Sprite{
             delay: 10
         });
 
-        console.log(this.scene.Damage);
         this.scene.Damage.pause();
         this.scene.Damage.resume();
         
     }
 
     movementManager(){
-        let puhPosX = this.puh.getX();
-        let puhPosY = this.puh.getY();
-        let distY = Math.abs(this.y - puhPosY);
-        let range = this.x - puhPosX;
-        //console.log(this.dash);
+        let puhPosX = this.puh.getX();// psoción X de Puh
+        let puhPosY = this.puh.getY();// posición Y de Puh
+        let distY = Math.abs(this.y - puhPosY);// distancia en valor absoluto entre Puh y Rick
+        let range = this.x - puhPosX;// distancia en X entre Puh y Rick
+
         if(!this.dash && distY < 110) 
         {
             if(this.x > 200 && this.x < 1300)this.dash = true;// si no está ya en los extremos
@@ -81,15 +69,15 @@ export default class Rick extends Phaser.GameObjects.Sprite{
                 this.body.setVelocityX(900);
                 this.setFlip(false, false);
             }
-            if(this.anims.currentAnim.key !== 'walk')// animación
+            if(this.anims.currentAnim.key !== 'attack')// animación
             {
             
-            this.play('walk');
+            this.play('attack');
             }
         }
         else if(this.dash && (this.x <= 200 || this.x >= 1300))// daño a Rick
         {
-            if(this.anims.currentAnim.key === 'walk')
+            if(this.anims.currentAnim.key === 'attack')
             {
                 this.body.setVelocityX(0);// para a Rick
                 this.play('idleR');// animación
