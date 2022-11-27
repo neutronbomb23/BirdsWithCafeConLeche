@@ -9,13 +9,15 @@
     font-weight: bold;
     margin-left: 645px;
     margin-right: 645px;
-    color: rgb(0, 0, 0);
-    background-color: transparent;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
     margin-top: 50px;
 
 }
 
 .text{
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
     font-size: 22px;
     font-weight: bold;
     display: flex;
@@ -26,14 +28,17 @@
 }
 
 .lista{
-    font-size: 30px;
+    color: rgb(111, 46, 131);
+    font-weight: bold;
+    background-color: rgb(255, 255, 255);
+    width: 30%;
+    font-size: 25px;
     margin-left: 30%;
 }
 .titles{
     font-size: 25px;
-    color: rgb(255, 255, 255);
-    background-color: rgb(255, 40, 2);
     width: 30%;
+    font-weight: bolder;
     margin-left: 35%;
     display: flex;
     align-items: center;
@@ -41,31 +46,48 @@
     margin-top: 30px;
 }
 
+#descripción
+{
+    color: rgb(255, 255, 255);
+    background-color: rgb(98, 139, 0);
+}
+#Historia
+{
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 132, 141);
+}
+
 .des{
     font-size: 22px;
     color: rgb(255, 255, 255);
-    background-color: rgb(255, 40, 2);
+    background-color: rgb(111, 46, 131);
     width: 30%;
     margin-left: 35%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
-.socials{
-    width: 200px;
-    display: block;
-    align-content: center;
-    margin-left: 45%;
-}
-
-
 .DASP{
     width: 145px;
     float:right;
-    margin-right: 55%;
+    background-color: transparent;
 }
+
+.socials {
+    width: 100px;
+}
+#github{
+    align-content: center;
+    margin-left: 40%;
+}
+#twitter {
+    float: right;
+    /*margin-right: 45%;*/
+}
+
 footer{
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
     margin-left: 100px;
     font-size: 15px;
     font-weight: bold;
@@ -73,8 +95,8 @@ footer{
 
 body {
         /* The image used */
-        background-image: url("https://images5.alphacoders.com/778/778643.jpg");
-        
+        /*background-image: url("https://images5.alphacoders.com/778/778643.jpg");*/
+        background-image: url(../assets/Fondo_index.jpg); 
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
