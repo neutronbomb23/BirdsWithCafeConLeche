@@ -40,7 +40,7 @@ export class BossScene extends Phaser.Scene{
 
         this.puh = new Puh(this, 600, 1300);// instanciación de Puh
         this.puh.setFly(true) // Llamada a método para cambiar el booleano de la clase puh que determina si vuela o no.
-        this.rick = new Rick(this, 900, 1100);// instanciación de Rick
+        this.rick = new Rick(this, 900, 1150);// instanciación de Rick
 
         this.floor = this.physics.add.image(720,1550, 'floor').setImmovable(true).setScale(3);
         this.floor.body.allowGravity = false;

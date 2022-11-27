@@ -6,6 +6,7 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
         this.dash = false;// ataque
+        this.first = true;// booleano para asegurar que el timer solo se inicia a cero la primera vez
         this.timer = 0;
 
         this.scene.anims.create({
@@ -45,18 +46,19 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         this.setScale(8);
         this.setFlip(false, false);
 
-        this.Damage = this.scene.tweens.add({
+        this.scene.Damage = this.scene.tweens.add({
             targets: this,
             scale: this.scale*0.7,
-            duration: 1000,
+            duration: 800,
             ease: 'Sine.easeInOut',
             yoyo: true,
             repeat: -1,
             delay: 10
         });
 
-        console.log(this.Damage);
-        this.Damage.pause();
+        console.log(this.scene.Damage);
+        this.scene.Damage.pause();
+        this.scene.Damage.resume();
         
     }
 
@@ -69,41 +71,49 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         if(!this.dash && distY < 110) 
         {
             this.dash = true;
-            if(range > 0)
+            if(range > 0)// puh está a la izquierda
             {
                 this.body.setVelocityX(-900);
                 this.setFlip(true, false);
             }
-            else
+            else// puh está a la derecha
             {
                 this.body.setVelocityX(900);
                 this.setFlip(false, false);
             }
-            if(this.anims.currentAnim.key !== 'walk')
+            if(this.anims.currentAnim.key !== 'walk')// animación
             {
             
             this.play('walk');
             }
-            this.timer = 0;
         }
-        if(this.dash && (this.x <= 200 || this.x >= 1300))
+        else if(this.dash && (this.x <= 200 || this.x >= 1300))// daño a Rick
         {
-            if(this.anims.currentAnim.key !== 'idelR')
+            if(this.anims.currentAnim.key === 'walk')
             {
-                this.Damage.resume();//tween de daño
-                this.body.setVelocityX(0);
-                this.play('idleR');
+                this.body.setVelocityX(0);// para a Rick
+                this.play('idleR');// animación
+                this.scene.Damage.resume();//tween de daño
+                if(this.first)
+                {
+                    console.log(this.first);
+                    this.timer = 0;// contador a 0
+                    this.first = false;// booleano a false para no reiniciar el contador a cero
+                }
             }
-            if(this.timer >= 150){
+            if(this.timer >= 350){
                 console.log("entra");
-                this.Damage.pause();
-                this.dash = false;
+                this.dash = false;// fin del daño y del ataque
+                this.first = true;// booleano a true para reiniciar el contador en el siguiente ataque
+                this.scene.Damage.pause();// tween pausado
+                this.y = 1250;// para que no se caiga por el cambio de escala
+                this.setScale(8);// vuelve a su escala inicial
             }
         }
 
-        if(!this.dash)
+        else if(!this.dash)
         {
-            this.walking();      
+            this.walking(); // patrulla   
         }
     }
 
