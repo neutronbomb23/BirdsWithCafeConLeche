@@ -1,4 +1,0 @@
--PABLO: Cámara, ajustarla bien o dejarla eso.
--ALBERTO: solucionar el problema de stackeo de la canción.
--DORJEE: Sonido de Puh aleatorio.
--SOFÍA: Animación Puh.
