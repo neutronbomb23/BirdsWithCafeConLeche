@@ -38,6 +38,7 @@ export class Scene1 extends Phaser.Scene{
         this.load.audio('song','assets/audio/game.mp3');// sonido
         this.load.image('portal', 'assets/portal.png');
         this.load.audio('crow', 'assets/audio/crow.mp3');
+        this.load.audio('death', 'assets/audio/death.mp3');
         this.load.spritesheet('skullAn', 'assets/obstacles/HeadAnimation.png', {frameWidth:32,  frameHeight: 32});
         this.load.spritesheet('clawAn', 'assets/obstacles/ClawAnimation.png', {frameWidth:32,  frameHeight: 32});
         this.load.spritesheet('boneAn', 'assets/obstacles/BoneAnimation.png', {frameWidth:32,  frameHeight: 32});
@@ -50,6 +51,7 @@ export class Scene1 extends Phaser.Scene{
         this.song = this.sound.add('song');
         this.song.play();
         this.fx = this.sound.add('crow');
+        this.deathSound = this.sound.add('death');
         
         this.map = this.make.tilemap({ 
 			key: 'tilemap', 
@@ -69,6 +71,7 @@ export class Scene1 extends Phaser.Scene{
         this.puh.body.setSize(this.puh.width - 10, this.puh.height, true);
         this.puh.setFly(false) // Llamada a método para cambiar el booleano de la clase puh que determina si vuela o no.
         this.chirpFX = this.puh.chirp = false;
+        
         this.obstaclesList = ['bone', 'birdSkull'] // Creación del array de la lista de objetos cargados en el preload.
         this.obstacles = this.physics.add.group(); // A este "grupo" se le añade físicas.
         this.claw = 'birdClaw';
@@ -113,7 +116,14 @@ export class Scene1 extends Phaser.Scene{
         this.puh.visible = false;
         console.log('Puh Abatido');
         this.song.stop();
-        this.scene.start('GameOver');
+        this.deathSound.play();
+        this.deathSound.on('complete', audio => {
+            
+            console.log("He muerto");
+            this.scene.start('GameOver');
+
+        });
+       
     }   
 
     nextLevel(){
