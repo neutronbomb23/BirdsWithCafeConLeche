@@ -7,9 +7,7 @@ Cosas que quedan
 -Areglar escenas (disminuir cutrez)
 -Arreglar tween de inicio del boss
 -SetColliderWorldBound de los falling objects (muros invisibles)
-*Sonidos Puh (muerte)*(HECHO CON LISTENER)
 -Arreglar objetos que atraviesan (width de las plataformas) 
--añadir sonidos al boss (HECHO, FALTA CAMBIAR EL ASSET DE SONIDO)
 -Comentar código y organizar carpetas 
 -UI? (texto diciéndote lo que te falta por llegar hasta arriba) = OPCIONAL 
 -Checkpoints 

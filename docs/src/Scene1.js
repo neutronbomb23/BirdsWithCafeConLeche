@@ -117,7 +117,7 @@ export class Scene1 extends Phaser.Scene{
         console.log('Puh Abatido');
         this.song.stop();
         this.deathSound.play();
-        this.deathSound.on('complete', audio => {
+        this.deathSound.on('complete', audio => {  //Una vez que el audio se haya acabado de reproducir, salta a la escena de GameOver
             
             console.log("He muerto");
             this.scene.start('GameOver');
@@ -134,7 +134,7 @@ export class Scene1 extends Phaser.Scene{
     }
 
     randomNumbSound(){
-        this.soundRandom = Math.floor(Math.random() * 100);
+        this.soundRandom = Math.floor(Math.random() * 100); //Generador de números aleatorios para controlar el sonido de Puh y de Rick
         return this.soundRandom;
         console.log(this.soundRandom)
     }
@@ -184,11 +184,11 @@ export class Scene1 extends Phaser.Scene{
         }
 
         if(this.ESC.isDown){
-            this.scene.launch('GamePause', {me: this.scene});
+            this.scene.launch('GamePause', {me: this.scene}); //Paso un dato a la escena de Pausa para poder mantenerla pausada sin tener que hacer un scene.start
             this.scene.pause();
         }
 
-        if((this.puh.chirp && this.soundRandom == 2) && !this.fx.isPlaying){
+        if((this.puh.chirp && this.soundRandom == 2) && !this.fx.isPlaying){ //Si el booleano es true, y el número aleatorio es dos, además debe cumplirse que el sonido no esté sonando.
             console.log(this.puh.chirp);
             this.fx.play();
         }
