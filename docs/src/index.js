@@ -31,11 +31,9 @@ let config = {
 		zoom: 1
     },
     
-<<<<<<< Updated upstream
+
     scene: [Intro, Menu, Game, GameOver,  Scene1, BossScene, Scene2, GamePause,],
-=======
-    scene: [Intro, Menu, Game, GameOver, Scene1, BossScene, Scene2, GamePause],
->>>>>>> Stashed changes
+
     physics: { 
         default: 'arcade', 
         arcade: { 
