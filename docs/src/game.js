@@ -182,12 +182,14 @@ export class Game extends Phaser.Scene{
     }
 
     generateObs(dt){
-        let randomNumb = Math.floor(Math.random() * 3);
-        if (randomNumb <= 2){
-            var idObs = this.obstaclesList[randomNumb];
+        let randomNumb = Math.floor(Math.random() * 3);// redondea hacia abajo (número entero)
+        if (randomNumb <= 2)
+        {
+            var idObs = this.obstaclesList[randomNumb];//Lista de obstáculos de tamaño aleatorio
         }
         let y =(300 -(this.time.now - startTime) * CAMERASPEED*dt/10000)
-        if (idObs == 'bone' || idObs == 'birdSkull'){
+        if (idObs == 'bone' || idObs == 'birdSkull')
+        {
             let toni =  new FallingObjects(this, y, idObs);
             this.obstacles.add(toni);
         }

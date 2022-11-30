@@ -1,6 +1,7 @@
 export default class FallingObjects extends Phaser.GameObjects.Sprite{
     constructor(scene, y, name){
-        let min = Math.ceil(48); let max = Math.floor(1400);
+        let min = Math.ceil(48);//redondea hacia arriba
+        let max = Math.floor(1400);// redonde hacia abajo
         const xCoord = (Math.floor(Math.random() * (max - min + 1)) + min) // Posición aleatoria
         super(scene, xCoord, y, name);
         this.name = name;

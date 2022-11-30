@@ -2,6 +2,7 @@ import { GameOver } from "./GameOver.js";
 import { GamePause } from "./inGamePause.js";
 import Puh from './puh.js';
 import Rick from './Rick.js';
+import WaterDrop from './waterDrop.js';
 
 const CAMPOSY = 400; var camCurrentPosY = CAMPOSY; // Respecto a Puh
 const TOP = 1100; // punto en el eje y en el que se detiene la camara
@@ -13,6 +14,7 @@ var startTime; // Runtime en el momento en el que empieza la escena
 export class BossScene extends Phaser.Scene{
     constructor(){
         super({key: 'bossScene'});
+       // this.timer = 0;
     }
 
     preload(){ // precarga los assets
@@ -28,6 +30,7 @@ export class BossScene extends Phaser.Scene{
         this.load.audio('Boss', 'assets/audio/k.mp3');
         this.load.audio('song','assets/audio/game.mp3');// sonido
         this.load.image('platform', 'assets/platform.png');// plataforma
+        this.load.image('WaterDrop', 'assets/Rick/Gota.png');// gota de agua
     }
 
     create(){
@@ -47,6 +50,13 @@ export class BossScene extends Phaser.Scene{
         this.floor = this.physics.add.image(720,1550, 'floor').setImmovable(true).setScale(3);
         this.floor.body.allowGravity = false;
 
+
+        this.drop = 'WaterDrop';// gota
+        this.dropObs = this.physics.add.group();// gurpo de gotas con físicas
+
+
+        //this.physics.add.collider(this.dropObs, this.puh, this.gameOver.bind(this), null);// game Over
+        this.physics.add.collider(this.dropObs, this.floor);
         this.physics.add.collider(this.puh, this.floor);// colisión entre Puh y el suelo
         this.physics.add.collider(this.rick, this.floor);// colisión entre Rick y el suelo
         //this.physics.add.collider(this.rick, this.puh);// colisión entre Rick y Puh
@@ -64,6 +74,7 @@ export class BossScene extends Phaser.Scene{
         this.keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
         this.keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
         this.ESC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
+
     }
 
     gameOver(){     
@@ -86,8 +97,31 @@ export class BossScene extends Phaser.Scene{
         this.soundRandom = Math.floor(Math.random() * 30);
     }
 
+    RickDrop()
+    {
+        let waterDrop = new WaterDrop(this, this.rick.getX(), this.rick.getY(), -1000, 4.5, this.drop);// instancia la gota en la posición de Rick
+        this.dropObs.add(waterDrop);// añade la gota al grupo
+    }
+
+    generateObs(){
+       
+        let rnd = Math.floor(Math.random() * 6);// número aleatorio entre 0 y 5
+        rnd += 5; // número aleatorio entre 5 y 10
+        for(let i = 0; i < rnd; i++)
+        {
+            let min = Math.ceil(48);//redondea hacia arriba
+            let max = Math.floor(1400);// redonde hacia abajo
+            let x = (Math.floor(Math.random() * (max - min + 1)) + min) // Posición aleatoria de x
+    
+            let waterDrop = new WaterDrop(this, x, -180, 500, 3, this.drop);
+            this.dropObs.add(waterDrop);// añade la gota al grupo
+        }// se generan en fución del número aleatorio
+       // this.timer = 0;
+    }
+
     loadScene = true;
     update(t,dt){
+        if(this.timer >= 5000)this.generateObs();
         this.randomNumbSound();
 
         if(this.loadScene){

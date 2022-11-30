@@ -8,6 +8,7 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         this.dash = false;// ataque
         this.first = true;// booleano para asegurar que el timer solo se inicia a cero la primera vez
         this.timer = 0;
+        this.dropTimer = 0;
 
         this.scene.anims.create({
             key: 'idleR',
@@ -48,6 +49,14 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         this.scene.Damage.pause();
         this.scene.Damage.resume();
         
+    }
+
+    getX(){
+        return this.x; // Devuelve la posicion x de puh
+    }
+
+    getY(){
+        return this.y; // Devuelve la posicion y de puh
     }
 
     movementManager(){
@@ -99,10 +108,15 @@ export default class Rick extends Phaser.GameObjects.Sprite{
             }
         }
 
-        else if(!this.dash)
+        else if(distY >= 110)
         {
-            this.walking(); // patrulla   
             this.bossSound = true;
+            if(!this.dash)this.walking(); // patrulla   
+            if(this.dropTimer >= 2000)
+            {
+                this.scene.RickDrop();// instancia gota hacia arriba
+                this.dropTimer = 0;// contador
+            }
         }
     }
 
@@ -134,6 +148,8 @@ export default class Rick extends Phaser.GameObjects.Sprite{
     
     preUpdate(t, dt){
         this.timer += dt;
+        this.dropTimer += dt;
+        //console.log(this.dropTimer);
         super.preUpdate(t,dt);
         this.movementManager();
     }

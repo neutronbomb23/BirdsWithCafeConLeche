@@ -78,8 +78,8 @@ export class Scene1 extends Phaser.Scene{
         
         this.obstaclesList = ['bone', 'birdSkull'] // Creación del array de la lista de objetos cargados en el preload.
         this.obstacles = this.physics.add.group(); // A este "grupo" se le añade físicas.
-        this.claw = 'birdClaw';
-        this.clawobs = this.physics.add.group();
+        this.claw = 'birdClaw';// variable con identificador de la garra
+        this.clawobs = this.physics.add.group();// grupo de objetos(garras) con físicas
 
         //this.physics.add.collider(this.obstacles, this.floor, this.addScore.bind(this), null);
         this.physics.add.collider(this.puh, this.platformLayer);
@@ -145,18 +145,18 @@ export class Scene1 extends Phaser.Scene{
     }
 
     generateObs(dt){
-        let randomNumb = Math.floor(Math.random() * 3);
+        let randomNumb = Math.floor(Math.random() * 3);// redondea hacia abajo (número entero)
         if (randomNumb <= 2){
-            var idObs = this.obstaclesList[randomNumb];
+            var idObs = this.obstaclesList[randomNumb];// idObs será uno de los obstáculos (aleatorio)
         }
-        let y =(-1500 + this.puh.y);
+        let y =(-1500 + this.puh.y);//Posición desde la que se generan los obstáculos (es relativa a la posición de Puh)
         if (idObs == 'bone' || idObs == 'birdSkull'){
-            let toni =  new FallingObjects(this, y, idObs);
-            this.obstacles.add(toni);
+            let toni =  new FallingObjects(this, y, idObs);// crea un falling object del tipo idObs
+            this.obstacles.add(toni);// añade el obstáculo aleatorio al grupo
         }
-        else{
+        else{// la garra tiene una funcionalidad distinta
             let toni = new Claw(this, y, 'birdClaw');
-            this.clawobs.add(toni);
+            this.clawobs.add(toni);// añade la garra al grupo
         }
         
     }
