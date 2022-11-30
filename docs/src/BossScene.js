@@ -25,6 +25,7 @@ export class BossScene extends Phaser.Scene{
         this.load.spritesheet('RickAttack', 'assets/Rick/pigeon_red.png', {frameWidth:32,  frameHeight: 32});// ataque de Rick
         this.load.spritesheet('Rick', 'assets/Rick/pigeon.png', {frameWidth:32,  frameHeight: 32});// Rick
         this.load.image('floor', 'assets/floor.png');// suelo
+        this.load.audio('Boss', 'assets/audio/k.mp3');
         this.load.audio('song','assets/audio/game.mp3');// sonido
         this.load.image('platform', 'assets/platform.png');// plataforma
     }
@@ -34,7 +35,7 @@ export class BossScene extends Phaser.Scene{
         startTime = this.time.now;
         this.song = this.sound.add('song');
         this.song.play();
-
+        this.bossFX = this.sound.add('Boss');
 
         this.physics.world.setBoundsCollision(true, true, false, false); // Define limites del mapa
         this.add.image(720, 800, 'background').setScale(6); // Imagen fondo
@@ -42,7 +43,7 @@ export class BossScene extends Phaser.Scene{
         this.puh = new Puh(this, 600, 1300);// instanciación de Puh
         this.puh.setFly(true) // Llamada a método para cambiar el booleano de la clase puh que determina si vuela o no.
         this.rick = new Rick(this, 900, 1150);// instanciación de Rick
-
+        this.activateBossSound = this.rick.bossSound = false;
         this.floor = this.physics.add.image(720,1550, 'floor').setImmovable(true).setScale(3);
         this.floor.body.allowGravity = false;
 
@@ -70,8 +71,7 @@ export class BossScene extends Phaser.Scene{
         this.puh.visible = false;
         this.rick.visible = false;
         console.log('Puh Abatido');
-        this.song.stop();
-   
+        this.song.stop();   
     }   
 
     stopMusic(){
@@ -82,13 +82,26 @@ export class BossScene extends Phaser.Scene{
         return this.puh;
     }
 
+    randomNumbSound(){
+        this.soundRandom = Math.floor(Math.random() * 30);
+    }
+
     loadScene = true;
     update(t,dt){
+        this.randomNumbSound();
+
         if(this.loadScene){
             this.scene.restart();
             this.song.stop();
             this.loadScene = false;
         }
+
+        if((this.soundRandom == 2 && this.rick.bossSound) && !this.bossFX.isPlaying)
+         {
+            this.bossFX.play();
+            console.log("HE SONADO BIEN PERRA");
+            console.log(this.rick.bossSound);
+         }
 
         if(this.keyQ.isDown){
             this.scene.restart();

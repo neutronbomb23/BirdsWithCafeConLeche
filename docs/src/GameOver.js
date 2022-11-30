@@ -19,7 +19,7 @@ export class GameOver extends Phaser.Scene {
   create () {
     this.add.image(730, 400, 'gameOverBlanco'); // Carga la imagen en escena
     this.tryagainText = this.add.text(300,650, '              WANNA PLAY AGAIN?\n I´LL END UP EATING YOU ANYWAYS!', { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: 50, color: 'white'}); //Texto que aparece al poner el cursor encima del botón play
-    this.tryagainText.visible = false;
+    this.tryagainText.visible = false; // Por defecto, el texto no es visible.
     let returnButton = this.add.image(720, 950, 'playButton').setScale(1); // Botón de play
     let menuButton = this.add.image(720, 1200 , 'menuButton').setScale(1); // Botón para volver al menú, hay que cambiar el aspecto
     returnButton.setInteractive(); // Hace que el botón sea interactivo, para poder pulsar sobre el o para accionar eventos.

@@ -38,6 +38,7 @@ export class Scene1 extends Phaser.Scene{
         this.load.audio('song','assets/audio/game.mp3');// sonido
         this.load.image('portal', 'assets/portal.png');
         this.load.audio('crow', 'assets/audio/crow.mp3');
+        this.load.audio('death', 'assets/audio/death.mp3');
         this.load.spritesheet('skullAn', 'assets/obstacles/HeadAnimation.png', {frameWidth:32,  frameHeight: 32});
         this.load.spritesheet('clawAn', 'assets/obstacles/ClawAnimation.png', {frameWidth:32,  frameHeight: 32});
         this.load.spritesheet('boneAn', 'assets/obstacles/BoneAnimation.png', {frameWidth:32,  frameHeight: 32});
@@ -50,6 +51,7 @@ export class Scene1 extends Phaser.Scene{
         this.song = this.sound.add('song');
         this.song.play();
         this.fx = this.sound.add('crow');
+        this.deathSound = this.sound.add('death');
         
         this.map = this.make.tilemap({ 
 			key: 'tilemap', 
@@ -69,20 +71,7 @@ export class Scene1 extends Phaser.Scene{
         this.puh.body.setSize(this.puh.width - 10, this.puh.height, true);
         this.puh.setFly(false) // Llamada a método para cambiar el booleano de la clase puh que determina si vuela o no.
         this.chirpFX = this.puh.chirp = false;
-
-
-        //this.initScore();
-    
-        //Creación de todos los objetos del mapa, se les quita la gravedad y se les hace inamovibles.
-
-        /*let velocity = 100 * Phaser.Math.Between(1.3,2);
-
-        if(Phaser.Math.Between(0,10)>5){
-            velocity = 0 - velocity;
-        }
-        */
-        //this.physics.add.collider(this.birdClaw, this.platform, this.addScore.bind(this), null);
-
+        
         this.obstaclesList = ['bone', 'birdSkull'] // Creación del array de la lista de objetos cargados en el preload.
         this.obstacles = this.physics.add.group(); // A este "grupo" se le añade físicas.
         this.claw = 'birdClaw';
@@ -103,21 +92,6 @@ export class Scene1 extends Phaser.Scene{
         this.keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
         this.ESC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);   
     }
-
-    /*itScore(){
-        this.scoreText = this.add.text(16,16, 'Points: 0', {
-        fontSize: '40px',
-        fill: '#fff',
-        fontFamily: 'verdana, arial, sans-serif' 
-        });
-    }
-    
-    addScore(){
-        this.score++;
-        this.scoreText.setText('Points: ' + this.score);
-        console.log('1 punto');
-    }*/
-    
     callClaw(obj1, obj2){
         obj1.slowVel();
         obj2.destroy();
@@ -142,7 +116,14 @@ export class Scene1 extends Phaser.Scene{
         this.puh.visible = false;
         console.log('Puh Abatido');
         this.song.stop();
-        this.scene.start('GameOver');
+        this.deathSound.play();
+        this.deathSound.on('complete', audio => {  //Una vez que el audio se haya acabado de reproducir, salta a la escena de GameOver
+            
+            console.log("He muerto");
+            this.scene.start('GameOver');
+
+        });
+       
     }   
 
     nextLevel(){
@@ -153,8 +134,9 @@ export class Scene1 extends Phaser.Scene{
     }
 
     randomNumbSound(){
-        this.soundRandom = Math.floor(Math.random() * 3);
+        this.soundRandom = Math.floor(Math.random() * 100); //Generador de números aleatorios para controlar el sonido de Puh y de Rick
         return this.soundRandom;
+        console.log(this.soundRandom)
     }
 
     generateObs(dt){
@@ -202,11 +184,11 @@ export class Scene1 extends Phaser.Scene{
         }
 
         if(this.ESC.isDown){
-            this.scene.launch('GamePause', {me: this.scene});
+            this.scene.launch('GamePause', {me: this.scene}); //Paso un dato a la escena de Pausa para poder mantenerla pausada sin tener que hacer un scene.start
             this.scene.pause();
         }
 
-        if((this.puh.chirp && this.soundRandom == 2) && !this.fx.isPlaying){
+        if((this.puh.chirp && this.soundRandom == 2) && !this.fx.isPlaying){ //Si el booleano es true, y el número aleatorio es dos, además debe cumplirse que el sonido no esté sonando.
             console.log(this.puh.chirp);
             this.fx.play();
         }

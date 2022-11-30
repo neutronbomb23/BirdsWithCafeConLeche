@@ -205,13 +205,15 @@ export class Game extends Phaser.Scene{
     }
 
     randomNumbSound(){
-        this.soundRandom = Math.floor(Math.random() * 3);
+        this.soundRandom = Math.floor(Math.random() * 100000);
         return this.soundRandom;
+        console.log(this.soundRandom)
     }
 
     update(t,dt){
 
         this.randomNumbSound();
+       
         
         this.lastTimeObbs += dt;
         if(this.lastTimeObbs > 1000)

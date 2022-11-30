@@ -63,11 +63,13 @@ export default class Rick extends Phaser.GameObjects.Sprite{
             {
                 this.body.setVelocityX(-900);
                 this.setFlip(true, false);
+                this.bossSound = true;
             }
             else// puh está a la derecha
             {
                 this.body.setVelocityX(900);
                 this.setFlip(false, false);
+                this.bossSound = true;
             }
             if(this.anims.currentAnim.key !== 'attack')// animación
             {
@@ -100,6 +102,7 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         else if(!this.dash)
         {
             this.walking(); // patrulla   
+            this.bossSound = true;
         }
     }
 
