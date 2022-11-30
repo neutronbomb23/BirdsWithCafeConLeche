@@ -20,22 +20,32 @@ export class GamePause extends Phaser.Scene {
         console.log(data);
         this.continue = data.me;
     }
-    
+
     create (){
         let playButton = this.add.image(720, 950, 'playButton').setScale(1); // Botón de play
         let loadButton = this.add.image(720,1200, 'loadButton').setScale(1); 
+<<<<<<< Updated upstream
          
         loadButton.setInteractive();
       
+=======
+
+        loadButton.setInteractive();
+
+>>>>>>> Stashed changes
         playButton.setInteractive();
-    
+
 
         playButton.on("pointerup", ()=>{
             this.continue.resume();
             this.scene.stop();
         });
 
+<<<<<<< Updated upstream
     
+=======
+
+>>>>>>> Stashed changes
 
         loadButton.on("pointerup", ()=>{
             this.continue.stop();

@@ -2,6 +2,7 @@ import { Menu } from './menu.js';
 import { Game } from './game.js';
 import { Scene2 } from "./Scene2.js";
 
+var respawnPos;
  
 export class GameOver extends Phaser.Scene {
     constructor() {
@@ -14,6 +15,14 @@ export class GameOver extends Phaser.Scene {
     this.load.text('tryAgain'); //Cargar texto Try Again
     this.load.image('returnButton', 'assets/returnpng.png'); //Cargar botón (que actúa como el botón de play)
     this.load.image('menuButton', 'assets/menubut.png'); //Cargar botón del menú
+  }
+  
+  init(data){
+    console.log(data);
+    respawnPos;
+    if (data <= 5700) respawnPos = 5650;
+    else if (data <= 10700) respawnPos = 10500;
+    else respawnPos = 16800;
   }
     
   create () {
@@ -34,7 +43,7 @@ export class GameOver extends Phaser.Scene {
     });
 
     returnButton.on("pointerup", ()=>{ //Método que te lleva al nivel donde has muerto si se presiona el botón play.
-    this.scene.start('Scene1');
+    this.scene.start('Scene1', respawnPos);
     this.scene.stop();
     });
 

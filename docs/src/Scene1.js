@@ -8,6 +8,8 @@ const DEBUG = false;
 const CAMPOSY = 400; var camCurrentPosY = CAMPOSY; // Respecto a Puh
 const CAMERASPEED = 100; // Velocidad a la que sube en funcion del tiempo
 var cameraMoves = true;
+var cameraPos = -15000;
+var puhPos = 16800;
 const TOP = 1100; // punto en el eje y en el que se detiene la camara
 
 const PUHX = 700; const PUHY = 1500; // Posiciones iniciales de puh
@@ -20,9 +22,10 @@ export class Scene1 extends Phaser.Scene{
         super({key: 'Scene1'}); //Idemtificador para llamar a este escena desde otras.
     }
 
-    /*init(){
-    this.score = 0;
-    }*/
+    init(data){
+    this.cameraPos = (-data + 1500)
+    this.puhPos = (data)
+    }
 
     preload(){ // precarga los assets
         this.load.tilemapTiledJSON('tilemap', 'assets/Tilemap/gamemap.json'); //tilemap JSON
@@ -67,7 +70,7 @@ export class Scene1 extends Phaser.Scene{
 
         this.physics.world.setBoundsCollision(true, true, false, false); // Define limites del mapa
 
-        this.puh = new Puh(this, 100, 16800);// instanciación de Puh
+        this.puh = new Puh(this, 100, this.puhPos);// instanciación de Puh
         this.puh.body.setSize(this.puh.width - 10, this.puh.height, true);
         this.puh.setFly(false) // Llamada a método para cambiar el booleano de la clase puh que determina si vuela o no.
         this.chirpFX = this.puh.chirp = false;
@@ -100,7 +103,7 @@ export class Scene1 extends Phaser.Scene{
 
     initCamera(){
         this.cameras.main.startFollow(this.puh); // Sigue a puh 
-        this.cameras.main.setFollowOffset(0, -15000); // Distancia entre el la camara y puh
+        this.cameras.main.setFollowOffset(0, this.cameraPos); // Distancia entre el la camara y puh
         this.cameras.main.setLerp(0, 0.1);
         this.cameras.main.scrollX = false;
     }
@@ -108,11 +111,12 @@ export class Scene1 extends Phaser.Scene{
     updateCamera(){
         var runTimeSecs = (this.time.now - startTime) * 0.001; // Tiempo desde que se inicio la escena
         if(DEBUG)console.log(runTimeSecs)
-        camCurrentPosY = -15000 + runTimeSecs*CAMERASPEED - (PUHY - this.puh.y); // Distancia entre el la camara y puh
+        camCurrentPosY = this.cameraPos + runTimeSecs*CAMERASPEED - (PUHY - this.puh.y); // Distancia entre el la camara y puh
         this.cameras.main.setFollowOffset(0, camCurrentPosY); // Set de la posición y de la camara
     }
 
     gameOver(){
+        var lastPuhpos = this.puh.y;
         this.puh.visible = false;
         console.log('Puh Abatido');
         this.song.stop();
@@ -120,7 +124,7 @@ export class Scene1 extends Phaser.Scene{
         this.deathSound.on('complete', audio => {  //Una vez que el audio se haya acabado de reproducir, salta a la escena de GameOver
             
             console.log("He muerto");
-            this.scene.start('GameOver');
+            this.scene.start('GameOver', lastPuhpos);
 
         });
        
@@ -163,9 +167,9 @@ export class Scene1 extends Phaser.Scene{
     update(t,dt){
 
         this.randomNumbSound();
-
+        console.log(this.puh.y);
         this.lastTimeObbs += dt;
-        if(this.lastTimeObbs > 1000)
+        if(this.lastTimeObbs > 3000)
         {
             this.generateObs(dt);
             this.lastTimeObbs = 0;

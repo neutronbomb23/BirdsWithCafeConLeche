@@ -25,19 +25,24 @@ let config = {
             height: 188
         },
 		max: {
-            width: 1500,
-            height: 1800
+            width: 720,
+            height: 900
         },
 		zoom: 1
     },
     
+<<<<<<< Updated upstream
     scene: [Intro, Menu, Game, GameOver,  Scene1, BossScene, Scene2, GamePause,],
+=======
+    scene: [Intro, Menu, Game, GameOver, Scene1, BossScene, Scene2, GamePause],
+>>>>>>> Stashed changes
     physics: { 
         default: 'arcade', 
         arcade: { 
             gravity: { y: 1000 }, 
             debug: true 
         },
+        fps: { forceSetTimeOut: true, target: 60 },
         checkCollision: {
             up: true,
             down: true,
