@@ -31,7 +31,7 @@ let config = {
 		zoom: 1
     },
     
-    scene: [Intro, Menu, Game, GameOver, GamePause, Scene1, BossScene, Scene2],
+    scene: [Intro, Menu, Game, GameOver,  Scene1, BossScene, Scene2, GamePause,],
     physics: { 
         default: 'arcade', 
         arcade: { 

@@ -12,6 +12,7 @@ export class GamePause extends Phaser.Scene {
 
     preload (){
         this.load.image('playButton', 'assets/startpng.png');
+        this.load.image('loadButton', 'assets/menubut.png');
     }
 
     init(data){
@@ -22,6 +23,9 @@ export class GamePause extends Phaser.Scene {
     
     create (){
         let playButton = this.add.image(720, 950, 'playButton').setScale(1); // Botón de play
+        let loadButton = this.add.image(720,1200, 'loadButton').setScale(1); 
+         
+        loadButton.setInteractive();
       
         playButton.setInteractive();
     
@@ -30,6 +34,14 @@ export class GamePause extends Phaser.Scene {
             this.continue.resume();
             this.scene.stop();
         });
+
     
+
+        loadButton.on("pointerup", ()=>{
+            this.continue.stop();
+            this.scene.start('Menu');
+            this.scene.stop();
+        });
+
     }
 }
