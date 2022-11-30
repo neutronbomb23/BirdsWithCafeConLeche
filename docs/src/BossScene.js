@@ -14,7 +14,6 @@ var startTime; // Runtime en el momento en el que empieza la escena
 export class BossScene extends Phaser.Scene{
     constructor(){
         super({key: 'bossScene'});
-       // this.timer = 0;
     }
 
     preload(){ // precarga los assets
@@ -43,7 +42,7 @@ export class BossScene extends Phaser.Scene{
         this.physics.world.setBoundsCollision(true, true, false, false); // Define limites del mapa
         this.add.image(720, 800, 'background').setScale(6); // Imagen fondo
 
-        this.puh = new Puh(this, 600, 1300);// instanciación de Puh
+        this.puh = new Puh(this, 500, 1300);// instanciación de Puh
         this.puh.setFly(true) // Llamada a método para cambiar el booleano de la clase puh que determina si vuela o no.
         this.rick = new Rick(this, 900, 1150);// instanciación de Rick
         this.activateBossSound = this.rick.bossSound = false;
@@ -116,12 +115,10 @@ export class BossScene extends Phaser.Scene{
             let waterDrop = new WaterDrop(this, x, -180, 500, 3, this.drop);
             this.dropObs.add(waterDrop);// añade la gota al grupo
         }// se generan en fución del número aleatorio
-       // this.timer = 0;
     }
 
     loadScene = true;
     update(t,dt){
-        if(this.timer >= 5000)this.generateObs();
         this.randomNumbSound();
 
         if(this.loadScene){
