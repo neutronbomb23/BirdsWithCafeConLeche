@@ -2,7 +2,7 @@ import { Menu } from './menu.js';
 import { Game } from './game.js';
 import { Scene2 } from "./Scene2.js";
 
-var respawnPos;
+var respawnPos = 16800;
  
 export class GameOver extends Phaser.Scene {
     constructor() {
@@ -18,7 +18,6 @@ export class GameOver extends Phaser.Scene {
   }
   
   init(data){
-    console.log(data);
     respawnPos;
     if (data <= 5700) respawnPos = 5650;
     else if (data <= 10700) respawnPos = 10500;

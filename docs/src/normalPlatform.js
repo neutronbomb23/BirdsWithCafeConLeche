@@ -5,8 +5,6 @@ export default class Platform extends Phaser.GameObjects.Sprite{
         this.scene.add.existing(this); 
          this.scene.physics.add.existing(this);
         this.body.allowGravity = false;
-    
-      
 
         this.body.setCollideWorldBounds(true);
         this.body.setImmovable(true);

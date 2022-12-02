@@ -7,10 +7,9 @@ import Claw from "./Claw.js";
 const DEBUG = false;
 const CAMPOSY = 400; var camCurrentPosY = CAMPOSY; // Respecto a Puh
 const CAMERASPEED = 100; // Velocidad a la que sube en funcion del tiempo
-var cameraMoves = true;
 var cameraPos = -15000;
 var puhPos = 16800;
-const TOP = 1100; // punto en el eje y en el que se detiene la camara
+const TOP = -100000; // punto en el eje y en el que se detiene la camara
 
 const PUHX = 700; const PUHY = 1500; // Posiciones iniciales de puh
 
@@ -18,13 +17,13 @@ var startTime; // Runtime en el momento en el que empieza la escena
 
 export class Scene1 extends Phaser.Scene{
     constructor(){
-        
         super({key: 'Scene1'}); //Idemtificador para llamar a este escena desde otras.
     }
 
     init(data){
-    this.cameraPos = (-data + 1500)
-    this.puhPos = (data)
+        console.log(data)
+        this.cameraPos = (-data + 1500)
+        this.puhPos = (data)
     }
 
     preload(){ // precarga los assets
@@ -49,12 +48,12 @@ export class Scene1 extends Phaser.Scene{
 
     create(){
         startTime = this.time.now;
-        cameraMoves = true;
         this.lastTimeObbs = 0;
+        this.deathSound = this.sound.add('death');
         this.song = this.sound.add('song');
         this.song.play();
         this.fx = this.sound.add('crow');
-        this.deathSound = this.sound.add('death');
+        
         
         this.map = this.make.tilemap({ 
 			key: 'tilemap', 
@@ -95,8 +94,7 @@ export class Scene1 extends Phaser.Scene{
         this.physics.add.collider(this.puh, this.portal, this.nextLevel.bind(this),null);
         this.physics.add.collider(this.puh, this.pinchos, this.gameOver.bind(this), null);
     
-        //CAMARA
-        this.initCamera();
+        this.initCamera(); // Camara
 
         this.keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
         this.keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
@@ -124,25 +122,19 @@ export class Scene1 extends Phaser.Scene{
     }
 
     gameOver(){
-        var lastPuhpos = this.puh.y;
-         this.puh.destroy(); 
-        console.log('Puh Abatido');
+        this.puh.destroy(); 
         this.song.stop();
+        
+        this.scene.start('GameOver', this.puh.y);
         this.deathSound.play();
         this.deathSound.on('complete', audio => {  //Una vez que el audio se haya acabado de reproducir, salta a la escena de GameOver
-            
             console.log("He muerto");
-            this.scene.start('GameOver', lastPuhpos);
-
         });
-       
     }   
 
     nextLevel(){
-
         this.song.stop();
         this.scene.start('Scene2');
-
     }
 
     randomNumbSound(){
@@ -164,8 +156,16 @@ export class Scene1 extends Phaser.Scene{
         else{// la garra tiene una funcionalidad distinta
             let toni = new Claw(this, y, 'birdClaw');
             this.clawobs.add(toni);// añade la garra al grupo
-        }
+        }   
+    }
+
+    cameraManager(){
+        if(camCurrentPosY > TOP) { this.updateCamera(); } // Actualiza su posición respecto a puh
+        else { this.cameras.main.stopFollow(); } // Se queda quieta en el eje Y
         
+        if(camCurrentPosY > 900) { // DeathZone
+            this.gameOver();
+        }
     }
 
     stopMusic(){
@@ -173,21 +173,14 @@ export class Scene1 extends Phaser.Scene{
     }
 
     update(t,dt){
-
         this.randomNumbSound();
         this.lastTimeObbs += dt;
-        if(this.lastTimeObbs > 3000)
-        {
+        if(this.lastTimeObbs > 3000){
             this.generateObs(dt);
             this.lastTimeObbs = 0;
         }
 
-        if(cameraMoves){
-            this.updateCamera(); // Actualiza su posición respecto a puh
-        }
-        else{
-            this.cameras.main.stopFollow(); // Se queda quieta en el eje Y
-        }
+        this.cameraManager()
 
         if(this.keyQ.isDown){
             this.scene.restart();
@@ -202,10 +195,6 @@ export class Scene1 extends Phaser.Scene{
         if((this.puh.chirp && this.soundRandom == 2) && !this.fx.isPlaying){ //Si el booleano es true, y el número aleatorio es dos, además debe cumplirse que el sonido no esté sonando.
             console.log(this.puh.chirp);
             this.fx.play();
-        }
-
-        if (camCurrentPosY > TOP){ // Detiene el seguimiento de camara
-            cameraMoves = false;
         }
     }
 }

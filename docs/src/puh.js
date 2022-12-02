@@ -39,13 +39,9 @@ export default class Puh extends Phaser.GameObjects.Sprite{
         //this.chirp = false;
         // Horizontal
         if(this.a.isDown || this.cursors.left.isDown){
-
             this.chirp = true;
-
             if(this.timer >= 5000){
-               
                 this.body.setVelocityX(-350);
-             
             }
             else{
                 this.body.setVelocityX(-175);
@@ -76,7 +72,6 @@ export default class Puh extends Phaser.GameObjects.Sprite{
             else if(this.s.isDown || this.cursors.down.isDown){ this.body.setVelocityY(500); this.chirp = true;}
             else{ this.body.setVelocityY(200); this.chirp = false; }
         }
-       
     }
 
     initAnimations(scene, name){

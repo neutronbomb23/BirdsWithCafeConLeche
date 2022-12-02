@@ -46,7 +46,6 @@ export class Menu extends Phaser.Scene {
             this.menuMusic.stop();
         })
 
-
         optionsButton.on("pointerup", ()=>{ //Método que te lleva a la sección de controles.
             //this.scene.start('Menu');
             playButton.visible = false; //Se hace invisible el botón play.
@@ -60,7 +59,6 @@ export class Menu extends Phaser.Scene {
                 playButton.visible = true;
                 optionsButton.visible = true;
             })
-            
             //this.menuMusic.stop();
         })
 
@@ -68,13 +66,10 @@ export class Menu extends Phaser.Scene {
             this.scene.start('bossScene');
             this.menuMusic.stop();
         })
-
     }
-
 }
 
 
 //Podemos cambiar el viewport de la cámara con setViewport:
-
 // this es una Scene
 //this.cameras.main.setViewport(200, 150, 400, 300);
