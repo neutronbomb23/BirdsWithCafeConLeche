@@ -67,6 +67,8 @@ export class Scene1 extends Phaser.Scene{
         this.platformLayer = this.map.createLayer('plataformas', myTileset);
         this.platformLayer.setCollisionByExclusion(-1, true);
         this.decoracionLayer = this.map.createLayer('decoracion', myTileset);
+        this.pinchos = this.map.createLayer('pinchos', myTileset);
+        this.pinchos.setCollisionByExclusion(-1, true);
 
         this.physics.world.setBoundsCollision(true, true, false, false); // Define limites del mapa
 
@@ -82,6 +84,7 @@ export class Scene1 extends Phaser.Scene{
 
         //this.physics.add.collider(this.obstacles, this.floor, this.addScore.bind(this), null);
         this.physics.add.collider(this.puh, this.platformLayer);
+        this.physics.add.collider(this.puh, this.pinchos, this.gameOver.bind(this), null);
         this.physics.add.collider(this.clawobs, this.puh, this.callClaw, null);
         this.physics.add.collider(this.obstacles, this.puh, this.gameOver.bind(this), null);
         this.physics.add.collider(this.puh, this.portal, this.nextLevel.bind(this),null);
