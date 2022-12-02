@@ -60,6 +60,7 @@ export class Menu extends Phaser.Scene {
                 playButton.visible = true;
                 optionsButton.visible = true;
             })
+            
             //this.menuMusic.stop();
         })
 

@@ -84,12 +84,16 @@ export class Scene1 extends Phaser.Scene{
 
         //this.physics.add.collider(this.obstacles, this.floor, this.addScore.bind(this), null);
         this.physics.add.collider(this.puh, this.platformLayer);
-        this.physics.add.collider(this.puh, this.pinchos, this.gameOver.bind(this), null);
+       
         this.physics.add.collider(this.clawobs, this.puh, this.callClaw, null);
-        this.physics.add.collider(this.obstacles, this.puh, this.gameOver.bind(this), null);
-        this.physics.add.collider(this.puh, this.portal, this.nextLevel.bind(this),null);
+       
+    
         this.physics.add.collider(this.obstacles, this.platformLayer);
         this.physics.add.collider(this.puh, this.platformLayer);
+
+        this.physics.add.collider(this.obstacles, this.puh, this.gameOver.bind(this), null);
+        this.physics.add.collider(this.puh, this.portal, this.nextLevel.bind(this),null);
+        this.physics.add.collider(this.puh, this.pinchos, this.gameOver.bind(this), null);
     
         //CAMARA
         this.initCamera();
@@ -98,6 +102,7 @@ export class Scene1 extends Phaser.Scene{
         this.keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
         this.ESC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);   
     }
+
     callClaw(obj1, obj2){
         obj1.slowVel();
         obj2.destroy();
@@ -120,7 +125,7 @@ export class Scene1 extends Phaser.Scene{
 
     gameOver(){
         var lastPuhpos = this.puh.y;
-        this.puh.visible = false;
+         this.puh.destroy(); 
         console.log('Puh Abatido');
         this.song.stop();
         this.deathSound.play();
@@ -170,7 +175,6 @@ export class Scene1 extends Phaser.Scene{
     update(t,dt){
 
         this.randomNumbSound();
-        console.log(this.puh.y);
         this.lastTimeObbs += dt;
         if(this.lastTimeObbs > 3000)
         {
@@ -202,11 +206,6 @@ export class Scene1 extends Phaser.Scene{
 
         if (camCurrentPosY > TOP){ // Detiene el seguimiento de camara
             cameraMoves = false;
-        }
-        
-        if(DEBUG){
-            console.log(this.puh.x)
-            console.log((-(this.time.now - startTime)*CAMERASPEED)*dt/10000)
         }
     }
 }
