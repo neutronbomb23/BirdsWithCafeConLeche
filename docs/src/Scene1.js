@@ -73,7 +73,7 @@ export class Scene1 extends Phaser.Scene{
         this.physics.world.setBoundsCollision(true, true, false, false); // Define limites del mapa
 
         this.puh = new Puh(this, 100, this.puhPos);// instanciación de Puh
-        this.puh.body.setSize(this.puh.width - 10, this.puh.height, true);
+        this.puh.body.setSize(this.puh.body.width - 15, this.puh.body.height -2, true);
         this.puh.setFly(false) // Llamada a método para cambiar el booleano de la clase puh que determina si vuela o no.
         this.chirpFX = this.puh.chirp = false;
         
@@ -125,7 +125,7 @@ export class Scene1 extends Phaser.Scene{
 
     gameOver(){
         var lastPuhpos = this.puh.y;
-         this.puh.destroy(); 
+        this.puh.destroy(); 
         console.log('Puh Abatido');
         this.song.stop();
         this.deathSound.play();
