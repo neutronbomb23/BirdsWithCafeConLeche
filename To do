@@ -1,7 +1,7 @@
 Cosas que quedan
 -Dejar fino HTML y css 
 -Que Puh muera al salirse del rango de la cámara (eje Y positivo)
--Escupitajos boss
+-Escupitajos boss 
 -Pinchos
 -Problema escalar la página web
 -Areglar escenas (disminuir cutrez)
@@ -10,5 +10,5 @@ Cosas que quedan
 -Arreglar objetos que atraviesan (width de las plataformas) 
 -Comentar código y organizar carpetas 
 -UI? (texto diciéndote lo que te falta por llegar hasta arriba) = OPCIONAL 
--Checkpoints 
+-Checkpoints (Dan un pequeño fallo con la cámara)
 -Problema stackeo de audio
