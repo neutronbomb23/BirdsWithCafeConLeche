@@ -36,6 +36,7 @@ export class BossScene extends Phaser.Scene{
         var image = this.add.image(100, 100, 'Rick');
         startTime = this.time.now;
         this.song = this.sound.add('song');
+        this.song.setLoop(true);
         this.song.play();
         this.bossFX = this.sound.add('Boss');
 
