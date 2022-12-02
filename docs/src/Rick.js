@@ -7,8 +7,9 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         this.scene.physics.add.existing(this);
         this.dash = false;// ataque
         this.first = true;// booleano para asegurar que el timer solo se inicia a cero la primera vez
-        this.timer = 0;
-        this.dropTimer = 0;
+        this.timer = 0;// contador de daño de Rick
+        this.dropTimer = 0;// contador que indica cuanto tiempo tardará en salir una nueva gota
+        this.timerDrop = 1000;// contador para que Rick se quede parado
 
         this.scene.anims.create({
             key: 'idleR',
@@ -111,12 +112,15 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         else if(distY >= 110)
         {
             this.bossSound = true;
-            if(!this.dash)this.walking(); // patrulla   
             if(this.dropTimer >= 5000)
             {
+                this.timerDrop = 0;// contador para que Rick se quede parado
                 this.scene.RickDrop();// instancia gota hacia arriba
                 this.dropTimer = 0;// contador
+                this.body.setVelocityX(0);
+                this.play('idleR')
             }
+            else if(!this.dash && this.timerDrop >= 1000)this.walking(); // patrulla   
         }
     }
 
@@ -149,6 +153,7 @@ export default class Rick extends Phaser.GameObjects.Sprite{
     preUpdate(t, dt){
         this.timer += dt;
         this.dropTimer += dt;
+        this.timerDrop += dt;
         //console.log(this.dropTimer);
         super.preUpdate(t,dt);
         this.movementManager();
