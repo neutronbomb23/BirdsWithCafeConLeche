@@ -112,7 +112,7 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         {
             this.bossSound = true;
             if(!this.dash)this.walking(); // patrulla   
-            if(this.dropTimer >= 2000)
+            if(this.dropTimer >= 5000)
             {
                 this.scene.RickDrop();// instancia gota hacia arriba
                 this.dropTimer = 0;// contador
