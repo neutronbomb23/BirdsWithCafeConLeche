@@ -41,6 +41,7 @@ export class Scene1 extends Phaser.Scene{
         this.load.spritesheet('skullAn', 'assets/images/obstacles/skullAnimation.png', {frameWidth:32,  frameHeight: 32});
         this.load.spritesheet('clawAn', 'assets/images/obstacles/clawAnimation.png', {frameWidth:32,  frameHeight: 32});
         this.load.spritesheet('boneAn', 'assets/images/obstacles/boneAnimation.png', {frameWidth:32,  frameHeight: 32});
+        this.load.image('portal', 'assets/images/portal.png');
     }
 
     create(){
@@ -64,6 +65,9 @@ export class Scene1 extends Phaser.Scene{
         this.decoracionLayer = this.map.createLayer('decoracion', myTileset);
         this.pinchos = this.map.createLayer('pinchos', myTileset);
         this.pinchos.setCollisionByExclusion(-1, true);
+
+        this.portal = this.physics.add.image(1420, 870, 'portal').setImmovable(true).setScale(0.3);
+        this.portal.body.allowGravity = false;
 
         this.physics.world.setBoundsCollision(true, true, false, false); // Define limites del mapa
 
@@ -128,7 +132,7 @@ export class Scene1 extends Phaser.Scene{
 
     nextLevel(){
         this.song.stop();
-        this.scene.start('Scene2');
+        this.scene.start('bossScene');
     }
 
     randomNumbSound(){

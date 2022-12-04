@@ -1,10 +1,8 @@
 import { Menu } from './menu.js';
-import { Game } from './game.js';
 import { Intro } from './intro.js';
 import { GameOver } from './GameOver.js';
 import { GamePause } from './inGamePause.js';
 import {Scene1 } from './Scene1.js';
-import {Scene2 } from './Scene2.js';
 import {BossScene } from './BossScene.js';
 
 let config = {
@@ -29,7 +27,7 @@ let config = {
 		zoom: 1
     },
 
-    scene: [Intro, Menu, Game, GameOver,  Scene1, BossScene, Scene2, GamePause,],
+    scene: [Intro, Menu, GameOver,  Scene1, BossScene, GamePause,],
 
     physics: { 
         default: 'arcade', 

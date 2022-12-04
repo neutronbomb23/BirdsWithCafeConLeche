@@ -1,5 +1,3 @@
-import { Game } from './game.js';
-import { Scene2 } from './Scene2.js';
 import { BossScene } from './BossScene.js'
 
 export class Menu extends Phaser.Scene {
@@ -17,7 +15,7 @@ export class Menu extends Phaser.Scene {
         this.load.image('paloma', 'assets/images/characters/paloma.png');
         this.load.image('centralperk', 'assets/images/logo/bwccl.png');
         this.load.image('returnButton', 'assets/images/buttons/return.png');
-        this.load.image('controls', 'assets/images/text/controls.png'); // cambiar por la imágen de controles cuando se tenga
+        this.load.image('controls', 'assets/images/text/controls.png'); 
     }
 
     create(){

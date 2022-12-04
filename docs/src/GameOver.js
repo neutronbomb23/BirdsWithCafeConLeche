@@ -1,6 +1,4 @@
 import { Menu } from './menu.js';
-import { Game } from './game.js';
-import { Scene2 } from "./Scene2.js";
 
 var respawnPos = 16800;
  
