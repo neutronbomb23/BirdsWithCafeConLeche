@@ -1,7 +1,6 @@
 import { Menu } from './menu.js';
 
 export class Intro extends Phaser.Scene {
-
     constructor() {
       super({ key: 'Intro' }); // Nombre de la escena para el SceneManager
     }

@@ -5,8 +5,6 @@ export default class Spike extends Phaser.GameObjects.Sprite{
         this.scene.physics.add.existing(this);
         this.body.allowGravity = false;
 
-        this.hit = true;
-
         this.body.setCollideWorldBounds(true);
         this.body.setImmovable(true);
     }

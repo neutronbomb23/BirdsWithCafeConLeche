@@ -11,10 +11,9 @@ export class GameOver extends Phaser.Scene {
   }
 
   preload () {
-    this.load.image('gameOverBlanco' , 'assets/GameOverBlanco.png'); //Cargar la imagen de Game Over
-    this.load.text('tryAgain'); //Cargar texto Try Again
-    this.load.image('returnButton', 'assets/returnpng.png'); //Cargar botón (que actúa como el botón de play)
-    this.load.image('menuButton', 'assets/menubut.png'); //Cargar botón del menú
+    this.load.image('gameOverBlanco' , 'assets/images/text/GameOverBlanco.png'); //Cargar la imagen de Game Over
+    this.load.image('returnButton', 'assets/images/buttons/return.png'); //Cargar botón (que actúa como el botón de play)
+    this.load.image('menuButton', 'assets/images/buttons/menu.png'); //Cargar botón del menú
   }
   
   init(data){

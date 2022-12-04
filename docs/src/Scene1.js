@@ -10,7 +10,6 @@ const CAMERASPEED = 100; // Velocidad a la que sube en funcion del tiempo
 var cameraPos = -15000;
 var puhPos = 16800;
 const TOP = -100000; // punto en el eje y en el que se detiene la camara
-
 const PUHX = 700; const PUHY = 1500; // Posiciones iniciales de puh
 
 var startTime; // Runtime en el momento en el que empieza la escena
@@ -30,20 +29,18 @@ export class Scene1 extends Phaser.Scene{
         this.load.tilemapTiledJSON('tilemap', 'assets/Tilemap/gamemap.json'); //tilemap JSON
         this.load.image('patronesTilemap', 'assets/Tilemap/goodly-2x.png'); // tile img
         this.load.image('fondoimg', 'assets/Tilemap/metall001-new-tileable.png'); // fondo
-        this.load.image('background', 'assets/wallpaperProvisional.png');// fondo provisional
-        this.load.spritesheet('puhIddle', 'assets/puh/puh.png', {frameWidth:32,  frameHeight: 32});// idle de Puh
-        this.load.spritesheet('puhMove', 'assets/puh/caminar.png', {frameWidth:32,  frameHeight: 32});// Movimiento de Puh
-        this.load.spritesheet('puhFly', 'assets/puh/Walk.png', {frameWidth:32,  frameHeight: 32});// Vuelo de Puh
-        this.load.image('bone', 'assets/obstacles/bone.png');// hueso
-        this.load.image('birdSkull', 'assets/obstacles/birdSkull.png');// calavera de pájaro
-        this.load.image('birdClaw', 'assets/obstacles/birdClaw.png');// garra de pájaro
+        this.load.spritesheet('puhIddle', 'assets/images/characters/puh/iddle.png', {frameWidth:32,  frameHeight: 32});// idle de Puh
+        this.load.spritesheet('puhMove', 'assets/images/characters/puh/walk.png', {frameWidth:32,  frameHeight: 32});// Movimiento de Puh
+        this.load.spritesheet('puhFly', 'assets/images/characters/puh/fly.png', {frameWidth:32,  frameHeight: 32});// Vuelo de Puh
+        this.load.image('bone', 'assets/images/obstacles/bone.png');// hueso
+        this.load.image('birdSkull', 'assets/images/obstacles/birdSkull.png');// calavera de pájaro
+        this.load.image('birdClaw', 'assets/images/obstacles/birdClaw.png');// garra de pájaro
         this.load.audio('song','assets/audio/game.mp3');// sonido
-        this.load.image('portal', 'assets/portal.png');
         this.load.audio('crow', 'assets/audio/crow.mp3');
         this.load.audio('death', 'assets/audio/death.mp3');
-        this.load.spritesheet('skullAn', 'assets/obstacles/HeadAnimation.png', {frameWidth:32,  frameHeight: 32});
-        this.load.spritesheet('clawAn', 'assets/obstacles/ClawAnimation.png', {frameWidth:32,  frameHeight: 32});
-        this.load.spritesheet('boneAn', 'assets/obstacles/BoneAnimation.png', {frameWidth:32,  frameHeight: 32});
+        this.load.spritesheet('skullAn', 'assets/images/obstacles/skullAnimation.png', {frameWidth:32,  frameHeight: 32});
+        this.load.spritesheet('clawAn', 'assets/images/obstacles/clawAnimation.png', {frameWidth:32,  frameHeight: 32});
+        this.load.spritesheet('boneAn', 'assets/images/obstacles/boneAnimation.png', {frameWidth:32,  frameHeight: 32});
     }
 
     create(){
@@ -53,7 +50,6 @@ export class Scene1 extends Phaser.Scene{
         this.song = this.sound.add('song');
         this.song.play();
         this.fx = this.sound.add('crow');
-        
         
         this.map = this.make.tilemap({ 
 			key: 'tilemap', 
@@ -86,7 +82,6 @@ export class Scene1 extends Phaser.Scene{
        
         this.physics.add.collider(this.clawobs, this.puh, this.callClaw, null);
        
-    
         this.physics.add.collider(this.obstacles, this.platformLayer);
         this.physics.add.collider(this.puh, this.platformLayer);
 
@@ -105,7 +100,6 @@ export class Scene1 extends Phaser.Scene{
         obj1.slowVel();
         obj2.destroy();
     }
-
 
     initCamera(){
         this.cameras.main.startFollow(this.puh); // Sigue a puh 
@@ -140,7 +134,6 @@ export class Scene1 extends Phaser.Scene{
     randomNumbSound(){
         this.soundRandom = Math.floor(Math.random() * 100); //Generador de números aleatorios para controlar el sonido de Puh y de Rick
         return this.soundRandom;
-        console.log(this.soundRandom)
     }
 
     generateObs(dt){
@@ -193,7 +186,6 @@ export class Scene1 extends Phaser.Scene{
         }
 
         if((this.puh.chirp && this.soundRandom == 2) && !this.fx.isPlaying){ //Si el booleano es true, y el número aleatorio es dos, además debe cumplirse que el sonido no esté sonando.
-            console.log(this.puh.chirp);
             this.fx.play();
         }
     }

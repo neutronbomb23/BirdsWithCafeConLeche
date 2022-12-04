@@ -4,15 +4,14 @@ import { Scene1 } from './Scene1.js';
 import { Scene2 } from "./Scene2.js";
  
 export class GamePause extends Phaser.Scene {
-
     constructor() {
       // Nombre de la escena para el SceneManager
       super({ key: 'GamePause' }); 
     }
 
     preload (){
-        this.load.image('playButton', 'assets/startpng.png');
-        this.load.image('loadButton', 'assets/menubut.png');
+        this.load.image('playButton', 'assets/images/buttons/start.png');
+        this.load.image('loadButton', 'assets/images/buttons/menu.png');
     }
 
     init(data){
@@ -24,13 +23,10 @@ export class GamePause extends Phaser.Scene {
     create (){
         let playButton = this.add.image(720, 950, 'playButton').setScale(1); // Botón de play
         let loadButton = this.add.image(720,1200, 'loadButton').setScale(1); 
-
          
         loadButton.setInteractive();
       
-
         playButton.setInteractive();
-
 
         playButton.on("pointerup", ()=>{
             this.continue.resume();
@@ -42,6 +38,5 @@ export class GamePause extends Phaser.Scene {
             this.scene.start('Menu');
             this.scene.stop();
         });
-
     }
 }

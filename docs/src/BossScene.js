@@ -17,19 +17,18 @@ export class BossScene extends Phaser.Scene{
     }
 
     preload(){ // precarga los assets
-        this.load.image('background', 'assets/wallpaperProvisional.png');// fondo
-        this.load.spritesheet('puhIddle', 'assets/puh/puh.png', {frameWidth:32,  frameHeight: 32});// idle de Puh
-        this.load.spritesheet('puhMove', 'assets/puh/caminar.png', {frameWidth:32,  frameHeight: 32});// Movimiento de Puh
-        this.load.spritesheet('puhFly', 'assets/puh/Walk.png', {frameWidth:32,  frameHeight: 32});// Vuelo de Puh
-        this.load.spritesheet('RickIddle', 'assets/Rick/pigeon_pecking.png', {frameWidth:48,  frameHeight: 32});// idle de Rick
-        this.load.spritesheet('RickWalk', 'assets/Rick/pigeon_walking.png', {frameWidth:32,  frameHeight: 32});// movimiento de Rick
-        this.load.spritesheet('RickAttack', 'assets/Rick/pigeon_red.png', {frameWidth:32,  frameHeight: 32});// ataque de Rick
-        this.load.spritesheet('Rick', 'assets/Rick/pigeon.png', {frameWidth:32,  frameHeight: 32});// Rick
-        this.load.image('floor', 'assets/floor.png');// suelo
+        this.load.image('background', 'assets/images/background/rust.png');// fondo
+        this.load.spritesheet('puhIddle', 'assets/images/characters/puh/iddle.png', {frameWidth:32,  frameHeight: 32});// idle de Puh
+        this.load.spritesheet('puhMove', 'assets/images/characters/puh/walk.png', {frameWidth:32,  frameHeight: 32});// Movimiento de Puh
+        this.load.spritesheet('puhFly', 'assets/images/characters/puh/fly.png', {frameWidth:32,  frameHeight: 32});// Vuelo de Puh
+        this.load.spritesheet('RickIddle', 'assets/images/characters/rick/pigeon_pecking.png', {frameWidth:48,  frameHeight: 32});// idle de Rick
+        this.load.spritesheet('RickWalk', 'assets/images/characters/rick/pigeon_walking.png', {frameWidth:32,  frameHeight: 32});// movimiento de Rick
+        this.load.spritesheet('RickAttack', 'assets/images/characters/rick/pigeon_red.png', {frameWidth:32,  frameHeight: 32});// ataque de Rick
+        this.load.spritesheet('Rick', 'assets/images/characters/rick/pigeon.png', {frameWidth:32,  frameHeight: 32});// Rick
+        this.load.image('floor', 'assets/images/floor.png');// suelo
         this.load.audio('Boss', 'assets/audio/k.mp3');
         this.load.audio('song','assets/audio/game.mp3');// sonido
-        this.load.image('platform', 'assets/platform.png');// plataforma
-        this.load.image('WaterDrop', 'assets/Rick/Gota.png');// gota de agua
+        this.load.image('WaterDrop', 'assets/images/characters/rick/gota.png');// gota de agua
     }
 
     create(){
@@ -63,18 +62,17 @@ export class BossScene extends Phaser.Scene{
 
         //this.physics.add.collider(this.rick, this.puh, this.gameOver.bind(this), null);// game Over
 
-       // this.platform = this.physics.add.image(520,950, 'platform').setImmovable(true).setScale(1);
+        //this.platform = this.physics.add.image(520,950, 'platform').setImmovable(true).setScale(1);
         //this.platform.body.allowGravity = false;
         //this.physics.add.collider(this.puh, this.platform);
         //this.physics.add.collider(this.rick, this.platform);
-       // this.platform.setCollideWorldBounds(true);
-       // this.platform.body.onWorldBounds=true;
+        //this.platform.setCollideWorldBounds(true);
+        //this.platform.body.onWorldBounds=true;
         //this.physics.add.collider(this.platform, this.floor);
 
         this.keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
         this.keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
         this.ESC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
-
     }
 
     gameOver(){     
@@ -97,8 +95,7 @@ export class BossScene extends Phaser.Scene{
         this.soundRandom = Math.floor(Math.random() * 30);
     }
 
-    RickDrop()
-    {
+    RickDrop(){
         let waterDrop = new WaterDrop(this, this.rick.getX(), this.rick.getY(), -1000, 4.5, this.drop);// instancia la gota en la posición de Rick
         this.dropObs.add(waterDrop);// añade la gota al grupo
     }

@@ -7,9 +7,7 @@ import {Scene1 } from './Scene1.js';
 import {Scene2 } from './Scene2.js';
 import {BossScene } from './BossScene.js';
 
-
 let config = {
-    
     type: Phaser.CANVAS,
     canvas: document.getElementById("juego"),
     width:  1440,
@@ -30,7 +28,6 @@ let config = {
         },
 		zoom: 1
     },
-    
 
     scene: [Intro, Menu, Game, GameOver,  Scene1, BossScene, Scene2, GamePause,],
 
@@ -48,10 +45,7 @@ let config = {
             right: true
         }
     },
-
    transparent: true
-   
-    
 };
 
 new Phaser.Game(config);

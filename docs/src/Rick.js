@@ -48,15 +48,14 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         });
 
         this.scene.Damage.pause();
-        this.scene.Damage.resume();
-        
+        this.scene.Damage.resume(); 
     }
 
-    getX(){
+    getX() {
         return this.x; // Devuelve la posicion x de puh
     }
 
-    getY(){
+    getY() {
         return this.y; // Devuelve la posicion y de puh
     }
 
@@ -69,38 +68,31 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         if(!this.dash && distY < 110) 
         {
             if(this.x > 200 && this.x < 1300)this.dash = true;// si no está ya en los extremos
-            if(range > 0)// puh está a la izquierda
-            {
+            if(range > 0) { // puh está a la izquierda
                 this.body.setVelocityX(-900);
                 this.setFlip(true, false);
                 this.bossSound = true;
             }
-            else// puh está a la derecha
-            {
+            else { // puh está a la derecha
                 this.body.setVelocityX(900);
                 this.setFlip(false, false);
                 this.bossSound = true;
             }
-            if(this.anims.currentAnim.key !== 'attack')// animación
-            {
-            
+            if(this.anims.currentAnim.key !== 'attack') {// animación
             this.play('attack');
             }
         }
-        else if(this.dash && (this.x <= 200 || this.x >= 1300))// daño a Rick
-        {
-            if(this.anims.currentAnim.key === 'attack')
-            {
+        else if(this.dash && (this.x <= 200 || this.x >= 1300)) {// daño a Rick
+            if(this.anims.currentAnim.key === 'attack') {
                 this.body.setVelocityX(0);// para a Rick
                 this.play('idleR');// animación
                 this.scene.Damage.resume();//tween de daño
-                if(this.first)
-                {
+                if(this.first) {
                     this.timer = 0;// contador a 0
                     this.first = false;// booleano a false para no reiniciar el contador a cero
                 }
             }
-            if(this.timer >= 1000){
+            if(this.timer >= 1000) {
                 this.dash = false;// fin del daño y del ataque
                 this.first = true;// booleano a true para reiniciar el contador en el siguiente ataque
                 this.scene.Damage.pause();// tween pausado
@@ -108,12 +100,9 @@ export default class Rick extends Phaser.GameObjects.Sprite{
                 this.setScale(8);// vuelve a su escala inicial
             }
         }
-
-        else if(distY >= 110)
-        {
+        else if(distY >= 110) {
             this.bossSound = true;
-            if(this.dropTimer >= 5000)
-            {
+            if(this.dropTimer >= 5000) {
                 this.timerDrop = 0;// contador para que Rick se quede parado
                 this.scene.RickDrop();// instancia gota hacia arriba
                 this.dropTimer = 0;// contador
@@ -124,28 +113,21 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         }
     }
 
-    walking()
-    {
-        if(this.flipX)
-        {
+    walking(){
+        if(this.flipX) {
             this.body.setVelocityX(-200);// movimiento hacia la izquierda
         }
-        else 
-        {
+        else {
             this.body.setVelocityX(200);// movimiento hacia la derecha
         }
         //console.log(this.x);
-        if(this.x >= 1150)
-        {
+        if(this.x >= 1150) {
             this.setFlip(true, false);// extremo derecho
         }
-        else if(this.x <= 200)
-        {
+        else if(this.x <= 200) {
             this.setFlip(false, false);// extremo izquierdo
         }
-    
-        if(this.anims.currentAnim.key !== 'walk')// animación de andar
-        {
+        if(this.anims.currentAnim.key !== 'walk') { // animación de andar
             this.play('walk');
         }
     }

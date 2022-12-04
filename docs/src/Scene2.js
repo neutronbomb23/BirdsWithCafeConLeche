@@ -23,20 +23,21 @@ export class Scene2 extends Phaser.Scene{
     }
 
     preload(){ // precarga los assets
-        this.load.image('background', 'assets/wallpaperProvisional.png');// fondo
-        this.load.spritesheet('puhIddle', 'assets/puh/puh.png', {frameWidth:32,  frameHeight: 32});// idle de Puh
-        this.load.spritesheet('puhMove', 'assets/puh/caminar.png', {frameWidth:32,  frameHeight: 32});// Movimiento de Puh
-        this.load.spritesheet('puhFly', 'assets/puh/Walk.png', {frameWidth:32,  frameHeight: 32});// Vuelo de Puh
-        this.load.image('platform', 'assets/platform.png');// plataforma
-        this.load.image('floor', 'assets/floor.png');// suelo
-        this.load.image('bone', 'assets/obstacles/bone.png');// hueso
-        this.load.image('birdSkull', 'assets/obstacles/birdSkull.png');// calavera de pájaro
-        this.load.image('zarzas', 'assets/zarzas.png');// zarzas
-        this.load.image('birdClaw', 'assets/obstacles/birdClaw.png');// garra de pájaro
+        this.load.tilemapTiledJSON('tilemap', 'assets/Tilemap/gamemap.json'); //tilemap JSON
+        this.load.image('patronesTilemap', 'assets/Tilemap/goodly-2x.png'); // tile img
+        this.load.image('fondoimg', 'assets/Tilemap/metall001-new-tileable.png'); // fondo
+        this.load.spritesheet('puhIddle', 'assets/images/characters/puh/iddle.png', {frameWidth:32,  frameHeight: 32});// idle de Puh
+        this.load.spritesheet('puhMove', 'assets/images/characters/puh/walk.png', {frameWidth:32,  frameHeight: 32});// Movimiento de Puh
+        this.load.spritesheet('puhFly', 'assets/images/characters/puh/fly.png', {frameWidth:32,  frameHeight: 32});// Vuelo de Puh
+        this.load.image('bone', 'assets/images/obstacles/bone.png');// hueso
+        this.load.image('birdSkull', 'assets/images/obstacles/birdSkull.png');// calavera de pájaro
+        this.load.image('birdClaw', 'assets/images/obstacles/birdClaw.png');// garra de pájaro
         this.load.audio('song','assets/audio/game.mp3');// sonido
-        this.load.spritesheet('skullAn', 'assets/obstacles/BoneAnimation.png', {frameWidth:32,  frameHeight: 32});
-        this.load.spritesheet('clawAn', 'assets/obstacles/ClawAnimation.png', {frameWidth:32,  frameHeight: 32});
-        this.load.spritesheet('headAn', 'assets/obstacles/HeadAnimation.png', {frameWidth:32,  frameHeight: 32});
+        this.load.audio('crow', 'assets/audio/crow.mp3');
+        this.load.audio('death', 'assets/audio/death.mp3');
+        this.load.spritesheet('skullAn', 'assets/images/obstacles/skullAnimation.png', {frameWidth:32,  frameHeight: 32});
+        this.load.spritesheet('clawAn', 'assets/images/obstacles/clawAnimation.png', {frameWidth:32,  frameHeight: 32});
+        this.load.spritesheet('boneAn', 'assets/images/obstacles/boneAnimation.png', {frameWidth:32,  frameHeight: 32});
     }
 
     create(){

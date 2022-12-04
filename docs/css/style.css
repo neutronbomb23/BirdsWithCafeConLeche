@@ -94,7 +94,7 @@ footer{
 body {
         /* The image used */
         /*background-image: url("https://images5.alphacoders.com/778/778643.jpg");*/
-        background-image: url(../assets/fondoHTML.png);
+        background-image: url(../assets/images/background/rust.png);
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;

@@ -3,22 +3,21 @@ import { Scene2 } from './Scene2.js';
 import { BossScene } from './BossScene.js'
 
 export class Menu extends Phaser.Scene {
-
     constructor() {
       // Nombre de la escena para el SceneManager
       super({ key: 'Menu' }); 
     }
 
     preload(){
-        this.load.image('playButton', 'assets/startpng.png');
-        this.load.image('optionsButton', 'assets/controlspng.png');
-        this.load.image('menuFondo', 'assets/menu.jpg');
+        this.load.image('playButton', 'assets/images/buttons/start.png');
+        this.load.image('optionsButton', 'assets/images/buttons/controls.png');
+        this.load.image('menuFondo', 'assets/images/background/menu.jpg');
         this.load.audio('menuMusic', 'assets/audio/menu.mp3');
-        this.load.image('text', 'assets/birdstext.png');
-        this.load.image('paloma', 'assets/paloma.png');
-        this.load.image('centralperk', 'assets/logopng.png');
-        this.load.image('returnButton', 'assets/returnpng.png');
-        this.load.image('controls', 'assets/inputsimg.png'); // cambiar por la imágen de controles cuando se tenga
+        this.load.image('text', 'assets/images/text/birdstext.png');
+        this.load.image('paloma', 'assets/images/characters/paloma.png');
+        this.load.image('centralperk', 'assets/images/logo/bwccl.png');
+        this.load.image('returnButton', 'assets/images/buttons/return.png');
+        this.load.image('controls', 'assets/images/text/controls.png'); // cambiar por la imágen de controles cuando se tenga
     }
 
     create(){

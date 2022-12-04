@@ -15,8 +15,7 @@ export default class WaterDrop extends Phaser.GameObjects.Sprite {
         if(this.v < 0)this.body.allowGravity = false;// va hacia arriba
     }
 
-    colisionManager() 
-    {
+    colisionManager() {
         if (this.body.onFloor() || this.y >= 1400) this.destroy();// destruir la gota al tocar el suelo o llegar a cierta altura
     }
 a
@@ -24,8 +23,7 @@ a
         super.preUpdate(t, dt);
         this.body.setVelocityY(this.v);
         this.colisionManager();
-        if(this.y <= -190)
-        {
+        if(this.y <= -190){
             this.scene.generateObs();// genera gotas que caen
             this.destroy();
         }
