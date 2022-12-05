@@ -34,6 +34,7 @@ export default class Rick extends Phaser.GameObjects.Sprite{
 
         this.play('walk');
         this.body.setCollideWorldBounds(true);
+        this.body.setSize(this.body.width - 15, this.body.height -2, true);
         this.setScale(8);
         this.setFlip(false, false);
 
@@ -49,6 +50,8 @@ export default class Rick extends Phaser.GameObjects.Sprite{
 
         this.scene.Damage.pause();
         this.scene.Damage.resume(); 
+
+
     }
 
     getX() {

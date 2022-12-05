@@ -125,9 +125,6 @@ export class Scene1 extends Phaser.Scene{
         
         this.scene.start('GameOver', this.puh.y);
         this.deathSound.play();
-        this.deathSound.on('complete', audio => {  //Una vez que el audio se haya acabado de reproducir, salta a la escena de GameOver
-            console.log("He muerto");
-        });
     }   
 
     nextLevel(){
