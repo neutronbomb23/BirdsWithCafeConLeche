@@ -1,5 +1,6 @@
 import { GameOver } from "./GameOver.js";
 import { GamePause } from "./inGamePause.js";
+import {Victory } from "./Victory.js";
 import Puh from '../Characters/puh.js';
 import Rick from '../Characters/Rick.js';
 import WaterDrop from '../Obstacles/waterDrop.js';

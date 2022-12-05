@@ -74,7 +74,7 @@ export default class Rick extends Phaser.GameObjects.Sprite{
             if(this.dropTimer >= 5000) this.ThrowDrop();// lanza gota
             else if(this.timerDrop >= 1000) this.walking(); // patrulla   
         }
-        else if(this.anims.currentAnim.key !== 'attackR') this.attack(range);// para evitar bug porque no entra en la paturlla al descender Puh
+        else if(this.anims.currentAnim.key !== 'attackR') this.attack(range);// para evitar bug porque no entra en el ataque al descender Puh
     }
 
     attack(range)
