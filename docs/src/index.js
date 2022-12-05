@@ -4,6 +4,7 @@ import { GameOver } from './Scenes/GameOver.js';
 import { GamePause } from './Scenes/inGamePause.js';
 import {Scene1 } from './Scenes/Scene1.js';
 import {BossScene } from './Scenes/BossScene.js';
+import {Victory} from './Scenes/Victory.js';
 
 let config = {
     type: Phaser.CANVAS,
@@ -27,7 +28,7 @@ let config = {
 		zoom: 1
     },
 
-    scene: [Intro, Menu, GameOver,  Scene1, BossScene, GamePause,],
+    scene: [Intro, Menu, GameOver,  Scene1, BossScene, GamePause, Victory,],
 
     physics: { 
         default: 'arcade', 
