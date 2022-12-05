@@ -1,8 +1,8 @@
 import { GameOver } from "./GameOver.js";
 import { GamePause } from "./inGamePause.js";
-import FallingObjects from "./fallingObjects.js";
-import Puh from './puh.js';
-import Claw from "./Claw.js";
+import FallingObjects from "../Obstacles/fallingObjects.js";
+import Puh from '../Characters/puh.js';
+import Claw from "../Obstacles/Claw.js";
 
 const DEBUG = false;
 const CAMPOSY = 400; var camCurrentPosY = CAMPOSY; // Respecto a Puh
