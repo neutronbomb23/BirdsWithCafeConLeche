@@ -1,8 +1,9 @@
 import { GameOver } from "./GameOver.js";
 import { GamePause } from "./inGamePause.js";
-import Puh from './puh.js';
-import Rick from './Rick.js';
-import WaterDrop from './waterDrop.js';
+import {Victory } from "./Victory.js";
+import Puh from '../Characters/puh.js';
+import Rick from '../Characters/Rick.js';
+import WaterDrop from '../Obstacles/waterDrop.js';
 
 const CAMPOSY = 400; var camCurrentPosY = CAMPOSY; // Respecto a Puh
 const TOP = 1100; // punto en el eje y en el que se detiene la camara

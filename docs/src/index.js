@@ -1,9 +1,10 @@
-import { Menu } from './menu.js';
-import { Intro } from './intro.js';
-import { GameOver } from './GameOver.js';
-import { GamePause } from './inGamePause.js';
-import {Scene1 } from './Scene1.js';
-import {BossScene } from './BossScene.js';
+import { Menu } from './Scenes/menu.js';
+import { Intro } from './Scenes/intro.js';
+import { GameOver } from './Scenes/GameOver.js';
+import { GamePause } from './Scenes/inGamePause.js';
+import {Scene1 } from './Scenes/Scene1.js';
+import {BossScene } from './Scenes/BossScene.js';
+import {Victory} from './Scenes/Victory.js';
 
 let config = {
     type: Phaser.CANVAS,
@@ -27,7 +28,7 @@ let config = {
 		zoom: 1
     },
 
-    scene: [Intro, Menu, GameOver,  Scene1, BossScene, GamePause,],
+    scene: [Intro, Menu, GameOver,  Scene1, BossScene, GamePause, Victory,],
 
     physics: { 
         default: 'arcade', 
