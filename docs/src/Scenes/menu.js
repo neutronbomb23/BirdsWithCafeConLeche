@@ -19,7 +19,6 @@ export class Menu extends Phaser.Scene {
     }
 
     create(){
-
         this.add.image(720,900, 'menuFondo').setScale(1.3); // Imagen fondo
         this.add.image(720,500, 'centralperk').setScale(1.5); // Imagen fondo
         this.add.image(220, 1050, 'paloma').setScale(0.4);

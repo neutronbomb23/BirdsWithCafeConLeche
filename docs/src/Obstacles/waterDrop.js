@@ -1,12 +1,10 @@
 export default class WaterDrop extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, velocity, scale, name) {
- 
         super(scene, x, y, name);
         this.scale = scale;// escala
         this.v = velocity;// velocidad
 
         this.scene.add.existing(this);
-
         this.scene.physics.add.existing(this);
 
         this.setScale(this.scale);

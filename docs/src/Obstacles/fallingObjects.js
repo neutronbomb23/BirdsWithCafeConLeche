@@ -18,7 +18,7 @@ export default class FallingObjects extends Phaser.GameObjects.Sprite{
         this.LIFETIME = 10; 
     }
 
-    RandomInt(min, max) { // Funcion Aux
+    RandomInt(min, max){ // Funcion Aux
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -57,7 +57,7 @@ export default class FallingObjects extends Phaser.GameObjects.Sprite{
             else { this.body.setVelocityX(-this.BOUNCE_VELOCITY_X); } // Izquierda en X
             this.body.setVelocityY(this.BOUNCE_VELOCITY_Y); // Aplica velocidad en Y
 
-            if (this.name == 'skull') {this.BOUNCE_VELOCITY_Y /= 2;  this.BOUNCE_VELOCITY_X /= 2;} // Decrementa la fuerza del rebote en la calavera
+            if (this.name == 'birdSkull') {this.BOUNCE_VELOCITY_Y /= 2;  this.BOUNCE_VELOCITY_X /= 2;} // Decrementa la fuerza del rebote en la calavera
         } 
         else if(this.body.onWall()){ this.body.setVelocityX(this.BOUNCE_VELOCITY_X) } // Si colisiona por la izquierda
         else if(this.body.onWall()){ this.body.setVelocityX(this.BOUNCE_VELOCITY_X) } // Si colisiona por la derecha

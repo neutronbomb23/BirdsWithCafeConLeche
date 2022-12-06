@@ -7,10 +7,7 @@ import WaterDrop from '../Obstacles/waterDrop.js';
 
 const CAMPOSY = 400; var camCurrentPosY = CAMPOSY; // Respecto a Puh
 const TOP = 1100; // punto en el eje y en el que se detiene la camara
-
 const PUHX = 700; const PUHY = 1500; // Posiciones iniciales de puh
-
-var startTime; // Runtime en el momento en el que empieza la escena
 
 export class BossScene extends Phaser.Scene{
     constructor(){
@@ -36,16 +33,12 @@ export class BossScene extends Phaser.Scene{
     }
 
     create(){
-       
         var image = this.add.image(100, 100, 'Rick');
-        startTime = this.time.now;
         this.song = this.sound.add('song');
         this.song.setLoop(true);
         this.song.play();
         this.bossFX = this.sound.add('Boss');
 
-        
-        
         //pinchos plataformas decoracion muros
         this.bossMap = this.make.tilemap({ 
 			key: 'bossMap', 
@@ -151,12 +144,11 @@ export class BossScene extends Phaser.Scene{
             this.loadScene = false;
         }
 
-        if((this.soundRandom == 2 && this.rick.bossSound) && !this.bossFX.isPlaying)
-         {
+        if((this.soundRandom == 2 && this.rick.bossSound) && !this.bossFX.isPlaying){
             this.bossFX.play();
-            console.log("HE SONADO BIEN PERRA");
+            console.log("HE SONADO BIEN");
             console.log(this.rick.bossSound);
-         }
+        }
 
         if(this.keyQ.isDown){
             this.scene.restart();

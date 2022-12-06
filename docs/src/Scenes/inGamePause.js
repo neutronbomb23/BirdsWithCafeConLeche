@@ -14,7 +14,6 @@ export class GamePause extends Phaser.Scene {
 
     init(data){
         // Cojo el "dato" o "propiedad" de la escena en donde se ha pulsado el escape, para poder resumir la escena si se presiona el botón.
-        console.log(data);
         this.continue = data.me;
     }
 
