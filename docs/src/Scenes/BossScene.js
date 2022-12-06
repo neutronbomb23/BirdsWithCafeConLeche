@@ -18,6 +18,9 @@ export class BossScene extends Phaser.Scene{
     }
 
     preload(){ // precarga los assets
+        this.load.tilemapTiledJSON('bossMap', 'assets/Tilemap/bossScene.json'); //tilemap JSON
+        this.load.image('patronesTilemap', 'assets/Tilemap/goodly-2x.png'); // tile img
+        this.load.image('fondoimg', 'assets/Tilemap/metall001-new-tileable.png'); // fondo
         this.load.image('background', 'assets/images/background/rust.png');// fondo
         this.load.spritesheet('puhIddle', 'assets/images/characters/puh/iddle.png', {frameWidth:32,  frameHeight: 32});// idle de Puh
         this.load.spritesheet('puhMove', 'assets/images/characters/puh/walk.png', {frameWidth:32,  frameHeight: 32});// Movimiento de Puh
@@ -25,7 +28,7 @@ export class BossScene extends Phaser.Scene{
         this.load.spritesheet('RickIddle', 'assets/images/characters/rick/pigeon_pecking.png', {frameWidth:48,  frameHeight: 32});// idle de Rick
         this.load.spritesheet('RickWalk', 'assets/images/characters/rick/pigeon_walking.png', {frameWidth:32,  frameHeight: 32});// movimiento de Rick
         this.load.spritesheet('RickAttack', 'assets/images/characters/rick/pigeon_red.png', {frameWidth:32,  frameHeight: 32});// ataque de Rick
-        this.load.spritesheet('Rick', 'assets/images/characters/rick/pigeon.png', {frameWidth:32,  frameHeight: 32});// Rick
+        this.load.spritesheet('Rick', 'assets/images/characters/paloma.png', {frameWidth:32,  frameHeight: 32});// Rick
         this.load.image('floor', 'assets/images/floor.png');// suelo
         this.load.audio('Boss', 'assets/audio/k.mp3');
         this.load.audio('song','assets/audio/game.mp3');// sonido
@@ -33,6 +36,7 @@ export class BossScene extends Phaser.Scene{
     }
 
     create(){
+       
         var image = this.add.image(100, 100, 'Rick');
         startTime = this.time.now;
         this.song = this.sound.add('song');
@@ -40,25 +44,46 @@ export class BossScene extends Phaser.Scene{
         this.song.play();
         this.bossFX = this.sound.add('Boss');
 
-        this.physics.world.setBoundsCollision(true, true, false, false); // Define limites del mapa
-        this.add.image(720, 800, 'background').setScale(6); // Imagen fondo
+        
+        
+        //pinchos plataformas decoracion muros
+        this.bossMap = this.make.tilemap({ 
+			key: 'bossMap', 
+			tileWidth: 32, 
+			tileHeight: 32 
+		});
 
+        this.fondoLayer = this.bossMap.createFromObjects('fondo', {name: "fondoimg", key: 'fondoimg'});
+        const myTileset = this.bossMap.addTilesetImage('mundo', 'patronesTilemap');
+        this.platformLayer = this.bossMap.createLayer('plataformas', myTileset);
+        this.platformLayer.setCollisionByExclusion(-1, true);
+        this.decoracionLayer = this.bossMap.createLayer('decoracion', myTileset);
+        this.pinchos = this.bossMap.createLayer('pinchos', myTileset);
+        this.pinchos.setCollisionByExclusion(-1, true);
+        this.muros = this.bossMap.createLayer('muros', myTileset);
+        this.muros.setCollisionByExclusion(-1, true);
+    
+       
+
+        this.physics.world.setBoundsCollision(true, true, false, false); // Define limites del mapa
         this.puh = new Puh(this, 500, 1300);// instanciación de Puh
+        this.puh.body.setSize(this.puh.body.width - 15, this.puh.body.height -2, true);
         this.puh.setFly(true) // Llamada a método para cambiar el booleano de la clase puh que determina si vuela o no.
         this.rick = new Rick(this, 900, 1150);// instanciación de Rick
         this.activateBossSound = this.rick.bossSound = false;
-        this.floor = this.physics.add.image(720,1550, 'floor').setImmovable(true).setScale(3);
-        this.floor.body.allowGravity = false;
-
 
         this.drop = 'WaterDrop';// gota
         this.dropObs = this.physics.add.group();// gurpo de gotas con físicas
 
 
         //this.physics.add.collider(this.dropObs, this.puh, this.gameOver.bind(this), null);// game Over
-        this.physics.add.collider(this.dropObs, this.floor);
-        this.physics.add.collider(this.puh, this.floor);// colisión entre Puh y el suelo
-        this.physics.add.collider(this.rick, this.floor);// colisión entre Rick y el suelo
+        this.physics.add.collider(this.puh, this.platformLayer);
+        this.physics.add.collider(this.puh, this.muros);
+        this.physics.add.collider(this.puh, this.pinchos, this.gameOver.bind(this),null);
+        this.physics.add.collider(this.rick, this.platformLayer);
+        this.physics.add.collider(this.rick, this.muros); // habría que llamar a hacerle daño
+        this.physics.add.collider(this.dropObs, this.platformLayer);
+        this.physics.add.collider(this.dropObs, this.muros);
         //this.physics.add.collider(this.rick, this.puh);// colisión entre Rick y Puh
 
         //this.physics.add.collider(this.rick, this.puh, this.gameOver.bind(this), null);// game Over
