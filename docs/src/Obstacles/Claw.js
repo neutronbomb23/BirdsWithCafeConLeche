@@ -22,6 +22,8 @@ export default class Claw extends Phaser.GameObjects.Sprite{
         this.scene.anims.create({
             key: 'birdClaw',
             frames: scene.anims.generateFrameNumbers('clawAn', {start:0, end:7}),
+            frameRate: 20,
+            repeat: -1
         }); 
         this.play(name); // Se establece la animación del objeto
     }

@@ -1,7 +1,6 @@
 import { Menu } from './menu.js';
 
 var respawnPos = 16800;
- 
 export class GameOver extends Phaser.Scene {
     constructor() {
   // Nombre de la escena para el SceneManager
@@ -14,11 +13,8 @@ export class GameOver extends Phaser.Scene {
     this.load.image('menuButton', 'assets/images/buttons/menu.png'); //Cargar botón del menú
   }
   
-  init(data){
-    respawnPos;
-    if (data <= 5700) respawnPos = 5650;
-    else if (data <= 10700) respawnPos = 10500;
-    else respawnPos = 16800;
+  init(puhpos) {
+    respawnPos = puhpos;
   }
     
   create () {
@@ -39,8 +35,13 @@ export class GameOver extends Phaser.Scene {
     });
 
     returnButton.on("pointerup", ()=>{ //Método que te lleva al nivel donde has muerto si se presiona el botón play.
-    this.scene.start('Scene1', respawnPos);
-    this.scene.stop();
+      if(respawnPos % 10 == 0){
+        this.scene.start('Scene1', respawnPos);
+      }
+      else{
+        this.scene.start('bossScene');
+      }
+      this.scene.stop();
     });
 
     menuButton.on("pointerup", ()=>{ //Método que te lleva al menú principal si se presiona el botón menú.

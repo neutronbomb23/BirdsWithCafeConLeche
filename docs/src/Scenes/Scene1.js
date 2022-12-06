@@ -11,18 +11,17 @@ var cameraPos = -15000;
 var puhPos = 16800;
 const TOP = -100000; // punto en el eje y en el que se detiene la camara
 const PUHX = 700; const PUHY = 1500; // Posiciones iniciales de puh
-
-var startTime; // Runtime en el momento en el que empieza la escena
-
+var puhRespPoint = 16800;
+var runTimeSecs = 0;
 export class Scene1 extends Phaser.Scene{
     constructor(){
         super({key: 'Scene1'}); //Idemtificador para llamar a este escena desde otras.
     }
 
     init(data){
-        console.log(data)
         this.cameraPos = (-data + 1500)
         this.puhPos = (data)
+        runTimeSecs = 0
     }
 
     preload(){ // precarga los assets
@@ -45,7 +44,6 @@ export class Scene1 extends Phaser.Scene{
     }
 
     create(){
-        startTime = this.time.now;
         this.lastTimeObbs = 0;
         this.deathSound = this.sound.add('death');
         this.song = this.sound.add('song');
@@ -99,7 +97,7 @@ export class Scene1 extends Phaser.Scene{
         this.keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
         this.ESC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);   
     }
-
+    
     callClaw(obj1, obj2){
         obj1.slowVel();
         obj2.destroy();
@@ -112,8 +110,8 @@ export class Scene1 extends Phaser.Scene{
         this.cameras.main.scrollX = false;
     }
 
-    updateCamera(){
-        var runTimeSecs = (this.time.now - startTime) * 0.001; // Tiempo desde que se inicio la escena
+    updateCamera(dt){
+        runTimeSecs += (dt) * 0.001; // Tiempo desde que se inicio la escena
         if(DEBUG)console.log(runTimeSecs)
         camCurrentPosY = this.cameraPos + runTimeSecs*CAMERASPEED - (PUHY - this.puh.y); // Distancia entre el la camara y puh
         this.cameras.main.setFollowOffset(0, camCurrentPosY); // Set de la posición y de la camara
@@ -123,7 +121,7 @@ export class Scene1 extends Phaser.Scene{
         this.puh.destroy(); 
         this.song.stop();
         
-        this.scene.start('GameOver', this.puh.y);
+        this.scene.start('GameOver', puhRespPoint);
         this.deathSound.play();
     }   
 
@@ -142,7 +140,7 @@ export class Scene1 extends Phaser.Scene{
         if (randomNumb <= 2){
             var idObs = this.obstaclesList[randomNumb];// idObs será uno de los obstáculos (aleatorio)
         }
-        let y =(-1500 + this.puh.y);//Posición desde la que se generan los obstáculos (es relativa a la posición de Puh)
+        let y =(this.puh.y - camCurrentPosY - 1500 - 30);//Posición desde la que se generan los obstáculos (es relativa a la posición de Puh)
         if (idObs == 'bone' || idObs == 'birdSkull'){
             let toni =  new FallingObjects(this, y, idObs);// crea un falling object del tipo idObs
             this.obstacles.add(toni);// añade el obstáculo aleatorio al grupo
@@ -153,8 +151,8 @@ export class Scene1 extends Phaser.Scene{
         }   
     }
 
-    cameraManager(){
-        if(camCurrentPosY > TOP) { this.updateCamera(); } // Actualiza su posición respecto a puh
+    cameraManager(dt){
+        if(camCurrentPosY > TOP) { this.updateCamera(dt); } // Actualiza su posición respecto a puh
         else { this.cameras.main.stopFollow(); } // Se queda quieta en el eje Y
         
         if(camCurrentPosY > 900) { // DeathZone
@@ -165,7 +163,7 @@ export class Scene1 extends Phaser.Scene{
     stopMusic(){
         this.song.stop();
     }
-
+    
     update(t,dt){
         this.randomNumbSound();
         this.lastTimeObbs += dt;
@@ -174,7 +172,10 @@ export class Scene1 extends Phaser.Scene{
             this.lastTimeObbs = 0;
         }
 
-        this.cameraManager()
+        if (this.puh.y <= 5700) puhRespPoint = 5650;
+        else if (this.puh.y <= 10700 && this.puhPos != 5650) puhRespPoint = 10600;
+
+        this.cameraManager(dt)
 
         if(this.keyQ.isDown){
             this.scene.restart();

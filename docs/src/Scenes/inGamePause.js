@@ -19,6 +19,7 @@ export class GamePause extends Phaser.Scene {
     }
 
     create (){
+        let myScene1 = new Scene1();
         let playButton = this.add.image(720, 950, 'playButton').setScale(1); // Botón de play
         let loadButton = this.add.image(720,1200, 'loadButton').setScale(1); 
          
