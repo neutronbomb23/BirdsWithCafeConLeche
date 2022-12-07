@@ -32,6 +32,7 @@ export class GamePause extends Phaser.Scene {
         });
 
         loadButton.on("pointerup", ()=>{
+            this.continue.scene.song.stop();
             this.continue.stop();
             this.scene.start('Menu');
             this.scene.stop();

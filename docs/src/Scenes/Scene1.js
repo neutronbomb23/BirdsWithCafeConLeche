@@ -3,7 +3,7 @@ import { GamePause } from "./inGamePause.js";
 import FallingObjects from "../Obstacles/fallingObjects.js";
 import Puh from '../Characters/puh.js';
 import Claw from "../Obstacles/Claw.js";
- 
+
 const CAMPOSY = 400; var camCurrentPosY = CAMPOSY; // Respecto a Puh
 const CAMERASPEED = 100; // Velocidad a la que sube en funcion del tiempo
 var cameraPos = -15000;
@@ -118,6 +118,7 @@ export class Scene1 extends Phaser.Scene{
     gameOver(){
         this.puh.destroy(); 
         this.song.stop();
+        
         this.scene.start('GameOver', puhRespPoint);
         this.deathSound.play();
     }   
@@ -152,7 +153,7 @@ export class Scene1 extends Phaser.Scene{
         if(camCurrentPosY > TOP) { this.updateCamera(dt); } // Actualiza su posición respecto a puh
         else { this.cameras.main.stopFollow(); } // Se queda quieta en el eje Y
         
-        if(camCurrentPosY > 900) {  this.gameOver(); } // DeathZone
+        if(camCurrentPosY > 900) { this.gameOver(); } // DeathZone
     }
 
     stopMusic(){
@@ -167,8 +168,8 @@ export class Scene1 extends Phaser.Scene{
             this.lastTimeObbs = 0;
         }
 
-        if (this.puh.y <= 5700) puhRespPoint = 5650;
-        else if (this.puh.y <= 10700 && this.puhPos != 5650) puhRespPoint = 10600;
+        if (this.puh.y <= 5700) { puhRespPoint = 5650 };
+        else if (this.puh.y <= 10700 && this.puhPos != 5650) { puhRespPoint = 10600 };
 
         this.cameraManager(dt);
 
