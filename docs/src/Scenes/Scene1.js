@@ -168,8 +168,8 @@ export class Scene1 extends Phaser.Scene{
             this.lastTimeObbs = 0;
         }
 
-        if (this.puh.y <= 5700) { puhRespPoint = 5650 };
-        else if (this.puh.y <= 10700 && this.puhPos != 5650) { puhRespPoint = 10600 };
+        if (this.puh.y <= 5700) { puhRespPoint = 5650; }
+        else if (this.puh.y <= 10700 && this.puhPos != 5650) { puhRespPoint = 10600; }
 
         this.cameraManager(dt);
 
