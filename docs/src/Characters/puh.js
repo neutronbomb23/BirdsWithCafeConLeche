@@ -6,7 +6,7 @@ export default class Puh extends Phaser.GameObjects.Sprite{
 
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
-        this.initAnimations(scene, this.name);
+        this.initAnimations(scene);
         this.body.setCollideWorldBounds(true);
         this.setScale(3);
 
@@ -72,7 +72,7 @@ export default class Puh extends Phaser.GameObjects.Sprite{
         }
     }
 
-    initAnimations(scene, name){
+    initAnimations(scene){
         //Se crean las animaciones
         this.scene.anims.create({
             key: 'idle',

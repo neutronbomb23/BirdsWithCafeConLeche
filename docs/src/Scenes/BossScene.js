@@ -59,7 +59,7 @@ export class BossScene extends Phaser.Scene{
        
 
         this.physics.world.setBoundsCollision(true, true, false, false); // Define limites del mapa
-        this.puh = new Puh(this, 500, 1300);// instanciación de Puh
+        this.puh = new Puh(this, 700, 600);// instanciación de Puh
         this.puh.body.setSize(this.puh.body.width - 15, this.puh.body.height -2, true);
         this.puh.setFly(true) // Llamada a método para cambiar el booleano de la clase puh que determina si vuela o no.
         this.rick = new Rick(this, 900, 1150);// instanciación de Rick
