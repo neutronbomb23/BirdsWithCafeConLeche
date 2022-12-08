@@ -14,7 +14,7 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         this.TweenActive = false;
         this.damage = false;
         this.body.setCollideWorldBounds(true);
-        this.body.setSize(this.body.width-30, this.body.height -2, true);
+        this.body.setSize(this.body.width-18, this.body.height -2, true);
         this.setScale(8);
         this.setFlip(false, false);
         this.initAnimations(scene);
@@ -102,7 +102,7 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         else{ // puh está a la derecha
             this.body.setVelocityX(1200);
             this.setFlip(false, false);
-            this.body.offset.x = 28; 
+            this.body.offset.x = 16; 
         }
         this.bossSound = true;
         if(this.anims.currentAnim.key !== 'attackR'){// animación
@@ -146,7 +146,7 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         } // movimiento hacia la izquierda
         else { 
             this.body.setVelocityX(200);
-            this.body.offset.x = 28; 
+            this.body.offset.x = 16; 
         } // movimiento hacia la derecha
         if(this.x >= 1200){
             this.setFlip(true, false);// extremo derecho
