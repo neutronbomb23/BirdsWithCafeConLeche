@@ -10,15 +10,12 @@
     margin-left: 645px;
     margin-right: 645px;
     color: rgb(255, 255, 255);
-    background-color: rgb(0, 0, 0);
     margin-top: 50px;
-
 }
 
 .text{
     color: rgb(255, 255, 255);
-    background-color: rgb(0, 0, 0);
-    font-size: 22px;
+    font-size: 30px;
     font-weight: bold;
     display: flex;
     text-align: justify;
@@ -28,15 +25,16 @@
 }
 
 .lista{
-    color: rgb(111, 46, 131);
+    color: rgb(255, 255, 255);
     font-weight: bold;
-    background-color: rgb(255, 255, 255);
     width: 30%;
-    font-size: 25px;
+    font-size: 30px;
     margin-left: 34%;
 }
 .titles{
-    font-size: 25px;
+    color: rgb(200, 217, 13);
+    background-color: rgb(55, 46, 131);
+    font-size: 40px;
     width: 30%;
     font-weight: bolder;
     margin-left: 35%;
@@ -48,25 +46,26 @@
 
 #descripción
 {
-    color: rgb(255, 255, 255);
+    color: rgb(200, 217, 13);
     background-color: rgb(98, 139, 0);
 }
 #Historia
 {
-    color: rgb(255, 255, 255);
+    color: rgb(200, 217, 13);
     background-color: rgb(0, 132, 141);
 }
 
 .des{
-    font-size: 22px;
-    color: rgb(255, 255, 255);
-    background-color: rgb(111, 46, 131);
+    font-size: 30px;
+    color: rgb(200, 217, 13);
+    background-color: rgb(55, 46, 131);
     width: 30%;
     margin-left: 35%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 .DASP{
     width: 145px;
     float:right;
@@ -76,10 +75,12 @@
 .socials {
     width: 100px;
 }
+
 #github{
     align-content: center;
     margin-left: 45%;
 }
+
 #twitter {
     float: right;
 }
@@ -98,8 +99,6 @@ body {
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
-        
         background-attachment: fixed;
-        
         height: 300vh;
 }
