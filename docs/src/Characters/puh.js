@@ -8,7 +8,7 @@ export default class Puh extends Phaser.GameObjects.Sprite{
         this.scene.physics.add.existing(this);
         this.initAnimations(scene);
         this.body.setSize(this.body.width-18, this.body.height -12, true);
-        this.body.offset.y = 13; 
+        this.body.offset.y = 12; 
         this.body.setCollideWorldBounds(true);
         this.setScale(3);
 

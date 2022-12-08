@@ -73,7 +73,7 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         let distY = Math.abs(this.y - this.puh.getY());// distancia en valor absoluto entre Puh y Rick
         let range = this.x - this.puh.getX();// distancia en X entre Puh y Rick
 
-        if(!this.dash && distY < 120) { console.log(this); this.attack(range); }// ataque
+        if(!this.dash && distY < 120) { this.attack(range); }// ataque
         else if(this.dash && (this.x <= 220 || this.x >= 1220)) {
             this.Dash(); 
         }// daño a Rick
