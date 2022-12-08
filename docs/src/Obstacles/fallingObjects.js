@@ -52,6 +52,8 @@ export default class FallingObjects extends Phaser.GameObjects.Sprite{
     }
 
     colisionManager(){
+        if(this.x <= 30) { this.body.setVelocityX(this.BOUNCE_VELOCITY_X);}
+        else if(this.x >= 1425) { this.body.setVelocityX(-this.BOUNCE_VELOCITY_X);}
         if(this.body.onFloor()){ // Si colisiona por abajo
             if (this.RandomInt(0,2)  === 0){ this.body.setVelocityX(this.BOUNCE_VELOCITY_X); } // Derecha en X
             else { this.body.setVelocityX(-this.BOUNCE_VELOCITY_X); } // Izquierda en X
