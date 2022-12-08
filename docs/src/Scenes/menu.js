@@ -1,4 +1,3 @@
-import { BossScene } from './BossScene.js'
 
 export class Menu extends Phaser.Scene {
     constructor() {
@@ -25,14 +24,11 @@ export class Menu extends Phaser.Scene {
         this.add.image(1250, 1050, 'paloma').setScale(0.4);
         this.add.image(720,150, 'text').setScale(1.3);
         
-        let scene2Button = this.add.image(320, 500, 'playButton').setScale(1); // Botón de Boss
         let playButton = this.add.image(720, 950, 'playButton').setScale(1); // Botón de play
         let optionsButton = this.add.image(720, 1200 , 'optionsButton').setScale(1); // Botón de opciones
-        //this.add.sprite(100,100,'puh');
       
         playButton.setInteractive();
         optionsButton.setInteractive();
-        scene2Button.setInteractive();
 
         this.menuMusic = this.sound.add('menuMusic');
         
@@ -43,7 +39,6 @@ export class Menu extends Phaser.Scene {
         })
 
         optionsButton.on("pointerup", ()=>{ //Método que te lleva a la sección de controles.
-            //this.scene.start('Menu');
             playButton.visible = false; //Se hace invisible el botón play.
             optionsButton.visible = false; //Se hace invisible el botón de opciones.
             let controls = this.add.image(720, 1075, 'controls').setScale(1.2); //Se imprime en pantalla la imagen que muestra los controles.
@@ -55,12 +50,6 @@ export class Menu extends Phaser.Scene {
                 playButton.visible = true;
                 optionsButton.visible = true;
             })
-            //this.menuMusic.stop();
-        })
-
-        scene2Button.on("pointerup", ()=>{ //Método para empezar el juego cuando se pulse el botón play, también para la música para evitar que se escuche en la escena del juego.
-            this.scene.start('bossScene');
-            this.menuMusic.stop();
         })
     }
 }

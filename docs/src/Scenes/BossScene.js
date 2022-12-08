@@ -28,7 +28,7 @@ export class BossScene extends Phaser.Scene{
         this.load.spritesheet('RickIddle', 'assets/images/characters/rick/pigeon_pecking.png', {frameWidth:48,  frameHeight: 32});// idle de Rick
         this.load.spritesheet('RickWalk', 'assets/images/characters/rick/pigeon_walking.png', {frameWidth:32,  frameHeight: 32});// movimiento de Rick
         this.load.spritesheet('RickAttack', 'assets/images/characters/rick/pigeon_red.png', {frameWidth:32,  frameHeight: 32});// ataque de Rick
-        this.load.spritesheet('Rick', 'assets/images/characters/paloma.png', {frameWidth:32,  frameHeight: 32});// Rick
+        this.load.spritesheet('RickSpit', 'assets/images/characters/rick/pigeon_spitting.png', {frameWidth:48,  frameHeight: 32});// ataque de Rick
         this.load.audio('Boss', 'assets/audio/k.mp3');
         this.load.audio('song','assets/audio/game.mp3');// sonido
         this.load.image('WaterDrop', 'assets/images/characters/rick/gota.png');// gota de agua
@@ -36,12 +36,16 @@ export class BossScene extends Phaser.Scene{
 
     create(){
        
-        var image = this.add.image(100, 100, 'Rick');
         startTime = this.time.now;
         this.song = this.sound.add('song');
         this.song.setLoop(true);
         this.song.play();
         this.bossFX = this.sound.add('Boss');
+        this.RickLives = 10;// vidas de Rick
+        this.LivesText = this.add.text(100,50, 'Rick Lives: ', { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', 
+        fontSize: 75, color: 'white'}); //Texto Vidas
+        this.RickLivesText = this.add.text(475,50, this.RickLives, { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', 
+        fontSize: 75, color: 'white'}); //Texto Vidas Rick;
 
         
         
@@ -65,14 +69,13 @@ export class BossScene extends Phaser.Scene{
        
 
         this.physics.world.setBoundsCollision(true, true, false, false); // Define limites del mapa
-        this.puh = new Puh(this, 500, 1300);// instanciación de Puh
+        this.puh = new Puh(this, 720, 900);// instanciación de Puh
         this.puh.body.setSize(this.puh.body.width - 15, this.puh.body.height -2, true);
         this.puh.setFly(true) // Llamada a método para cambiar el booleano de la clase puh que determina si vuela o no.
         this.rick = new Rick(this, 900, 1150);// instanciación de Rick
         this.rick.body.setSize(this.rick.body.width - 15, this.rick.body.height -2, true);
         this.activateBossSound = this.rick.bossSound = false;
 
-        this.RickLives = 1;// vidas de Rick
 
         this.drop = 'WaterDrop';// gota
         this.dropObs = this.physics.add.group();// gurpo de gotas con físicas
@@ -105,7 +108,9 @@ export class BossScene extends Phaser.Scene{
     
     rickLives(){
         this.RickLives--;
-        console.log(this.RickLives);
+        this.RickLivesText.visible = false;
+        this.RickLivesText = this.add.text(475,50, this.RickLives, { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', 
+        fontSize: 75, color: 'white'}); //Texto Vidas Rick
         if(this.RickLives == 0) this.Victory(); // Rick sin vidas
 
     }
@@ -130,7 +135,12 @@ export class BossScene extends Phaser.Scene{
     }
 
     RickDrop(){
-        let waterDrop = new WaterDrop(this, this.rick.getX(), this.rick.getY(), -1000, 4.5, this.drop);// instancia la gota en la posición de Rick
+        var DropPosX = this.rick.getX();
+        var DropPosY = this.rick.getY();
+        if(this.rick.flipX) DropPosX -= 75;// posición de la boca con Rick girado
+        else DropPosX += 75;// posición de la Boca con Rick sin girar
+        DropPosY -= 100;// posición de la boca de Rick en Y
+        let waterDrop = new WaterDrop(this, DropPosX, DropPosY, -1000, 4.5, this.drop);// instancia la gota en la posición de Rick
         this.dropObs.add(waterDrop);// añade la gota al grupo
     }
 

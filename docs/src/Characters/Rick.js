@@ -10,6 +10,7 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         this.timer = 0; // contador de daño de Rick
         this.dropTimer = 0; // contador que indica cuanto tiempo tardará en salir una nueva gota
         this.timerDrop = 1000; // contador para que Rick se quede parado
+        this.Spit = false; // booleano para que solo escupa una vez
         this.TweenActive = false;
 
         this.body.setCollideWorldBounds(true);
@@ -42,6 +43,13 @@ export default class Rick extends Phaser.GameObjects.Sprite{
             repeat: -1
         });
 
+        this.scene.anims.create({
+            key: 'spit',
+            frames: scene.anims.generateFrameNumbers('RickSpit', {start:0, end:4}),
+            frameRate: 5,
+            repeat: -1
+        });
+
         this.scene.Damage = this.scene.tweens.add({
             targets: this,
             scale: this.scale * 0.7,
@@ -70,8 +78,13 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         else if(this.dash && (this.x <= 220 || this.x >= 1220)) { this.Dash(); }// daño a Rick
         else if(distY >= 120 && !this.dash) {
             this.bossSound = true;
-            if(this.dropTimer >= 5000) { this.ThrowDrop(); } // lanza gota
-            else if(this.timerDrop >= 1000) { this.walking(); } // patrulla   
+            if(this.dropTimer >= 2500) { this.ThrowDrop(); } // lanza gota
+            else if(this.timerDrop >= 700) { 
+                if(this.anims.currentAnim.key === 'spit'){
+                    this.scene.RickDrop();// instancia gota hacia arriba
+                    this.Spit = false;
+                }
+                this.walking(); } // patrulla   
         }
         else if(this.anims.currentAnim.key !== 'attackR') { this.attack(range); }// para evitar bug porque no entra en el ataque al descender Puh
     }
@@ -79,11 +92,11 @@ export default class Rick extends Phaser.GameObjects.Sprite{
     attack(range){
         if(this.x > 220 && this.x < 1220) { this.dash = true; }// si no está ya en los extremos
         if(range > 0){ // puh está a la izquierda
-            this.body.setVelocityX(-900);
+            this.body.setVelocityX(-1200);
             this.setFlip(true, false);
         }
         else{ // puh está a la derecha
-            this.body.setVelocityX(900);
+            this.body.setVelocityX(1200);
             this.setFlip(false, false);
         }
         this.bossSound = true;
@@ -115,10 +128,10 @@ export default class Rick extends Phaser.GameObjects.Sprite{
 
     ThrowDrop(){
         this.timerDrop = 0;// contador para que Rick se quede parado
-        this.scene.RickDrop();// instancia gota hacia arriba
         this.dropTimer = 0;// contador para la siguiente gota
         this.body.setVelocityX(0);
-        this.play('idleR');
+        this.play('spit');
+        this.Spit = true; // escupe
     }
 
     walking(){
