@@ -66,9 +66,9 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         let distY = Math.abs(this.y - this.puh.getY());// distancia en valor absoluto entre Puh y Rick
         let range = this.x - this.puh.getX();// distancia en X entre Puh y Rick
 
-        if(!this.dash && distY < 110) { console.log(this); this.attack(range); }// ataque
-        else if(this.dash && (this.x <= 200 || this.x >= 1300)) { this.Dash(); }// daño a Rick
-        else if(distY >= 110 && !this.dash) {
+        if(!this.dash && distY < 120) { console.log(this); this.attack(range); }// ataque
+        else if(this.dash && (this.x <= 220 || this.x >= 1220)) { this.Dash(); }// daño a Rick
+        else if(distY >= 120 && !this.dash) {
             this.bossSound = true;
             if(this.dropTimer >= 5000) { this.ThrowDrop(); } // lanza gota
             else if(this.timerDrop >= 1000) { this.walking(); } // patrulla   
@@ -77,7 +77,7 @@ export default class Rick extends Phaser.GameObjects.Sprite{
     }
 
     attack(range){
-        if(this.x > 200 && this.x < 1300) { this.dash = true; }// si no está ya en los extremos
+        if(this.x > 220 && this.x < 1220) { this.dash = true; }// si no está ya en los extremos
         if(range > 0){ // puh está a la izquierda
             this.body.setVelocityX(-900);
             this.setFlip(true, false);
@@ -125,7 +125,7 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         if(this.flipX){ this.body.setVelocityX(-200); } // movimiento hacia la izquierda
         else { this.body.setVelocityX(200); } // movimiento hacia la derecha
         
-        if(this.x >= 1150){
+        if(this.x >= 1200){
             this.setFlip(true, false);// extremo derecho
         }
         else if(this.x <= 200){
