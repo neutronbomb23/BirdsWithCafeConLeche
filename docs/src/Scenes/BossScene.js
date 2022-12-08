@@ -72,7 +72,7 @@ export class BossScene extends Phaser.Scene{
         this.rick.body.setSize(this.rick.body.width - 15, this.rick.body.height -2, true);
         this.activateBossSound = this.rick.bossSound = false;
 
-        this.RickLives = 7;// vidas de Rick
+        this.RickLives = 1;// vidas de Rick
 
         this.drop = 'WaterDrop';// gota
         this.dropObs = this.physics.add.group();// gurpo de gotas con físicas
