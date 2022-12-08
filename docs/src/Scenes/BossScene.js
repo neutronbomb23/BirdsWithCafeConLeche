@@ -87,7 +87,7 @@ export class BossScene extends Phaser.Scene{
 
         this.physics.add.collider(this.rick, this.puh, this.gameOver.bind(this), null);// game Over
         this.physics.add.collider(this.dropObs, this.puh, this.gameOver.bind(this), null);// game Over
-        this.physics.add.collider(this.puh, this.pinchos, this.gameOver.bind(this), null);
+        this.physics.add.collider(this.puh, this.pinchos, this.gameOver.bind(this),null);
 
         this.keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
         this.keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
