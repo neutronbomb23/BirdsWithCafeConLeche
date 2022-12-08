@@ -62,7 +62,7 @@ export default class FallingObjects extends Phaser.GameObjects.Sprite{
             if (this.name == 'birdSkull') {this.BOUNCE_VELOCITY_Y /= 2;  this.BOUNCE_VELOCITY_X /= 2;} // Decrementa la fuerza del rebote en la calavera
         } 
         else if(this.body.onWall()){ this.body.setVelocityX(this.BOUNCE_VELOCITY_X) } // Si colisiona por la izquierda
-        else if(this.body.onWall()){ this.body.setVelocityX(this.BOUNCE_VELOCITY_X) } // Si colisiona por la derecha
+        else if(this.body.onWall()){ this.body.setVelocityX(-this.BOUNCE_VELOCITY_X) } // Si colisiona por la derecha
     }
 
     preUpdate(t,dt){

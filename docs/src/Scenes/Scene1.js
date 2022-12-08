@@ -163,7 +163,7 @@ export class Scene1 extends Phaser.Scene{
     update(t,dt){
         this.randomNumbSound();
         this.lastTimeObbs += dt;
-        if(this.lastTimeObbs > 3000){
+        if(this.lastTimeObbs > 300){
             this.generateObs(dt);
             this.lastTimeObbs = 0;
         }
