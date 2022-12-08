@@ -75,14 +75,10 @@ export class Scene1 extends Phaser.Scene{
         this.claw = 'birdClaw';// variable con identificador de la garra
         this.clawobs = this.physics.add.group();// grupo de objetos(garras) con físicas
 
-        //this.physics.add.collider(this.obstacles, this.floor, this.addScore.bind(this), null);
         this.physics.add.collider(this.puh, this.platformLayer);
-       
-        this.physics.add.collider(this.clawobs, this.puh, this.callClaw, null);
-       
+        this.physics.add.collider(this.clawobs, this.puh, this.callClaw, null); 
         this.physics.add.collider(this.obstacles, this.platformLayer);
         this.physics.add.collider(this.puh, this.platformLayer);
-
         this.physics.add.collider(this.obstacles, this.puh, this.gameOver.bind(this), null);
         this.physics.add.collider(this.puh, this.portal, this.nextLevel.bind(this),null);
         this.physics.add.collider(this.puh, this.pinchos, this.gameOver.bind(this), null);
@@ -115,7 +111,6 @@ export class Scene1 extends Phaser.Scene{
     gameOver(){
         this.puh.destroy(); 
         this.song.stop();
-        
         this.scene.start('GameOver', puhRespPoint);
         this.deathSound.play();
     }   

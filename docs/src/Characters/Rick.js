@@ -14,10 +14,9 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         this.TweenActive = false;
         this.damage = false;
         this.body.setCollideWorldBounds(true);
-        this.body.setSize(this.body.width - 15, this.body.height -2, true);
+        this.body.setSize(this.body.width-30, this.body.height -2, true);
         this.setScale(8);
         this.setFlip(false, false);
-
         this.initAnimations(scene);
     }
 
@@ -86,7 +85,8 @@ export default class Rick extends Phaser.GameObjects.Sprite{
                     this.scene.RickDrop();// instancia gota hacia arriba
                     this.Spit = false;
                 }
-                this.walking(); } // patrulla   
+                this.walking(); // patrulla 
+            }   
         }
         else if(this.anims.currentAnim.key !== 'attackR') { this.attack(range); }// para evitar bug porque no entra en el ataque al descender Puh
         this.damageSound = false;
@@ -97,10 +97,12 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         if(range > 0){ // puh está a la izquierda
             this.body.setVelocityX(-1200);
             this.setFlip(true, false);
+            this.body.offset.x = 4;
         }
         else{ // puh está a la derecha
             this.body.setVelocityX(1200);
             this.setFlip(false, false);
+            this.body.offset.x = 28; 
         }
         this.bossSound = true;
         if(this.anims.currentAnim.key !== 'attackR'){// animación
@@ -138,9 +140,14 @@ export default class Rick extends Phaser.GameObjects.Sprite{
     }
 
     walking(){
-        if(this.flipX){ this.body.setVelocityX(-200); } // movimiento hacia la izquierda
-        else { this.body.setVelocityX(200); } // movimiento hacia la derecha
-        
+        if(this.flipX){ 
+            this.body.setVelocityX(-200); 
+            this.body.offset.x = 4;
+        } // movimiento hacia la izquierda
+        else { 
+            this.body.setVelocityX(200);
+            this.body.offset.x = 28; 
+        } // movimiento hacia la derecha
         if(this.x >= 1200){
             this.setFlip(true, false);// extremo derecho
         }

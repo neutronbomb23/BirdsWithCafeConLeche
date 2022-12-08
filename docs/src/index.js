@@ -34,7 +34,7 @@ let config = {
         default: 'arcade', 
         arcade: { 
             gravity: { y: 1000 }, 
-            //debug: true 
+            debug: true 
         },
         fps: { forceSetTimeOut: true, target: 60 },
         checkCollision: {
