@@ -34,7 +34,7 @@ export class Menu extends Phaser.Scene {
         
         this.menuMusic.play();
         playButton.on("pointerup", ()=>{ //Método para empezar el juego cuando se pulse el botón play, también para la música para evitar que se escuche en la escena del juego.
-            this.scene.start('Scene1', 16800);
+            this.scene.start('bossScene', 16800);
             this.menuMusic.stop();
         })
 

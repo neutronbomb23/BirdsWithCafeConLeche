@@ -12,7 +12,7 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         this.timerDrop = 1000; // contador para que Rick se quede parado
         this.Spit = false; // booleano para que solo escupa una vez
         this.TweenActive = false;
-
+        this.damage = false;
         this.body.setCollideWorldBounds(true);
         this.body.setSize(this.body.width - 15, this.body.height -2, true);
         this.setScale(8);
@@ -75,7 +75,9 @@ export default class Rick extends Phaser.GameObjects.Sprite{
         let range = this.x - this.puh.getX();// distancia en X entre Puh y Rick
 
         if(!this.dash && distY < 120) { console.log(this); this.attack(range); }// ataque
-        else if(this.dash && (this.x <= 220 || this.x >= 1220)) { this.Dash(); }// daño a Rick
+        else if(this.dash && (this.x <= 220 || this.x >= 1220)) {
+            this.Dash(); 
+        }// daño a Rick
         else if(distY >= 120 && !this.dash) {
             this.bossSound = true;
             if(this.dropTimer >= 2500) { this.ThrowDrop(); } // lanza gota
@@ -87,6 +89,7 @@ export default class Rick extends Phaser.GameObjects.Sprite{
                 this.walking(); } // patrulla   
         }
         else if(this.anims.currentAnim.key !== 'attackR') { this.attack(range); }// para evitar bug porque no entra en el ataque al descender Puh
+        this.damageSound = false;
     }
 
     attack(range){
@@ -114,7 +117,7 @@ export default class Rick extends Phaser.GameObjects.Sprite{
             if(this.first){
                 this.timer = 0;// contador a 0
                 this.first = false;// booleano a false para no reiniciar el contador a cero
-                this.scene.rickLives();// resta vida a Rick
+                this.scene.rickLifes();// resta vida a Rick
             }
         }
         if(this.timer >= 1000){

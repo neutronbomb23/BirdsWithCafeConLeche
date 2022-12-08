@@ -29,8 +29,10 @@ export class BossScene extends Phaser.Scene{
         this.load.spritesheet('RickWalk', 'assets/images/characters/rick/pigeon_walking.png', {frameWidth:32,  frameHeight: 32});// movimiento de Rick
         this.load.spritesheet('RickAttack', 'assets/images/characters/rick/pigeon_red.png', {frameWidth:32,  frameHeight: 32});// ataque de Rick
         this.load.spritesheet('RickSpit', 'assets/images/characters/rick/pigeon_spitting.png', {frameWidth:48,  frameHeight: 32});// ataque de Rick
-        this.load.audio('Boss', 'assets/audio/k.mp3');
+        this.load.audio('Boss', 'assets/audio/rick.mp3');
         this.load.audio('song','assets/audio/game.mp3');// sonido
+        this.load.audio('water','assets/audio/water.mp3');// sonido
+        this.load.audio('golpe', 'assets/audio/golpe.mp3');
         this.load.image('WaterDrop', 'assets/images/characters/rick/gota.png');// gota de agua
     }
 
@@ -40,11 +42,13 @@ export class BossScene extends Phaser.Scene{
         this.song = this.sound.add('song');
         this.song.setLoop(true);
         this.song.play();
+        this.golpeSound = this.sound.add('golpe');
+        this.waterSound = this.sound.add('water');
         this.bossFX = this.sound.add('Boss');
-        this.RickLives = 10;// vidas de Rick
-        this.LivesText = this.add.text(100,50, 'Rick Lives: ', { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', 
+        this.Ricklifes = 10;// vidas de Rick
+        this.lifesText = this.add.text(100,50, 'Rick´s HP: ', { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', 
         fontSize: 75, color: 'white'}); //Texto Vidas
-        this.RickLivesText = this.add.text(475,50, this.RickLives, { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', 
+        this.RicklifesText = this.add.text(475,50, this.Ricklifes, { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', 
         fontSize: 75, color: 'white'}); //Texto Vidas Rick;
 
         
@@ -106,12 +110,13 @@ export class BossScene extends Phaser.Scene{
         this.song.stop();   
     }
     
-    rickLives(){
-        this.RickLives--;
-        this.RickLivesText.visible = false;
-        this.RickLivesText = this.add.text(475,50, this.RickLives, { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', 
+    rickLifes(){
+        this.Ricklifes--;
+        this.golpeSound.play();
+        this.RicklifesText.visible = false;
+        this.RicklifesText = this.add.text(475,50, this.Ricklifes, { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', 
         fontSize: 75, color: 'white'}); //Texto Vidas Rick
-        if(this.RickLives == 0) this.Victory(); // Rick sin vidas
+        if(this.Ricklifes == 0) this.Victory(); // Rick sin vidas
 
     }
 
@@ -131,8 +136,9 @@ export class BossScene extends Phaser.Scene{
     }
 
     randomNumbSound(){
-        this.soundRandom = Math.floor(Math.random() * 30);
+        this.soundRandom = Math.floor(Math.random() * 200);
     }
+    
 
     RickDrop(){
         var DropPosX = this.rick.getX();
@@ -180,7 +186,14 @@ export class BossScene extends Phaser.Scene{
             this.scene.restart();
             this.song.stop();
         }
-
+        if(this.rick.Spit)
+        {
+            this.waterSound.play();
+        }
+        if(this.rick.damageSound)
+        {
+            this.golpeSound.play();
+        }
         if(this.ESC.isDown){
             this.scene.launch('GamePause', {me: this.scene});
             this.scene.pause();
