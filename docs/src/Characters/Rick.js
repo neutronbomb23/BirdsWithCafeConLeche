@@ -101,13 +101,14 @@ export default class Rick extends Phaser.GameObjects.Sprite{
             if(this.first){
                 this.timer = 0;// contador a 0
                 this.first = false;// booleano a false para no reiniciar el contador a cero
+                this.scene.rickLives();// resta vida a Rick
             }
         }
         if(this.timer >= 1000){
             this.dash = false;// fin del daño y del ataque
             this.first = true;// booleano a true para reiniciar el contador en el siguiente ataque
             this.scene.Damage.stop();
-            this.y = 1250;// para que no se caiga por el cambio de escala
+            this.y = 1250;// Salto final
             this.setScale(8);// vuelve a su escala inicial
         }
     }

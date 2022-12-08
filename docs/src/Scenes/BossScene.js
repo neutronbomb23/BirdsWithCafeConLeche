@@ -7,7 +7,10 @@ import WaterDrop from '../Obstacles/waterDrop.js';
 
 const CAMPOSY = 400; var camCurrentPosY = CAMPOSY; // Respecto a Puh
 const TOP = 1100; // punto en el eje y en el que se detiene la camara
+
 const PUHX = 700; const PUHY = 1500; // Posiciones iniciales de puh
+
+var startTime; // Runtime en el momento en el que empieza la escena
 
 export class BossScene extends Phaser.Scene{
     constructor(){
@@ -26,19 +29,22 @@ export class BossScene extends Phaser.Scene{
         this.load.spritesheet('RickWalk', 'assets/images/characters/rick/pigeon_walking.png', {frameWidth:32,  frameHeight: 32});// movimiento de Rick
         this.load.spritesheet('RickAttack', 'assets/images/characters/rick/pigeon_red.png', {frameWidth:32,  frameHeight: 32});// ataque de Rick
         this.load.spritesheet('Rick', 'assets/images/characters/paloma.png', {frameWidth:32,  frameHeight: 32});// Rick
-        this.load.image('floor', 'assets/images/floor.png');// suelo
         this.load.audio('Boss', 'assets/audio/k.mp3');
         this.load.audio('song','assets/audio/game.mp3');// sonido
         this.load.image('WaterDrop', 'assets/images/characters/rick/gota.png');// gota de agua
     }
 
     create(){
+       
         var image = this.add.image(100, 100, 'Rick');
+        startTime = this.time.now;
         this.song = this.sound.add('song');
         this.song.setLoop(true);
         this.song.play();
         this.bossFX = this.sound.add('Boss');
 
+        
+        
         //pinchos plataformas decoracion muros
         this.bossMap = this.make.tilemap({ 
 			key: 'bossMap', 
@@ -59,17 +65,19 @@ export class BossScene extends Phaser.Scene{
        
 
         this.physics.world.setBoundsCollision(true, true, false, false); // Define limites del mapa
-        this.puh = new Puh(this, 700, 600);// instanciación de Puh
+        this.puh = new Puh(this, 500, 1300);// instanciación de Puh
         this.puh.body.setSize(this.puh.body.width - 15, this.puh.body.height -2, true);
         this.puh.setFly(true) // Llamada a método para cambiar el booleano de la clase puh que determina si vuela o no.
         this.rick = new Rick(this, 900, 1150);// instanciación de Rick
+        this.rick.body.setSize(this.rick.body.width - 15, this.rick.body.height -2, true);
         this.activateBossSound = this.rick.bossSound = false;
+
+        this.RickLives = 7;// vidas de Rick
 
         this.drop = 'WaterDrop';// gota
         this.dropObs = this.physics.add.group();// gurpo de gotas con físicas
 
 
-        //this.physics.add.collider(this.dropObs, this.puh, this.gameOver.bind(this), null);// game Over
         this.physics.add.collider(this.puh, this.platformLayer);
         this.physics.add.collider(this.puh, this.muros);
         this.physics.add.collider(this.puh, this.pinchos, this.gameOver.bind(this),null);
@@ -77,30 +85,37 @@ export class BossScene extends Phaser.Scene{
         this.physics.add.collider(this.rick, this.muros); // habría que llamar a hacerle daño
         this.physics.add.collider(this.dropObs, this.platformLayer);
         this.physics.add.collider(this.dropObs, this.muros);
-        //this.physics.add.collider(this.rick, this.puh);// colisión entre Rick y Puh
 
-        //this.physics.add.collider(this.rick, this.puh, this.gameOver.bind(this), null);// game Over
-
-        //this.platform = this.physics.add.image(520,950, 'platform').setImmovable(true).setScale(1);
-        //this.platform.body.allowGravity = false;
-        //this.physics.add.collider(this.puh, this.platform);
-        //this.physics.add.collider(this.rick, this.platform);
-        //this.platform.setCollideWorldBounds(true);
-        //this.platform.body.onWorldBounds=true;
-        //this.physics.add.collider(this.platform, this.floor);
+        this.physics.add.collider(this.rick, this.puh, this.gameOver.bind(this), null);// game Over
+        this.physics.add.collider(this.dropObs, this.puh, this.gameOver.bind(this), null);// game Over
 
         this.keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
         this.keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
         this.ESC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
     }
 
+
     gameOver(){     
-        this.scene.start('GameOver', 1);
+        this.scene.start('GameOver');
         this.puh.visible = false;
         this.rick.visible = false;
         console.log('Puh Abatido');
         this.song.stop();   
-    }   
+    }
+    
+    rickLives(){
+        this.RickLives--;
+        console.log(this.RickLives);
+        if(this.RickLives == 0) this.Victory(); // Rick sin vidas
+
+    }
+
+    Victory(){
+        this.scene.start('Victory');// escena de victoria
+        this.puh.visible = false;
+        this.rick.visible = false;
+        this.song.stop();   
+    }
 
     stopMusic(){
         this.song.stop();
@@ -144,11 +159,12 @@ export class BossScene extends Phaser.Scene{
             this.loadScene = false;
         }
 
-        if((this.soundRandom == 2 && this.rick.bossSound) && !this.bossFX.isPlaying){
+        if((this.soundRandom == 2 && this.rick.bossSound) && !this.bossFX.isPlaying)
+         {
             this.bossFX.play();
-            console.log("HE SONADO BIEN");
+            console.log("HE SONADO BIEN PERRA");
             console.log(this.rick.bossSound);
-        }
+         }
 
         if(this.keyQ.isDown){
             this.scene.restart();
