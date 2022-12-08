@@ -8,7 +8,6 @@ import WaterDrop from '../Obstacles/waterDrop.js';
 const CAMPOSY = 400; var camCurrentPosY = CAMPOSY; // Respecto a Puh
 const TOP = 1100; // punto en el eje y en el que se detiene la camara
 const PUHX = 700; const PUHY = 1500; // Posiciones iniciales de puh
-
 var startTime; // Runtime en el momento en el que empieza la escena
 
 export class BossScene extends Phaser.Scene{
