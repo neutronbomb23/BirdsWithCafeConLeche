@@ -30,9 +30,6 @@ export class Scene1 extends Phaser.Scene{
         this.load.spritesheet('puhIddle', 'assets/images/characters/puh/iddle.png', {frameWidth:32,  frameHeight: 32});// idle de Puh
         this.load.spritesheet('puhMove', 'assets/images/characters/puh/walk.png', {frameWidth:32,  frameHeight: 32});// Movimiento de Puh
         this.load.spritesheet('puhFly', 'assets/images/characters/puh/fly.png', {frameWidth:32,  frameHeight: 32});// Vuelo de Puh
-        this.load.image('bone', 'assets/images/obstacles/bone.png');// hueso
-        this.load.image('birdSkull', 'assets/images/obstacles/birdSkull.png');// calavera de pájaro
-        this.load.image('birdClaw', 'assets/images/obstacles/birdClaw.png');// garra de pájaro
         this.load.audio('song','assets/audio/game.mp3');// sonido
         this.load.audio('crow', 'assets/audio/crow.mp3');
         this.load.audio('death', 'assets/audio/death.mp3');
@@ -173,10 +170,10 @@ export class Scene1 extends Phaser.Scene{
 
         this.cameraManager(dt);
 
-        if(this.keyQ.isDown){
+        /*if(this.keyQ.isDown){
             this.scene.restart();
             this.song.stop();
-        }
+        }*/
 
         if(this.ESC.isDown){
             this.scene.launch('GamePause', {me: this.scene}); //Paso un dato a la escena de Pausa para poder mantenerla pausada sin tener que hacer un scene.start
