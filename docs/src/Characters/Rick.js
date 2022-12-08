@@ -126,7 +126,7 @@ export default class Rick extends Phaser.GameObjects.Sprite{
             this.dash = false;// fin del daño y del ataque
             this.first = true;// booleano a true para reiniciar el contador en el siguiente ataque
             this.scene.Damage.stop();
-            this.y = 1250;// Salto final
+            this.y = 1250;// salto para evitar que caiga
             this.setScale(8);// vuelve a su escala inicial
         }
     }
