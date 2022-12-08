@@ -33,6 +33,8 @@ export class BossScene extends Phaser.Scene{
         this.load.audio('water','assets/audio/water.mp3');// sonido
         this.load.audio('golpe', 'assets/audio/golpe.mp3');
         this.load.image('WaterDrop', 'assets/images/characters/rick/gota.png');// gota de agua
+        this.load.audio('RickDeath', 'assets/audio/RickDeath.mp3');
+        
     }
 
     create(){
@@ -41,6 +43,7 @@ export class BossScene extends Phaser.Scene{
         this.deathSound = this.sound.add('death');
         this.song.setLoop(true);
         this.song.play();
+        this.RickDeath = this.sound.add('RickDeath');
         this.golpeSound = this.sound.add('golpe');
         this.waterSound = this.sound.add('water');
         this.bossFX = this.sound.add('Boss');
@@ -157,19 +160,19 @@ export class BossScene extends Phaser.Scene{
             this.song.stop();
             this.loadScene = false;
         }
-
         if((this.soundRandom == 2 && this.rick.bossSound) && !this.bossFX.isPlaying){
             this.bossFX.play();
-        }
-        if(this.keyQ.isDown){
-            this.scene.restart();
-            this.song.stop();
         }
         if(this.rick.Spit){
             this.waterSound.play();
         }
         if(this.rick.damageSound){
             this.golpeSound.play();
+        }
+        if(this.RickLifes == 0)
+        {
+            this.RickDeath.play();
+            
         }
         if(this.ESC.isDown){
             this.scene.launch('GamePause', {me: this.scene});

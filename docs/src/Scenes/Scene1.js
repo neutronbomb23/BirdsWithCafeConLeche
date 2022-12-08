@@ -163,12 +163,7 @@ export class Scene1 extends Phaser.Scene{
         else if (this.puh.y <= 10700 && this.puhPos != 5650) { puhRespPoint = 10600; }
 
         this.cameraManager(dt);
-
-        /*if(this.keyQ.isDown){
-            this.scene.restart();
-            this.song.stop();
-        }*/
-
+        
         if(this.ESC.isDown){
             this.scene.launch('GamePause', {me: this.scene}); //Paso un dato a la escena de Pausa para poder mantenerla pausada sin tener que hacer un scene.start
             this.scene.pause();
