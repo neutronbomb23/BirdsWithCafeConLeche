@@ -96,7 +96,7 @@ export class BossScene extends Phaser.Scene{
     }
 
     gameOver(){     
-        this.scene.start('GameOver');
+        this.scene.start('GameOver', 1);
         this.puh.visible = false;
         this.rick.visible = false;
         this.song.stop();   
