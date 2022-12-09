@@ -15,7 +15,7 @@ export default class FallingObjects extends Phaser.GameObjects.Sprite{
         this.TIME = 0; // se inicializa luego
         this.BOUNCE_VELOCITY_X = 600;
         this.BOUNCE_VELOCITY_Y = -500;
-        this.LIFETIME = 10; 
+        this.LIFETIME = 6; 
     }
 
     RandomInt(min, max){ // Funcion Aux
