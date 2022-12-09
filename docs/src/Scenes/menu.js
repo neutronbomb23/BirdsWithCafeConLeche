@@ -26,15 +26,22 @@ export class Menu extends Phaser.Scene {
         
         let playButton = this.add.image(720, 950, 'playButton').setScale(1); // Botón de play
         let optionsButton = this.add.image(720, 1200 , 'optionsButton').setScale(1); // Botón de opciones
-      
+        let bossButton = this.add.image(720, 800 , 'playButton').setScale(1); // Botón de opciones
+
         playButton.setInteractive();
         optionsButton.setInteractive();
-
+        bossButton.setInteractive();
+        
         this.menuMusic = this.sound.add('menuMusic');
         
         this.menuMusic.play();
         playButton.on("pointerup", ()=>{ //Método para empezar el juego cuando se pulse el botón play, también para la música para evitar que se escuche en la escena del juego.
             this.scene.start('Scene1', 16800);
+            this.menuMusic.stop();
+        })
+
+        bossButton.on("pointerup", ()=>{ //Método para empezar el juego cuando se pulse el botón play, también para la música para evitar que se escuche en la escena del juego.
+            this.scene.start('bossScene');
             this.menuMusic.stop();
         })
 
