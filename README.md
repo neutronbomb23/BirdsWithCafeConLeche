@@ -3,11 +3,6 @@
 
 ## [¡Entra a jugar!](https://neutronbomb23.github.io/BirdsWithCafeConLeche/) 
 
-# Redes sociales creadas para el proyecto:
-## [Twitter](https://twitter.com/DaspCoding) 
-
-
-
 ## Descripción general del proyecto:
 Un juego de género plataformas, en el que controlas a un pequeño pájaro de color azul llamado Puh. En este juego el objetivo sería alcanzar la salida de la estatua, sin que la cámara te alcance ya que morirás, y sin que los objetos que caen de manera aleatoria te toquen, ya que te costará la vida y tendrás que empezar desde el inicio del nivel. El juego usará mecánicas diversas como dos tipos de movimientos, el salto y movimiento "normal", bípedo, y en el último nivel el jugador podrá volar. El combate con el boss final consiste en evitar su movimiento de patrulla (tweens) y lograr que este choque con las plataformas con estalactitas. Se usará el scroll vertical del fondo (Parallax) y de la cámara con una velocidad que irá aumentando cada vez que el jugador se pase un nivel y para dar la sensación al jugador de angustia y ponerlo nervioso. 
 
